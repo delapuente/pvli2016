@@ -55,10 +55,16 @@ En la asignatura se usará:
 - TODO: plugin para reloading
 - `phaser`. Hay que fijar versión.
 
-
 # Plantillas
 
 # Licencia
 
 Todo el material quedará publicado con licencia libre (CC o equivalentes, por
 determinar).
+
+# Publicación
+
+Para hacer una publicación directa del contenido en Moodle, el directorio
+`compartido/` se hará público para los estudiantes a través del Google Drive de
+Carlos <cleon@ucm.es>, y se enlazarán como URL.
+
