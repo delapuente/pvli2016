@@ -1,2 +1,3 @@
-# pvli2016
-PVLI 2016 Subject material - Computer Science Faculty - UCM
+# Programación de Videojuegos en Lenguajes Interpretados
+
+This repository contains the material for the subject.
