@@ -135,7 +135,7 @@ aunque individualmente sean distintos.
         data-svg-animation="space-invaders-types">
 ![captura de pantalla del video juego space invaders donde se aprecian naves
 enemigas, la nave amiga, marcadores de vidas y puntuación, proyectiles amigos
-y enemigos y las defensas de la nave.](./imgs/space-invaders-types.jpg)
+y enemigos y las defensas de la nave.](./imgs/space-invaders-types.svg)
 </object>
 <template id="space-invaders-types">
 [
