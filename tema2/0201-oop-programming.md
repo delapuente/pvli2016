@@ -103,18 +103,19 @@ Una técnica para identificar objetos es pensar en **poner nombres**.
 <object type="image/svg+xml"
         data="./imgs/space-invaders-objects.svg"
         data-svg-animation="space-invaders-objects">
+![Captura de Space Invaders donde se distinguen muchos objetos: 50 enemigos,
+9 defensas, 12 disparos, 2 marcadores, 1 nave protagonista...](
+./imgs/space-invaders-objects.png)
 </object>
-<template id="space-invaders-objects">
+<script id="space-invaders-objects">
 [
   { "wait": 0.5 },
   { "el": ".circle", "length": 0.6 }
 ]
-</template>
+</script>
 
 
-Algunos objetos:
-
-Nave amiga, enemigo 1, enemigo 2, enemigo 3, disparo amigo,
+Algunos objetos: nave amiga, enemigo 1, enemigo 2, enemigo 3, disparo amigo,
 disparo enemigo 1, disparo enemigo 2, defensa 1, defensa 2, marcador de vidas,
 marcador de puntuación.
 
@@ -123,7 +124,7 @@ marcador de puntuación.
 
 
 Queda claro de un vistazo que muchos objetos concretos pertenecen a familias
-o **tipos** de objetos. Conviene recordar que también se los llama **clases**.
+o **tipos** de objetos. Conviene recordar que también se les llama **clases**.
 
 
 Los tipos **especifican propiedades y comportamientos comunes** a todos ellos
@@ -133,22 +134,20 @@ aunque individualmente sean distintos.
 <object type="image/svg+xml"
         data="./imgs/space-invaders-types.svg"
         data-svg-animation="space-invaders-types">
-![captura de pantalla del video juego space invaders donde se aprecian naves
-enemigas, la nave amiga, marcadores de vidas y puntuación, proyectiles amigos
-y enemigos y las defensas de la nave.](./imgs/space-invaders-types.svg)
+![Captura de Space Invaders donde se distinguen los distintos tipos de objetos:
+marcadores, defensas, enemigos, protagonista y disparos](
+./imgs/space-invaders-types.png)
 </object>
-<template id="space-invaders-types">
+<script id="space-invaders-types">
 [
   { "wait": 0.5 },
   { "el": ".circle", "length": 0.6 },
   { "el": ".quick-circle", "length": 0.2 }
 ]
-</template>
+</script>
 
 
-Algunos **tipos**:
-
-Marcadores, defensas, nave amiga, enemigos, disparos.
+Algunos **tipos**: marcadores, defensas, nave amiga, enemigos, disparos.
 
 
 Las **instancias** son cada uno de los objetos individuales. El enemigo especial
@@ -161,15 +160,18 @@ En los modelos de objetos es más conveniente trabajar con tipos de objetos.
 <object type="image/svg+xml"
         data="./imgs/space-invaders-object-diagram.svg"
         data-svg-animation="space-invaders-object-diagram">
+![Diagrama de objetos con los cinco clases identificadas: marcador, defensa,
+enemigo, protagonista y disparo.](
+./imgs/space-invaders-object-diagram.png)
 </object>
-<template id="space-invaders-object-diagram">
+<script id="space-invaders-object-diagram">
 [
   { "wait": 0.5 },
   { "el": "#background", "length": 4 },
   { "el": "text", "length": 0.001 },
   { "el": ".obj-type", "length": 0.6 }
 ]
-</template>
+</script>
 
 
 ### Interfaces y métodos
