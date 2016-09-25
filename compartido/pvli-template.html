@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>$title$</title>
-    <meta name="description" content="$description$">
+    <title>Programación orientada a objetos</title>
+    <meta name="description" content="Introducción al modelado de problemas utilizando orientación a objetos.">
     <meta name="author" content="$author">
 
     <link rel="stylesheet" href="../compartido/lib/tabzilla/css/tabzilla.css"/>
@@ -31,7 +31,10 @@
 
 		<div class="reveal">
       <div class="slides">
-        $slides$
+        <section data-markdown="0201-oop-programming.md"
+                 data-separator="^\n\n\n"
+                 data-separator-vertical="^\n\n">
+        </section>
       </div>
 		</div>
 
@@ -48,21 +51,10 @@
           { src: '../compartido/lib/reveal/plugin/markdown/marked.js' },
           { src: '../compartido/lib/reveal/plugin/markdown/markdown.js' },
           { src: '../compartido/lib/reveal/plugin/notes/notes.js', async: true },
-          { src: '../compartido/lib/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+          { src: '../compartido/lib/reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: '../compartido/lib/reveal.js-svg-animation/svg-animation.js', async: true }
 				]
 			});
-    </script>
-    <script>
-     var iframes = [].slice.call(document.querySelector('iframe'));
-     iframes.forEach(function (iframe) {
-       iframe.onload = function () { resize(iframe); };
-       resize(iframe);
-     });
-     function resize() {
-       var bbox = iframe.contentDocument.rootElement.getClientRects()[0];
-       iframe.style.width = bbox.width + 'px';
-       iframe.style.height = bbox.height + 'px';
-     }
-    </script>
+		</script>
   </body>
 </html>

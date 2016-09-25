@@ -89,7 +89,7 @@ problema.
 Vamos a modelar informalmente el video juego [Space Invaders](
 https://en.wikipedia.org/wiki/Space_Invaders).
 
-![Captura de pantalla del video juego Space Invaders donde se aprecian naves
+![captura de pantalla del video juego space invaders donde se aprecian naves
 enemigas, la nave amiga, marcadores de vidas y puntuación, proyectiles amigos
 y enemigos y las defensas de la nave.](./imgs/space-invaders.jpg)
 
@@ -133,6 +133,9 @@ aunque individualmente sean distintos.
 <object type="image/svg+xml"
         data="./imgs/space-invaders-types.svg"
         data-svg-animation="space-invaders-types">
+![captura de pantalla del video juego space invaders donde se aprecian naves
+enemigas, la nave amiga, marcadores de vidas y puntuación, proyectiles amigos
+y enemigos y las defensas de la nave.](./imgs/space-invaders-types.jpg)
 </object>
 <template id="space-invaders-types">
 [
