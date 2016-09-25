@@ -1,0 +1,23 @@
+<object type="image/svg+xml"
+        data="../imgs/space-invaders-objects.svg"
+        height="100%">
+</object>
+<script>
+(function () {
+   'use strict';
+   var object = document.querySelector('object');
+   window.animate = function () {
+     var svg = object.contentDocument.querySelector('svg');
+     var paths = [].slice.call(svg.querySelectorAll('path'));
+     paths.forEach(function (path) {
+       var length = path.getTotalLength();
+       path.style.transition = 'none';
+       path.style.strokeDasharray = length + ' ' + length;
+       path.style.strokeDashoffset = length;
+       path.getBoundingClientRect();
+       path.style.transition = 'stroke-dashoffset 600ms ease-in-out 1s';
+       path.style.strokeDashoffset = 0;
+     });
+   };
+}());
+</script>
