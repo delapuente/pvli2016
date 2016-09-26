@@ -1,0 +1,5 @@
+digraph {
+    source -> {interpreter compiler}
+    compiler -> object -> executable
+    interpreter -> vm
+}
