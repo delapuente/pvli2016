@@ -124,7 +124,7 @@ marcador de puntuación.
 
 
 Queda claro de un vistazo que muchos objetos concretos pertenecen a familias
-o **tipos** de objetos. Conviene recordar que también se les llama **clases**.
+o **tipos** de objetos. Conviene recordar que también se los llama **clases**.
 
 
 Los tipos **especifican propiedades y comportamientos comunes** a todos ellos
