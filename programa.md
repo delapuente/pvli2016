@@ -5,20 +5,31 @@ date: 11/09/2016
 vim: spelllang=es
 ...
 
+Práctica 1: "aventura conversacional" / "pokémon te ataca" / lectura de
+comandos que da Salva
+
+Práctica 2: "Gráficos en browser"
+
+Práctica 3: Platformer 
+
+Práctica 4: Platformer con física
+
+Práctica 5: Platformer con todo y despliegue
+
 # 26-30 de septiembre
 
 Tema 1: Programación de aplicaciones en HTML5
 
-- 26/9
+- 26/9 (Ismael y Carlos)
     - Presentación de la asignatura (objetivos, enfoque, criterios de
       evaluación...)
     - Colaboración con Mozilla ![Mozilla](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Mozilla_dinosaur_head_logo.png/1280px-Mozilla_dinosaur_head_logo.png){ width=7% }
     - Introducción a lenguajes interpretados (Javascript)
-- 27/9
-    - `node.js`, `gulp`, `toolset`, `browserify`
-    - HTML5
-- 30/9
-    - Charla inicial
+- 27/9 (Carlos)
+    - JavaScript: introducción a la sintaxis y a las estructuras básicas
+    - Toolset: `git`, `node.js`, `npm`, `gulp`, `yo`, `http-server`, `browserify`, `Chrome`, `Firefox`, editor de texto
+- 30/9 (Belén y Salva)
+    - Charla inicial <!-- TODO [Carlos, 20-09-2016 13:18]: Nombrar la charla si es posible -->
 
 # 03-07 de octubre 
 
@@ -27,18 +38,18 @@ Tema 1: Programación de aplicaciones en HTML5
 Tema 2: Javascript (I)
 
 <!-- [P1]  -->
-- 03/10 
+- 03/10 (Salva)
    - Programación orientada a objetos con JavaScript
    - Datos primitivos
    - La función como tipo de datos
    - Constructores y prototipos
 <!-- [P0] -->
-- 04/10 
+- 04/10 (Salva)
    - El modelo de datos de JavaScript
    - Closures
    - La cadena de prototipos
 <!-- [P3] -->
-- 07/10 
+- 07/10 (Salva)
    - Práctica 1: juego sin consola
 
 # 10-14 de octubre 
@@ -48,13 +59,13 @@ Tema 2: Javascript (I)
 Tema 2: Javascript (II)
 
  <!-- [P0] -->
-- 10/10
+- 10/10 (Salva)
    - Programación asíncrona
 <!-- [P2] -->
-- 11/10 
+- 11/10 (Salva)
    - Eventos: el patrón suscriptor / publicador
 <!-- [P1] -->
-- 14/10 
+- 14/10 (Salva)
    - Práctica 1: entrega
 
 # 17-21 de octubre 
@@ -63,29 +74,29 @@ Tema 2: Javascript (II)
 Tema 3: Programación de videojuegos en un canvas de HTML5
 
  <!-- x? -->
-- 17/10
+- 17/10 (Belén)
     - Creación y acceso a un canvas
     - Canvas 2D/WebGL
     - Pintado y repintado, ciclo
     - Ciclo básico de juego en JS
 <!-- x? -->
-- 18/10 
+- 18/10  (Belén)
     - Entrada básica. Clicks por lo menos - Cómo se gestionan los eventos navegador/DOM (capa Phaser que abstrae y unifica)
     ESTO NO DA TIEMPO    - Entrada avanzada (giro, accel, touch, pad…)
     - Fullscreen: limitación (browsers fuerzan que fullscreen venga de un evento de usuario por seguridad)
 <!-- [2] -->
-- 21/10 
+- 21/10  (Belén)
     - Práctica 2: pintar plataformas
 
 # 24-28 de octubre
 
 Tema 4: Arquitectura de un motor de juegos en JavaScript: componentes y eventos
 
-- 24/10
+- 24/10 (Ismael)
    - Introducción a la arquitectura de videojuegos
    - Programación orientada a objetos (nociones/repaso)
-- 25/10
-- 28/10
+- 25/10 (Carlos)
+- 28/10 (Carlos)
    - Componentes
    - Ejercicios (sistema de RPG en Node.js o HTML) 
       - Sistema de combate RPG

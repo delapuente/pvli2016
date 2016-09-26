@@ -11,23 +11,15 @@ prácticas (código) que serán entregadas a través del Campus Virtual en las
 fechas que se vaya señalando.
 
 Para la evaluación, el alumno entregará cinco prácticas, y realizará dos
-exámenes (uno parcial y uno final en febrero o septiembre). 
+exámenes (uno parcial y uno final en febrero o septiembre). Además, en la
+evaluación habrá una presentación de proyectos, y tanto la asistencia como la
+contribución durante el desarrollo de la asignatura serán tenidas en cuenta.
 
 La evaluación en PVLI se hará en función de la fórmula en @eq:formulaeval:
 
-$$\begin{aligned}
-nota_{final} = & practica_1 \times 0,025
-               & practica_2 \times 0,025
-               & practica_3 \times 0,025
-               & examen_{parcial} \times 0,1
-               & practica_4 \times 0,05
-               & practica_5 \times 0,1
-               & presentación \times 0,025
-               & examen_{final} \times 0,6
-               & asistencia \times 0,025
-               & contribución \times 0,025
-\end{aligned}$${#eq:formulaeval}
-
+```include
+formula_evaluacion.md
+```
 
 Todas las notas serán mantenidas hasta el final de la evaluación. Es decir, si
 se suspende en la convocatoria de febrero, todo aquello que haya tenido más de
