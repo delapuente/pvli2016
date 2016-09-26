@@ -41,7 +41,7 @@ permitido la automatización de modelos en software.
 
 
 ![Diagrama de flujo del ciclo de vida de un script en Unity](
-./imgs/monobehaviour-flowchart.svg) <!-- .element: style="height: 400px;" -->
+./imgs/monobehaviour-flowchart.png) <!-- .element: style="height: 400px;" -->
 
 El diagrama de flujo de cómo se llaman las distintas funciones de un script
 de Unity.
