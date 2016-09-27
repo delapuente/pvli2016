@@ -1,0 +1,8 @@
+digraph {
+    rankdir=LR
+        bgcolor=transparent
+
+    switch1 [label="cambiar ventana"]
+    switch2 [label="cambiar ventana"]
+    editar -> guardar -> switch1 -> probar -> switch2 -> editar
+}

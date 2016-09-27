@@ -1,0 +1,15 @@
+digraph {
+    rankdir=LR
+    bgcolor=transparent
+    pull [label="git pull"]
+    merge [label="merge"]
+    commit [label="git commit"]
+    push [label="git push"]
+    gulp [label="arrancar gulp"]
+    tests [label="pasar tests automáticos"]
+    
+    planificar -> pull -> merge -> editar -> probar -> editar
+    probar -> tests -> commit -> push
+    gulp -> editar
+
+}

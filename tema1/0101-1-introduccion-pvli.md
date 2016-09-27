@@ -110,12 +110,10 @@ Todo lo aprobado se guarda hasta septiembre.
 
 **Copiar es ilegal**. Significa **suspender**.
 
-<!-- Copiar significa suspender. -->
-
 Se hará un control de copias **estricto**.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/NO_COPY.svg" width="20%">
-<!-- ![No copiar](https://upload.wikimedia.org/wikipedia/commons/0/09/NO_COPY.svg){height=10%}\ -->
+<!-- <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/NO_COPY.svg" width="20%"> -->
+![No copiar](https://upload.wikimedia.org/wikipedia/commons/0/09/NO_COPY.svg){height=10%}\
 
 
 ## Fórmula

@@ -6,7 +6,7 @@
 
 
 Programar es expresar un problema en un lenguaje de programación dado. Modelar
-representa un paso intermedio en el que se capturan y organizan lon aspectos
+representa un paso intermedio en el que se capturan y organizan los aspectos
 importantes de un problema.
 
 

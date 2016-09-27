@@ -9,6 +9,8 @@ vim: spelllang=es
 
 ## No sólo escribimos
 
+---
+
 Escribir código no es todo lo que hacemos cuando programamos
 
 ---
@@ -50,7 +52,7 @@ Esto lo convierte en una de las herramientas fundamentales
 
 ---
 
-![GVim](vim.png){width=70%}
+![GVim](imgs/vim.png){width=70%}
 
 ## Consola
 
@@ -76,13 +78,14 @@ El *intérprete* es el programa que recibe el código (en forma de archivo o de 
 
 Un navegador es un programa capaz de analizar archivos en HTML y mostrarlos como una [página web](https://es.wikipedia.org/wiki/P%C3%A1gina_web).
 
-![Firefox](firefox.png){ width=40% }\
+![Firefox](imgs/firefox.png){ width=40% }\
 
 Hoy en día, los navegadores más usados contienen un intérprete de JavaScript.
 
 ---
 
 Además, los navegadores proveen al intérprete con un modelo del documento ([DOM-Document Object Model](https://es.wikipedia.org/wiki/Document_Object_Model)), que es un API para acceder a una página web
+
 
 ## Servidor web
 
@@ -264,7 +267,7 @@ $ npm install http-server
 
 Los paquetes tienen [dependencias](http://npm.anvaka.com/). Por ejemplo, [`browserify`](http://npm.anvaka.com/#/view/2d/browserify)
 
-![Ejemplo de dependencias de `browserify`](browserify.png){width=60%}
+![Ejemplo de dependencias de `browserify`](imgs/browserify.png){width=60%}
 
 ---
 
@@ -336,6 +339,7 @@ Consistirán en un texto corto con:
 - Los miembros del equipo
 - Lo que ha hecho cada miembro
 - Una descripción de todo lo *relevante* (por favor, sólo lo *relevante*)
+- En el repositorio git todo estará en [UTF-8](http://stackoverflow.com/questions/2241348/what-is-unicode-utf-8-utf-16), a no ser que haya una buena razón (que habrá que explicar en el texto)
 
 ---
 

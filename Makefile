@@ -1,49 +1,42 @@
-# SRCS=$(wildcard *.md)
-# DOTS=$(wildcard *.dot)
+SHARED=shared
+WEB=website
+LESSON=tema
+IMGS=imgs
+REVEALURL=../$(SHARED)/lib/reveal
+TEMPLATE=$(SHARED)/pvli-template-pandoc.html
 
-REVEALURL=shared/lib/reveal
-# OUTDIR=slides
-TEMPLATE=shared/pvli-template-pandoc.html
+SRCS=$(wildcard $(LESSON)*/*.md)
+DOTS=$(wildcard $(LESSON)*/*.dot)
+PNGSO=$(wildcard $(LESSON)*/$(IMGS)/*.png)
+JPGSO=$(wildcard $(LESSON)*/$(IMGS)/*.jpg)
 
-SRCS=$(wildcard tema*/*.md)
-DOTS=$(wildcard tema*/*.dot)
-# PNGS=$(wildcard tema*/*.png)
-# JPGS=$(wildcard tema*/*.jpg)
+HTML=$(addsuffix .html,$(addprefix $(WEB)/,$(basename $(SRCS:.md=.html))))
+WEBSHARED=$(WEB)/$(SHARED)
+SVGS=$(addsuffix .svg,$(addprefix $(WEB)/,$(basename $(DOTS:.dot=.svg))))
+PNGS=$(addprefix $(WEB)/,$(PNGSO))
+JPGS=$(addprefix $(WEB)/,$(JPGSO))
 
-OBJS=$(SRCS:.md=.html)
-# PDFS=$(SRCS:.md=.pdf)
-SVGS=$(DOTS:.dot=.svg)
+all: $(HTML) $(SVGS) $(PNGS) $(JPGS)
 
-all: dots html # pdf
-	# cp -a shared slides
+$(WEBSHARED): | $(WEB)
+	cp -a $(SHARED) $(WEB)
 
-%.html: %.md $(TEMPLATE) # ideally, depend on all .dot files of that folder
-	# $(eval DIR:=$(OUTDIR)/$(dir $<))
-	# mkdir -p $(DIR)
+$(WEB)/%.html: %.md  $(TEMPLATE) | $(WEBSHARED) 
+	mkdir -p $(dir $@)
 	pandoc --filter pandoc-include -s --mathjax -i --variable revealjs-url=$(REVEALURL) -t revealjs --template $(TEMPLATE) $< -o $@
 
-# %.pdf: %.html
-# 	wkhtmltopdf "$(basename $@).html" $@ 
-
-%.svg: %.dot
-	# $(eval DIR:=$(OUTDIR)/$(dir $<))
-	# mkdir -p $(DIR)
+$(WEB)/%.svg: %.dot | $(WEB)
+	mkdir -p $(dir $@)
 	dot -T svg -o $@ $<
 	
-.PHONY: all clean html dots
+$(WEB)/%: % | $(WEB)
+	mkdir -p $(dir $@)
+	cp -a $< $(dir $@)
+
+$(WEB):
+	mkdir -p $@
 
 clean: 
-	rm -f $(OBJS)
-	# rm -f $(PDFS)
-	rm -f $(SVGS)
+	rm -rf $(WEB)
 
-# pdf: $(PDFS)
-
-dots: $(SVGS)
-
-# pngs: $(PNGS)
-
-# jpgs: $(JPGS)
-
-html: $(OBJS)
-
+.PHONY: all clean
