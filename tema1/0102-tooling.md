@@ -279,7 +279,7 @@ Usaremos Chrome/Chromium, con la versión **que haya instalada en los laboratori
 
 ![Chrome](https://www.google.com/chrome/assets/common/images/chrome_logo_2x.png?mmfb=a5234ae3c4265f687c7fffae2760a907)\
 
-## Servidor web
+## Usaremos servidores web
 
 Aunque, en general, no hará falta instalarlo explícitamente, usaremos cualquier servidor `http`
 
