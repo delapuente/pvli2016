@@ -1,7 +1,7 @@
 # SRCS=$(wildcard *.md)
 # DOTS=$(wildcard *.dot)
 
-REVEALURL="../shared/lib/reveal"
+REVEALURL=shared/lib/reveal
 # OUTDIR=slides
 TEMPLATE=shared/pvli-template-pandoc.html
 
@@ -30,7 +30,7 @@ all: dots html # pdf
 	# mkdir -p $(DIR)
 	dot -T svg -o $@ $<
 	
-.PHONY: all clean pdf html dots
+.PHONY: all clean html dots
 
 clean: 
 	rm -f $(OBJS)

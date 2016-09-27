@@ -1,5 +1,6 @@
 digraph {
-  rankdir=LR
+   bgcolor=transparent
+ rankdir=LR
   compilador [label="compilador"]
   processor [label="procesador"]
   program [shape=record label="{<f1>A|B|C|...}"]
