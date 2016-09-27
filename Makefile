@@ -4,6 +4,7 @@ LESSON=tema
 IMGS=imgs
 REVEALURL=../$(SHARED)/lib/reveal
 TEMPLATE=$(SHARED)/pvli-template-pandoc.html
+GENERAL=general
 
 SRCS=$(wildcard $(LESSON)*/*.md)
 DOTS=$(wildcard $(LESSON)*/*.dot)
@@ -16,10 +17,14 @@ SVGS=$(addsuffix .svg,$(addprefix $(WEB)/,$(basename $(DOTS:.dot=.svg))))
 PNGS=$(addprefix $(WEB)/,$(PNGSO))
 JPGS=$(addprefix $(WEB)/,$(JPGSO))
 
-all: $(HTML) $(SVGS) $(PNGS) $(JPGS)
+all: $(HTML) $(SVGS) $(PNGS) $(JPGS) $(GENERAL) $(WEB)/$(GENERAL)/criterios_evaluacion.html $(WEB)/$(GENERAL)/programa.html 
 
 $(WEBSHARED): | $(WEB)
 	cp -a $(SHARED) $(WEB)
+
+$(WEB)/general/%.html: $(GENERAL)/%.md | $(WEB)
+	mkdir -p $(dir $@)
+	pandoc --filter pandoc-include -s --mathjax $< -o $@
 
 $(WEB)/%.html: %.md  $(TEMPLATE) | $(WEBSHARED) 
 	mkdir -p $(dir $@)

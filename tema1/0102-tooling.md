@@ -353,13 +353,13 @@ En las entregas, poned un texto así:
     Alonzo cree que todo es lambda y ha escrito mucho sobre ello.
 
     Alan, por su parte, ha creado una máquina teórica. 
-    
+
     Nos hemos dado cuenta de que que ambas soluciones son equivalentes.
-    Si se prueba el script:
-    
+    Se puede probar con el script:
+
     $ node entscheidungsproblem.js
 
-    se verá que sale el mismo resultado
+    Y se verá que sale el mismo resultado.
     
 
 ## Esquema general de trabajo
