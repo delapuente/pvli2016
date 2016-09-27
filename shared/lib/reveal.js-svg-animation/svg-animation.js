@@ -36,6 +36,10 @@
         var animationLength = directive.length || 0.4;
         var svg = element.contentDocument.documentElement;
         var paths = [].slice.call(svg.querySelectorAll(selector));
+        var startGroupDelay = waitOffset;
+        if (directive.simultaneously) {
+          waitOffset += animationLength;
+        }
         paths.forEach(function (path) {
           if (typeof path.getTotalLength === 'function') {
             var length = path.getTotalLength();
@@ -45,7 +49,7 @@
             path.getBoundingClientRect();
             path.style.transition = 'stroke-dashoffset ' +
               animationLength + 's ease-in-out ' +
-              waitOffset + 's';
+              (directive.simultaneously ? startGroupDelay : waitOffset) + 's';
             path.style.strokeDashoffset = 0;
           }
           else {
@@ -54,10 +58,12 @@
             path.getBoundingClientRect();
             path.style.transition = 'opacity ' +
               animationLength + 's ease-in-out ' +
-              waitOffset + 's';
+              (directive.simultaneously ? startGroupDelay : waitOffset) + 's';
             path.style.opacity = 1;
           }
-          waitOffset += animationLength;
+          if (!directive.simultaneously) {
+            waitOffset += animationLength;
+          }
         });
       }
     });

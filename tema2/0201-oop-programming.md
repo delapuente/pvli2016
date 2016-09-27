@@ -186,7 +186,7 @@ src="https://www.youtube.com/embed/437Ld_rKM2s?rel=0" frameborder="0"
 allowfullscreen></iframe>
 
 Un ejemplo: _los enemigos se mueven todos juntos hacia un lado, avanzan una
-línea y se mueven hacia el otro lado mientras disparan aleatoriamente._.
+línea y se mueven hacia el otro lado mientras disparan aleatoriamente_.
 
 
 Vamos a **buscar verbos** esta vez: **mover**, **avanzar** y **disparar**.
@@ -197,14 +197,23 @@ poder moverse hacia los lados, avanzar y disparar. Así, tendrán que permitir
 que les envíen mensajes pidiendo una de estas operaciones.
 
 
-API del tipo enemigo:
-  * Mover hacia la izquierda.
-  * Mover hacia la derecha. <!-- .element: class="fragment" -->
-  * Avanzar. <!-- .element: class="fragment" -->
-  * Disparar. <!-- .element: class="fragment" -->
-
-
 A las cosas que puede hacer un objeto se las denomina **métodos**.
+
+
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-enemy-api.svg"
+        data-svg-animation="space-invaders-enemy-api">
+![API del enemigo mostrando cuatro métodos: moverse a la izquierda,
+moverse a la derecha, avanzar y disparar.](
+./imgs/space-invaders-enemy-api.png)
+</object>
+<script id="space-invaders-enemy-api">
+[
+  { "wait": 0.5 },
+  { "el": "#container", "length": 1 },
+  { "el": ".api-item", "length": 0.6 }
+]
+</script>
 
 
 ### Estado y atributos
@@ -226,14 +235,22 @@ tener métodos específicos con qué manipular la posición como
 a la posición.
 
 
-Estado del tipo enemigo:
-  * Gráfico.
-  * Dirección actual. <!-- .element: class="fragment" -->
-  * Posición. <!-- .element: class="fragment" -->
-  * Puntuación. <!-- .element: class="fragment" -->
-
-
 A los aspectos de un objeto se los denomina **atributos**.
+
+
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-enemy-state.svg"
+        data-svg-animation="space-invaders-enemy-state">
+![Estado del enemigo mostrando: gráfico, dirección actual,
+posición y puntuación.](
+./imgs/space-invaders-enemy-state.png)
+</object>
+<script id="space-invaders-enemy-state">
+[
+  { "wait": 0.5 },
+  { "el": ".state-item", "length": 0.6 }
+]
+</script>
 
 
 ### Constructores y creación de objetos
@@ -254,8 +271,8 @@ enemigos de la especie 1, dos filas de la especie 2, 1 de la especie 3 y 1 de
 la especie 4_.
 
 
-Está claro que no queremos escribir los 55 enemigos individualmente. ¡Sobre todo
-porque todos serán prácticamente iguales!
+Está claro que no queremos escribir los 55 enemigos individualmente. Además, dado
+que todos pertenecen al tipo enemigo, queda claro que serán todos muy parecidos.
 
 
 Lo que necesitamos es un mecanismo de **generación automática de objetos**.
@@ -266,13 +283,59 @@ Nosotros vamos a añadir un nuevo objeto, el **contructor**, cuya tarea es la de
 generar objetos de un tipo dado. Así, encontraremos **un contructor por tipo**.
 
 
-Los constructores tienen una API muy sencilla: nuevo objeto. Este método crea
-un nuevo objeto de un tipo dado.
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-constructors.svg"
+        data-svg-animation="space-invaders-constructors">
+![Estado del enemigo mostrando: gráfico, dirección actual,
+posición y puntuación.](
+./imgs/space-invaders-constructors.png)
+</object>
+<script id="space-invaders-constructors">
+[
+  { "wait": 0.5 },
+  { "el": ".factory", "length": 0.6 }
+]
+</script>
+
+
+Los constructores tienen una API muy sencilla: **nuevo objeto**. Este
+método crea un nuevo objeto de un tipo dado.
+
+
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-constructor-detail.svg"
+        data-svg-animation="space-invaders-constructor-detail">
+![Una factoría para un tipo cualquiera con un sólo método:
+nuevo objeto.](
+./imgs/space-invaders-constructor-detail.png)
+</object>
+<script id="space-invaders-constructor-detail">
+[
+  { "wait": 0.5 },
+  { "el": ".api-item", "length": 0.6 }
+]
+</script>
 
 
 Los constructores suelen permitir personalizar partes del objeto que están
-creando de forma que se le pueda decir algo como "crea un enemigo con esta
-posición, este gráfico y esta puntuación".
+creando de forma que se le pueda decir algo como "crea un disparo con esta
+posición, este gráfico y esta dirección de avance".
+
+
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-constructor-example.svg"
+        data-svg-animation="space-invaders-constructor-example">
+![Una factoría para un tipo cualquiera con un sólo método:
+nuevo objeto.](
+./imgs/space-invaders-constructor-example.png)
+</object>
+<script id="space-invaders-constructor-example">
+[
+  { "wait": 0.5 },
+  { "el": ".message", "length": 0.6 },
+  { "el": ".creation", "length": 0.6 }
+]
+</script>
 
 
 ### Relaciones entre tipos
@@ -283,41 +346,61 @@ una posición. La nave amiga **crea** disparos.
 
 
 Nuestro cerebro tiende a establecer jerarquías entre objetos creando tipos más
-generalistas. Por ejemplo: en vez de pensar en enemigos y nave amiga por
+generalistas. Por ejemplo: en vez de pensar en enemigos y protagonista por
 separado, es posible pensar en **naves**.
 
 
-El **tipo nave** reune los métodos comunes de la nave protagonista y enemigos:
-  * Mover hacia la izquierda.
-  * Mover hacia la derecha.
-  * Disparar (pongamos que es disparar hacia abajo).
+El **tipo nave** reune los métodos y atributos comunes de la nave protagonista
+y enemigos.
 
 
-También reune los atributos comunes:
-  * Gráfico
-  * Posición
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-hierarchy.svg"
+        data-svg-animation="space-invaders-hierarchy">
+![La jerarquía entre los enemigos, la nave protagonista y el super-tipo nave.](
+./imgs/space-invaders-hierarchy.png)
+</object>
+<script id="space-invaders-hierarchy">
+[
+  { "wait": 0.5 },
+  { "el": ".is-a", "length": 1, "simultaneously": true },
+  { "el": ".is-a-arrow", "length": 0.4 }
+]
+</script>
 
 
-Los enemigos añadirián avanzar a la API. La puntuación y la última dirección
-de desplazamiento serían atributos propios de los enemigos.
+La jerarquía establece **relaciones de herencia** tambén llamadas relaciones
+"**es un(a)**" dado que **el protagonista es una nave** y **el enemigo es una
+nave**.
 
 
-La nave amiga no añade ningún método nuevo pero reinterpreta el método disparar
-para que dispare hacia arriba.
+Se dice que **el tipo enemigo extiende al tipo nave** añadiendo avanzar a la
+API, y La puntuación y la última dirección de desplazamiento al estado.
 
 
-Esta jerarquía:
-  * Nave.
-    * Protagonista.
-    * Enemigo.
-
-Establece **relaciones de herencia** tambén llamadas relaciones "**es un**" dado
-que **el protagonista es una nave** y **el enemigo es una nave**.
+La nave amiga no añade ningún método nuevo pero **redefine o sobreescribe** el
+método disparar para que dispare hacia arriba.
 
 
 Como hay nuevos tipos, tendremos nuevos constructores. Los viejos constructores
 pueden delegar parte de la creación del objeto (las partes comunes) a los
 nuevos.
+
+
+<object type="image/svg+xml"
+        data="./imgs/space-invaders-hierarchy-constructor.svg"
+        data-svg-animation="space-invaders-hierarchy-constructor">
+![Cuando se pide al constructor de enemigos un enemigo, este pide
+al constructor de naves una nave, la personaliza para que sea un
+enemigo y devuelve el enemigo.](
+./imgs/space-invaders-hierarchy-constructor.png)
+</object>
+<script id="space-invaders-hierarchy-constructor">
+[
+  { "wait": 0.5 },
+  { "el": ".message", "length": 0.6 }
+]
+</script>
 
 
 
