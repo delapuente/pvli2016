@@ -9,6 +9,8 @@ vim: spelllang=es
 
 ## Qué son lenguajes interpretados
 
+---
+
 Los [lenguajes
 interpretados](https://en.wikipedia.org/wiki/Interpreted_language) son
 lenguajes diseñados para describir programas que **no** se ejecutan en el
