@@ -412,6 +412,8 @@ De esta forma al pedir un enemigo, el constructor de enemigos pedirá una nave
 al constructor de naves. Tomará esa nave, la modificará para que sea un enemigo
 y devolverá un enemigo.
 
+
+
 > OOP to me means only messaging, local retention and protection and
 > hiding of state-process, and extreme late-binding of all things.
 
