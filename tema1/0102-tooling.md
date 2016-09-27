@@ -277,9 +277,9 @@ Los paquetes tienen [dependencias](http://npm.anvaka.com/). Por ejemplo, [`brows
 
 Usaremos Chrome/Chromium, con la versión **que haya instalada en los laboratorios**
 
-![Chrome](https://www.google.com/chrome/assets/common/images/chrome_logo_2x.png?mmfb=a5234ae3c4265f687c7fffae2760a907)\
+![Navegador Chrome](https://www.google.com/chrome/assets/common/images/chrome_logo_2x.png?mmfb=a5234ae3c4265f687c7fffae2760a907)
 
-## Servidor web
+## Servidores web
 
 Aunque, en general, no hará falta instalarlo explícitamente, usaremos cualquier servidor `http`
 
