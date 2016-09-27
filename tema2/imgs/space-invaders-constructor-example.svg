@@ -17,9 +17,9 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="space-invaders-constructor-example.svg"
-   inkscape:export-filename="/Users/salva/workspace/pvli2016/tema2/imgs/space-invaders-enemy-api.png"
-   inkscape:export-xdpi="79.959999"
-   inkscape:export-ydpi="79.959999">
+   inkscape:export-filename="/Users/salva/workspace/pvli2016/tema2/imgs/space-invaders-constructor-example.png"
+   inkscape:export-xdpi="78.389999"
+   inkscape:export-ydpi="78.389999">
   <defs
      id="defs22276">
     <symbol
@@ -40,7 +40,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="393.17889"
+     inkscape:cx="-46.82111"
      inkscape:cy="289.0619"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -63,7 +63,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
