@@ -228,14 +228,14 @@ diferente**, una **posición en pantalla** y además recordará en qué **direcc
 se estaba moviendo**.
 
 
-El estado no se suele exponer de forma directa en la API. Por ejemplo, en el
-caso de los enemigos, incluso si estos tienen una posición, es preferible
-tener métodos específicos con qué manipular la posición como
-"mover a la izquierda" o "mover a la derecha" en lugar de dejar libre acceso
+El estado no se suele exponer de forma directa en la API. Piensa en el
+caso de los enemigos: incluso si estos tienen una posición, es preferible
+tener métodos específicos con los que manipular la posición (como
+"mover a la izquierda" o "mover a la derecha") en lugar de dar libre acceso
 a la posición.
 
 
-A los aspectos de un objeto se los denomina **atributos**.
+A las características de un objeto se las denomina **atributos**.
 
 
 <object type="image/svg+xml"
@@ -251,6 +251,11 @@ posición y puntuación.](
   { "el": ".state-item", "length": 0.6 }
 ]
 </script>
+
+
+El proceso de modelado es iterativo. Al definir algunas acciones, hemos
+introducido nuevos nombres como **posición** o **dirección** que se convertirán
+en tipos de objetos con sus propios constructores.
 
 
 ### Constructores y creación de objetos
@@ -369,13 +374,13 @@ y enemigos.
 </script>
 
 
-La jerarquía establece **relaciones de herencia** tambén llamadas relaciones
+Esta jerarquía establece **relaciones de herencia** tambén llamadas relaciones
 "**es un(a)**" dado que **el protagonista es una nave** y **el enemigo es una
 nave**.
 
 
 Se dice que **el tipo enemigo extiende al tipo nave** añadiendo avanzar a la
-API, y La puntuación y la última dirección de desplazamiento al estado.
+API, y la puntuación y la última dirección de desplazamiento al estado.
 
 
 La nave amiga no añade ningún método nuevo pero **redefine o sobreescribe** el
@@ -403,6 +408,9 @@ enemigo y devuelve el enemigo.](
 </script>
 
 
+De esta forma al pedir un enemigo, el constructor de enemigos pedirá una nave
+al constructor de naves. Tomará esa nave, la modificará para que sea un enemigo
+y devolverá un enemigo.
 
 > OOP to me means only messaging, local retention and protection and
 > hiding of state-process, and extreme late-binding of all things.
