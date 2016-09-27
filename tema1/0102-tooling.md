@@ -87,7 +87,7 @@ Hoy en día, los navegadores más usados contienen un intérprete de JavaScript.
 Además, los navegadores proveen al intérprete con un modelo del documento ([DOM-Document Object Model](https://es.wikipedia.org/wiki/Document_Object_Model)), que es un API para acceder a una página web
 
 
-## Servidor web
+## Servidores web
 
 Un *[servidor web](https://es.wikipedia.org/wiki/Servidor_web)* es un programa de ordenador que, a través de la red, "escucha" peticiones según el protocolo HTTP y envía, como respuesta, páginas web
 
