@@ -150,9 +150,13 @@ marcadores, defensas, enemigos, protagonista y disparos](
 Algunos **tipos**: marcadores, defensas, nave amiga, enemigos, disparos.
 
 
-Las **instancias** son cada uno de los objetos individuales. El enemigo especial
-será una instancia del tipo **enemigo**.
+Los **valores** de un tipo son cada uno de los objetos individuales. El enemigo
+especial, así como cada uno de los otros enemigos será un valor distinto del
+**tipo enemigo**.
 
+
+Cuando utilizamos la terminología de clases, los valores se convierten en
+**instancias de la clase**.
 
 En los modelos de objetos es más conveniente trabajar con tipos de objetos.
 
