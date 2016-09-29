@@ -68,6 +68,18 @@ causa que lo impida.
 La nota de cada miembro de la pareja será individual (aunque, por supuesto,
 podrá coincidir).
 
+## Asistencia
+
+La asistencia es obligatoria, y está más allá de la evaluación. El curso es
+presencial, y está diseñado como tal. La intención es que el trabajo en clase
+sea suficiente para que, junto con la realización de los ejercicios
+y prácticas, se adquiera todo el conocimiento necesario para la asignatura.
+
+La evaluación de la asistencia se hará con hojas de firmas. La nota de
+asistencia se calculará como el porcentaje de asistencia ($asistencia = \text{hojas-asistencia}
+- faltas$) multiplicado por el peso de la asistencia de la fórmula
+@eq:formulaeval .
+
 ## Entregas
 
 Todo el material entregado debe estar alojado en un repositorio *git*

@@ -11,4 +11,4 @@ nota_{final} & = practica_1 \times 0,025 \\
              & + asistencia \times 0,025 \\
              & + contribución \times 0,025
 \end{aligned}
-$$
+$${#eq:formulaeval}
