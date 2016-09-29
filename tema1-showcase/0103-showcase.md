@@ -53,7 +53,7 @@ belen@mozilla.com
 - Audio posicional
 - Síntesis de audio
   - Osciladores, filtros. etc.
-  - Sí, puedes programarte tu propio sintetizador
+  - Sí, puedes programarte [tu propio sintetizador](https://djen.co/share/gpWumO)
 
 
 ### Input
@@ -66,22 +66,25 @@ belen@mozilla.com
 
 ### JavaScript mola
 
-- Lenguaje que permite desarrollar rápido
-- Scripting gratis!
--
+- Es universal, corre en todas las plataformas
+- Es moderno, multiparadigma
+- Permite desarrollar rápido
+- ¡Scripting gratis!
 
-### Pero yo quiero vender mi juego en un marketplace!
+
+### ¡Pero yo quiero vender mi juego en un marketplace!
 
 - Hay wrappers para poder distribuir tu juego en Steam, App Store, Google Play…
 - Permiten que tu juego HTML5 se distribuya como una aplicación nativa
 - Ejemplos: node-webkit, CocoonJS
 
 
-### El futuro... Webassembly
+### El futuro… WebAssembly
 
 - Un subset de JavaScript… ultrarrápido y en bytecode
 - Traductor de LLVM (C/C++) a Webassembly
-- Juegos con performance nativa en el browser!
+- ¡Juegos con rendimiento nativo en el browser!
+
 
 
 ## Showcase
@@ -125,7 +128,14 @@ belen@mozilla.com
 <small>http://elliotquest.com/</small>
 
 
-### Videojuegos amateur, game jams, etc.
+### Videojuegos amateur, demos comerciales, game jams, etc.
+
+
+#### Playcanvas' Swooop
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zU9MMbWyMzs?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<small>https://playcanv.as/p/JtL2iqIH/</small>
 
 
 #### Evil Glitch
@@ -186,8 +196,7 @@ http://www.pcjs.org/
 <iframe width="560" height="315" src="https://www.youtube.com/embed/RUeLd7T7Xi4?rel=0" frameborder="0" allowfullscreen></iframe>
 
 
-### Más Demos
+### Más demos
 
-- Playcanvas' Swooop https://playcanv.as/p/JtL2iqIH/
 - WebGL experiments https://www.chromeexperiments.com/webgl
 - Three.js featured projects https://threejs.org/
