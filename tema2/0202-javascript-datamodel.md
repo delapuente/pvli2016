@@ -123,12 +123,98 @@ typeof x;
 ```
 
 
+### Objetos en JavaScript
 
-## Objetos
+
+De entre todos los tipos, vamos a prestar atención a aquel cuyosa valores
+permiten la composición con otros. Es decir, los de tipos `'object'`.
 
 
-De entre todos los tipos primitivos, vamos a prestar atención a aquellos que
-permiten la composición de objetos
+En JavaScript, los objetos son colecciones de valores etiquetados. Por ejemplo,
+si queremos representar el punto `(10, 15)` del plano XY podemos etiquetar el
+valor en el eje X con la cadena `'x'` y el valor en el eje Y con la cadena
+`'Y'`.
+
+
+```js
+var point = { 'x': 10, 'y': 15 };
+```
+
+
+Si las etiquetas de los datos, llamadas normalmente **propiedades del objeto**,
+se escriben siguiendo las [reglas de formación de identificadores](
+) en JavaScript, las comillas no son necesarias.
+
+
+```js
+var point = { x: 10, y: 10 }; // mucho más conveniente
+```
+
+
+Este es el caso **más normal y el recomendado** y a lo largo del curso usaremos
+este pero conviene saber que por detrás, **la etiqueta es una cadena**.
+
+
+Para acceder a las propiedades de un objeto usamos los corchetes con la cadena
+de la propiedad en medio:
+
+```js
+point['x'];
+point['y'];
+```
+
+
+De nuevo, si seguimos las reglas de formación de identificadores, podemos usar
+la notación punto para acceder a la propiedad, mucho más rápida de escribir:
+
+```js
+point.x;
+point.y;
+```
+
+
+Para cambiar el valor de una propiedad usamos el operador de asignación:
+
+```js
+point.x = 0;
+point.y = 0;
+point['x'] = 0;
+point['y'] = 0;
+```
+
+
+### Arrays
+
+
+Las **listas** o **arrays** son colecciones de datos ordenados.
+
+
+### `null`
+
+
+Existe un último valor para el tipo objeto que es `null`. Este valor representa
+la **ausencia de objeto** y se suele utilizar para:
+
+  + En funciones en las que se pregunta por un objeto, indicar que no se ha
+  encontrado.
+  + En relaciones de composición, indicar que el objeto compuesto ya no necesita
+  al objeto componente.
+
+
+Por ejemplo, en el ejemplo de Space Invaders, suponed que preguntamos por el
+enemigo especial:
+
+```js
+function getSpecialEnemy() {
+  // buscar por el enemigo especial...
+  // ... y si no lo encuentras
+  return null;
+}
+```
+
+En el contexto de JavaScript, los objetos no son exactamente lo mismo que en el
+modelado orientado a objetos. No obstante, los objetos de JavaScript se acercan
+bastante a los objetos del modelado orientado a objetos.
 
 ```js
 true.toString();
