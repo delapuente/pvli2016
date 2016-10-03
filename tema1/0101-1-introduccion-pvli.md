@@ -119,7 +119,7 @@ Se hará un control de copias **estricto**.
 ## Fórmula
 
 ```include
-../formula_evaluacion.md
+general/aux/formula_evaluacion.md
 ```
 
 

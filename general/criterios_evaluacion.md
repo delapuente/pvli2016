@@ -1,7 +1,7 @@
 ---
-title: Criterios de evaluación PVLI (BORRADOR)
+title: Criterios de evaluación PVLI
 author: Carlos León
-date: 'Última actualización: 27/09/2016'
+date: 'Última actualización: 03/10/2016'
 vim: spelllang=es
 ...
 
@@ -15,17 +15,19 @@ exámenes (uno parcial y uno final en febrero o septiembre). Además, en la
 evaluación habrá una presentación de proyectos, y tanto la asistencia como la
 contribución durante el desarrollo de la asignatura serán tenidas en cuenta.
 
-La evaluación en PVLI se hará en función de la fórmula en @eq:formulaeval:
+La evaluación en PVLI se hará en función de la fórmula @eq:formulaeval:
 
 ```include
-formula_evaluacion.md
+general/aux/formula_evaluacion.md
 ```
 
 Todas las notas serán mantenidas hasta el final de la evaluación. Es decir, si
 se suspende en la convocatoria de febrero, todo aquello que haya tenido más de
 un 5 será mantenido como parte de la nota final, siempre y cuando no haya una
 entrega adicional posterior, en cuyo caso se corregirá esta última y *se
-mantendrá la última nota, incluso si esta es más baja que la primera*.
+mantendrá la última nota, incluso si esta es más baja que la primera*^[la
+intención es evitar envíos aleatorios y la consiguiente sobrecarga innecesaria
+del equipo docente].
 
 - Todas las correcciones tendrán una parte de evaluación automática basada en
   análisis automático de código y tests, y una parte de evaluación cualitativa
@@ -60,13 +62,7 @@ exhaustivo de copias.
 
 ## Grupos
 
-Todas las entregas serán en parejas, a excepción de los exámenes, que se
-realizarán de manera individual. Los alumnos pueden crear parejas. Aquellos
-alumnos que no estén en pareja serán asignados por el profesor si no hay una
-causa que lo impida.
-
-La nota de cada miembro de la pareja será individual (aunque, por supuesto,
-podrá coincidir).
+La información sobre los grupos puede consultarse en el [documento de grupos](grupos.html).
 
 ## Asistencia
 
@@ -117,4 +113,3 @@ archivos), se deberá incluir un texto de este tipo:
     $ node entscheidungsproblem.js
 
     Y se verá que sale el mismo resultado.
-

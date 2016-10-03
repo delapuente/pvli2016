@@ -5,20 +5,33 @@
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
   <meta name="author" content="Carlos León" />
-  <title>Criterios de evaluación PVLI (BORRADOR)</title>
+  <title>Criterios de evaluación PVLI</title>
   <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="../shared/docs.css" type="text/css" />
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">
-<h1 class="title">Criterios de evaluación PVLI (BORRADOR)</h1>
+<h1 class="title">Criterios de evaluación PVLI</h1>
 <h2 class="author">Carlos León</h2>
-<h3 class="date">Última actualización: 27/09/2016</h3>
+<h3 class="date">Última actualización: 03/10/2016</h3>
 </div>
 <p>Dado el carácter práctico de la asignatura de <em>Programación de Videojuegos en Lenguajes Interpretados</em>, la evaluación se llevará a cabo mediante entregas prácticas (código) que serán entregadas a través del Campus Virtual en las fechas que se vaya señalando.</p>
 <p>Para la evaluación, el alumno entregará cinco prácticas, y realizará dos exámenes (uno parcial y uno final en febrero o septiembre). Además, en la evaluación habrá una presentación de proyectos, y tanto la asistencia como la contribución durante el desarrollo de la asignatura serán tenidas en cuenta.</p>
-<p>La evaluación en PVLI se hará en función de la fórmula en <span class="citation">@eq:formulaeval</span>:</p>
-<p>Todas las notas serán mantenidas hasta el final de la evaluación. Es decir, si se suspende en la convocatoria de febrero, todo aquello que haya tenido más de un 5 será mantenido como parte de la nota final, siempre y cuando no haya una entrega adicional posterior, en cuyo caso se corregirá esta última y <em>se mantendrá la última nota, incluso si esta es más baja que la primera</em>.</p>
+<p>La evaluación en PVLI se hará en función de la fórmula  1:</p>
+<p><span class="math display">\[ \begin{aligned}
+nota_{final} &amp; = practica_1 \times 0,025 \\
+             &amp; + practica_2 \times 0,025 \\
+             &amp; + practica_3 \times 0,025 \\
+             &amp; + examen_{parcial} \times 0,1 \\
+             &amp; + practica_4 \times 0,05 \\
+             &amp; + practica_5 \times 0,1 \\
+             &amp; + presentación \times 0,025 \\
+             &amp; + examen_{final} \times 0,6 \\
+             &amp; + asistencia \times 0,025 \\
+             &amp; + contribución \times 0,025
+\end{aligned}\qquad(1)\]</span></p>
+<p>Todas las notas serán mantenidas hasta el final de la evaluación. Es decir, si se suspende en la convocatoria de febrero, todo aquello que haya tenido más de un 5 será mantenido como parte de la nota final, siempre y cuando no haya una entrega adicional posterior, en cuyo caso se corregirá esta última y <em>se mantendrá la última nota, incluso si esta es más baja que la primera</em><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <ul>
 <li>Todas las correcciones tendrán una parte de evaluación automática basada en análisis automático de código y tests, y una parte de evaluación cualitativa manual.</li>
 <li>Si se supera la parte de la evaluación automática, se procederá a la manual. En caso contrario, se habrá suspendido la entrega (examen o práctica).</li>
@@ -32,8 +45,10 @@
 <h2 id="copias">Copias</h2>
 <p><strong>Copiar cualquier entrega no está permitido y supondrá una falta grave, acarreando el suspenso de la convocatoria actual</strong>. Se llevará a cabo un examen exhaustivo de copias.</p>
 <h2 id="grupos">Grupos</h2>
-<p>Todas las entregas serán en parejas, a excepción de los exámenes, que se realizarán de manera individual. Los alumnos pueden crear parejas. Aquellos alumnos que no estén en pareja serán asignados por el profesor si no hay una causa que lo impida.</p>
-<p>La nota de cada miembro de la pareja será individual (aunque, por supuesto, podrá coincidir).</p>
+<p>La información sobre los grupos puede consultarse en el <a href="grupos.html">documento de grupos</a>.</p>
+<h2 id="asistencia">Asistencia</h2>
+<p>La asistencia es obligatoria, y está más allá de la evaluación. El curso es presencial, y está diseñado como tal. La intención es que el trabajo en clase sea suficiente para que, junto con la realización de los ejercicios y prácticas, se adquiera todo el conocimiento necesario para la asignatura.</p>
+<p>La evaluación de la asistencia se hará con hojas de firmas. La nota de asistencia se calculará como el porcentaje de asistencia (<span class="math inline">\(asistencia = \text{hojas-asistencia} - faltas\)</span>) multiplicado por el peso de la asistencia de la fórmula  1 .</p>
 <h2 id="entregas">Entregas</h2>
 <p>Todo el material entregado debe estar alojado en un repositorio <em>git</em> a elección de los alumnos. Este repositorio puede ser público o privado, pero se tiene que asegurar el acceso a los profesores.</p>
 <p>Por ejemplo, si el repositorio es privado, se tiene que dar de alta el usuario de los profesores.</p>
@@ -62,5 +77,11 @@ Se puede probar con el script:
 $ node entscheidungsproblem.js
 
 Y se verá que sale el mismo resultado.</code></pre>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>la intención es evitar envíos aleatorios y la consiguiente sobrecarga innecesaria del equipo docente<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
 </body>
 </html>
