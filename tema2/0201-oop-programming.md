@@ -60,7 +60,7 @@ mensajes**.
 Los objetos son **representaciones de los aspectos de un problema**.
 
 
-  * Hacen **una cosa solamente**.
+  * Desempeñan **un rol solamente**.
   * Exponen un conjunto de **funcionalidad concreta**: la [API](
   https://en.wikipedia.org/wiki/Application_programming_interface#Libraries_and_frameworks).
   * **Ocultan** cómo realizan esa funcionalidad.
