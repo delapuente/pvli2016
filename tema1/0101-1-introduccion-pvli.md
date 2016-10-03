@@ -1,10 +1,8 @@
 ---
-#title: 'Programación de Videojuegos en Lenguajes Interpretados: Introducción y programa'
 title: 'PVLI: Introducción'
 author: Carlos León
 date: 26/09/16
 vim: spelllang=es 
-# pandoc --filter pandoc-include -s --mathjax -i --variable revealjs-url="../shared/lib/reveal" -t revealjs --template reveal.html 0101-1-introduccion-pvli.md -o 0101-1-introduccion-pvli.html
 ... 
 
 
