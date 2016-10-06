@@ -1,5 +1,8 @@
 # Ejercicios de laboratorio
 
+Probad estos ejemplos y tratad de responder a las preguntas. Si os atascáis con
+lo que hace una función, buscad en Internet la función acompañado de "mdn".
+
 **1. Valores booleanos en JavaScript.**
 
 En JavaScript cualquier valor puede considerarse verdadero o falso según el
@@ -107,16 +110,16 @@ var p = {
   _x: 5,
   _y: 5,
   getX: function () {
-    return _x;
+    return this._x;
   },
   getY: function () {
-    return _y;
+    return this._y;
   },
   setX: function (v) {
-    _x = v;
+    this._x = v;
   },
   setY: function (v) {
-    _y = v;
+    this._y = v;
   }
 };
 
@@ -141,16 +144,16 @@ var p = {
   _x: 5,
   _y: 5,
   get x() {
-    return _x;
+    return this._x;
   },
   get y() {
-    return _y;
+    return this._y;
   },
   set x(v) {
-    _x = v;
+    this._x = v;
   },
   set y(v) {
-    _y = v;
+    this._y = v;
   }
 };
 
@@ -203,10 +206,8 @@ Si quisieras añadir una propiedad a un objeto ya existente tendrías que utiliz
 
 ```js
 var point = {};
-Object.defineProperty(point, '_x', { value: 5});
-point;
-Object.defineProperty(point, '_y', { value: 5});
-point;
+Object.defineProperty(point, '_x', { value: 5 });
+Object.defineProperty(point, '_y', { value: 5 });
 Object.defineProperty(point, 'x', {
   get: function () {
     return this._x;
@@ -215,7 +216,6 @@ Object.defineProperty(point, 'x', {
     this._x = v;
   }
 });
-point;
 Object.defineProperty(point, 'y', {
   get: function () {
     return this._y;
@@ -224,8 +224,17 @@ Object.defineProperty(point, 'y', {
     this._y = v;
   }
 });
-point;
+point; // no se observan propiedades...
+point.x; // ...pero aquí están.
+point.y;
 ```
+
+¿Te atreves a decir por qué cuando inspeccionamos el objeto no aparecen sus
+propiedades? ¿Cómo podrías arreglarlo? ¿Cómo harías para que sólo se vieran
+las propiedades que son parte de la API?
+
+No te lances a usar `Object.defineProperty()` si no tienes **muy claro** qué
+significan los términos **configurable**, **enumerable** y **writable**.
 
 **7. Usando funciones como si fueran métodos.**
 
@@ -310,10 +319,10 @@ un ejemplo clásico de la utilidad de un objeto JavaScript:
 
 ```js
 function wordHistogram(text) {
-  var wordList = text.split();
+  var wordList = text.split(' ');
   var histogram = {};
   for (var i = 0; i < wordList.length; i++) {
-    var word = wordList[0];
+    var word = wordList[i];
     if (!histogram.hasOwnProperty(word)) {
       histogram[word] = 0;
     }
@@ -321,14 +330,9 @@ function wordHistogram(text) {
   }
   return histogram;
 }
-
-var poem = 'Todo pasa y todo queda, ' +
-           'pero lo nuestro es pasar, ' +
-           'pasar haciendo caminos, ' +
-           'caminos sobre la mar';
-
-wordHistogram(poem);
 ```
+
+Prueba a usar la función por ti mismo.
 
 Lo que JavaScript llama objetos se conoce en otros lenguajes de programación
 como mapas o diccionarios y a los nombres de las propiedades se los llama
@@ -346,7 +350,7 @@ van a recorrer **todos** los elementos de una lista.
 
 ```js
 function wordHistogram(text) {
-  var wordList = text.split();
+  var wordList = text.split(' ');
   var histogram = {};
   wordList.forEach(function (word) {
     if (!histogram.hasOwnProperty(word)) {
@@ -365,7 +369,9 @@ var poem = 'Todo pasa y todo queda, ' +
 wordHistogram(poem);
 ```
 
-Podemos hacerlo si en vez de partir el texto por los espacios usamos una
+El resultado no es correcto porque al separar las palabras por los espacios
+estamos dejando caracteres que no son palabras como parte de ellas. Podemos
+arreglarlo si en vez de partir el texto por los espacios usamos una
 [expresión regular](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 para partir el texto por los límites de las palabras:
 
@@ -390,7 +396,8 @@ var poem = 'Todo pasa y todo queda, ' +
 wordHistogram(poem);
 ```
 
-Pero ahora tenemos cosas que no son palabras. Podemos filtrar una lista con
+Pero ahora tenemos cosas que no son palabras (como espacios y comas). Podemos
+filtrar una lista con
 [`.filter()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter):
 
 ```js
@@ -402,7 +409,7 @@ Y así quitar lo que no sean palabras:
 
 ```js
 function isWord(candidate) {
-  return candidate.test(/\w+/);
+  return /\w+/.test(candidate);
 }
 
 function wordHistogram(text) {
@@ -435,7 +442,7 @@ usamos
 
 ```js
 function isWord(candidate) {
-  return candidate.test(/\w+/);
+  return /\w+/.test(candidate);
 }
 
 function toLowerCase(word) {
@@ -468,11 +475,11 @@ wordHistogram(poem);
 Una última función nos permite transformar una lista en un sólo valor. Esto es
 precisamente el histograma, una clasificación de todos los valores de la lista.
 Esta transformación se consigue mediante
-[`.reduce()`]():
+[`.reduce()`](https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/reduce):
 
 ```js
 function isWord(candidate) {
-  return candidate.test(/\w+/);
+  return /\w+/.test(candidate);
 }
 
 function toLowerCase(word) {
