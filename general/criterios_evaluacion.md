@@ -1,7 +1,7 @@
 ---
 title: Criterios de evaluación PVLI
 author: Carlos León
-date: 'Última actualización: 03/10/2016'
+date: 06/10/2016
 vim: spelllang=es
 ...
 
@@ -18,7 +18,7 @@ contribución durante el desarrollo de la asignatura serán tenidas en cuenta.
 La evaluación en PVLI se hará en función de la fórmula @eq:formulaeval:
 
 ```include
-general/aux/formula_evaluacion.md
+general/auxiliary/formula_evaluacion.md
 ```
 
 Todas las notas serán mantenidas hasta el final de la evaluación. Es decir, si
