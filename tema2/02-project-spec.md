@@ -35,17 +35,12 @@ respectivamente que no pueden sobrepasar.
 
 La siguiente tabla resume las características:
 
-+================+========+========+========================+
-| Característica | Mínimo | Máximo | Limitado por:          |
-+================+========+========+========================+
+| Característica | Mínimo | Máximo | Limitado por           |
+|:---------------|-------:|-------:|:----------------------:|
 | Iniciativa     |      0 |      - |                      - |
-+----------------+--------+--------+------------------------+
 | Defensa        |      0 |    100 |                      - |
-+----------------+--------+--------+------------------------+
 | Puntos de vida |      0 |      - | Puntos de vida máximos |
-+----------------+--------|--------+------------------------+
 | Puntos de maná |      0 |      - | Puntos de maná máximos |
-+----------------+--------+--------+------------------------+
 
 Los personajes tienen también un **nombre** que los identifica en la interfaz de
 usuario y un **arma** con la que podrán atacar a otros personajes.
@@ -237,3 +232,15 @@ El procedimiento es el siguiente:
     1. Suma el valor del efecto al valor de la característica del objetivo.
     2. Corrige el valor para que se encuentre entre 0 y el máximo para esa
     característica, si tiene.
+
+## Control
+
+Durante esta práctica no se implementará ninguna interfaz de control lo que no
+significa que no se pueda jugar. Para jugar, importaremos el módulo que
+representa nuestro juego en la consola de node y utilizaremos la API de control
+del juego para jugar.
+
+### IA enemiga
+
+La inteligencia artificial enemiga sólo puede realizar [ataques](#atacar) contra
+héroes. La selección del héroe es aleatoria.
