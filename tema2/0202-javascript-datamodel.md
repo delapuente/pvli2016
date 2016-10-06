@@ -957,7 +957,7 @@ var obj3 = { f: 6 };
 var obj2 = Object.create(obj3);
 obj2.d = 4;
 obj2.e = 5;
-// Encadenamos obj1 a obj3
+// Encadenamos obj1 a obj2
 var obj1 = Object.create(obj2);
 obj1.a = 1;
 obj1.b = 2;
@@ -1450,10 +1450,10 @@ tipo, deberíamos comprobar si tiene la funcionalidad que necesitamos.
 
 
 JavaScript es tan dinámico que el operador `instanceof` y la propiedad
-`constructor` sólo tiene sentido si utilizamos seguimos los convenios aprendidos
+`constructor` sólo tienen sentido si seguimos los convenios aprendidos
 en la lección.
 
 
-Nada nos impide borrar la propiedad constructor de un prototipo o
+Nada nos impide borrar la propiedad `constructor` de un prototipo o
 sobreescribirla en un objeto determinado. En las nuevas versiones de JavaScript,
 el prototipo de un objeto puede cambiar después de haber sido construido.
