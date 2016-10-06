@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="el-modelo-de-datos-de-javascript" class="slide level1">
+<h1>El modelo de datos de JavaScript</h1>
+<p>Lenguaje de programación = sintaxis + modelo de datos + modelo de ejecución</p>
+<p>(+ estilo)</p>
+<ul>
+<li class="fragment">La <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference#Statements">sintaxis</a> es vuestra responsabilidad.</li>
+<li class="fragment">El modelo de datos es mía.</li>
+<li class="fragment">El modelo de ejecución también.</li>
+<li class="fragment">Y la jerga es de ambos.</li>
+</ul>
+<p>Lo que vamos a hacer ahora es codificar los conceptos <a href="./0201-oop-programming">aprendidos en la lección anterior</a>. No todos los lenguajes permiten una transcripción 1 a 1 de los conceptos que recogemos en el modelo.</p>
+<p>Por ejemplo, JavaScript no tiene un mecanismo para crear tipos nuevos pero tiene otros mecanismos que permiten codificar una funcionalidad similar.</p>
+<h2 id="experimentando-con-javascript">Experimentando con JavaScript</h2>
+<p>Vamos a experimentar con JavaScript así que necesitamos una forma rápida de inspeccionar expresiones y obtener feedback de lo que estamos haciendo. La mejor forma es utilizar la consola de <em>node</em>. Por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">node</span> --use_strict</code></pre></div>
+<p>La opción <code>--use_strict</code> activa el modo estricto de JavaScript que simplifica algunos aspectos del lenguaje. Recorta algunas características pero los beneficios son mayores que las pérdidas.</p>
+<p>Ahora puedes probar a introducir algunas expresiones:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash"><span class="op">&gt;</span> <span class="ex">40</span> + 2
+<span class="ex">42</span>
+<span class="op">&gt;</span> <span class="ex">var</span> point = { x: 1, y: 1 };
+<span class="ex">undefined</span>
+<span class="op">&gt;</span> <span class="ex">point</span>
+<span class="kw">{</span> <span class="ex">x</span>: 1, y: 1 <span class="kw">}</span>
+<span class="op">&gt;</span> <span class="ex">point.x</span>
+<span class="ex">1</span></code></pre></div>
+<p>Para limpiar la pantalla presiona <code>ctrl+l</code>.</p>
+<p>Para salir de <em>node</em>, presiona <code>ctrl+c</code> dos veces seguidas.</p>
+<p>Si no quieres lidiar con la consola de <em>node</em>, siempre puedes escribir un programa y usar <code>console.log()</code> para mostrar expresiones por pantalla.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// en prueba.js</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="dv">40</span> <span class="op">+</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> point <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">1</span> <span class="op">};</span>
+<span class="va">console</span>.<span class="at">log</span>(point)<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Coordenada X:&#39;</span><span class="op">,</span> <span class="va">point</span>.<span class="at">x</span>)<span class="op">;</span></code></pre></div>
+<p>Y ahora ejecutar el programa con node:</p>
+<div class="sourceCode"><pre class="sourceCode sh"><code class="sourceCode bash">$ <span class="ex">node</span> prueba.js                                                                                             2.2.3
+<span class="ex">42</span>
+<span class="kw">{</span> <span class="ex">x</span>: 1, y: 1 <span class="kw">}</span>
+<span class="ex">Coordenada</span> X 1</code></pre></div>
+<p>El tema asume una única sesión de la consola de <em>node</em> a menos que se indique lo contrario.</p>
+<p>Para la mayoría de los ejemplos, puedes mantener la misma sesión abierta pero si te encuentras con algo inesperado, antes de nada prueba a reiniciar la consola. Para reiniciar la consola tienes que <strong>salir y volver a entrar</strong>.</p>
+<p>Lo mejor es que se tenga la presentación abierta a un lado y la consola <em>node</em> en el otro.</p>
+<h2 id="tipos-primitivos">Tipos primitivos</h2>
+<p>Se llama <strong>tipos primitivos</strong> a aquellos que vienen con el lenguaje y que permiten la creación de nuevos tipos más complejos. En JavaScript, los tipos primitivos son: <strong>booleanos</strong>, <strong>números</strong>, <strong>cadenas</strong>, <strong>objetos</strong> y <strong>funciones</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// En los comentarios hay más valores posibles para cada uno de los tipos.</span>
+<span class="kw">var</span> bool <span class="op">=</span> <span class="kw">true</span><span class="op">;</span> <span class="co">// false</span>
+<span class="kw">var</span> number <span class="op">=</span> <span class="fl">1234.5</span><span class="op">;</span> <span class="co">// 42, -Infinity, +Infinity</span>
+<span class="kw">var</span> text <span class="op">=</span> <span class="st">&#39;I want to be a pirate!&#39;</span><span class="op">;</span> <span class="co">// &quot;I want to be a pirate&quot;</span>
+<span class="kw">var</span> object <span class="op">=</span> <span class="op">{};</span> <span class="co">// [], null</span>
+<span class="kw">var</span> code <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="cf">return</span> <span class="dv">42</span><span class="op">;</span> <span class="op">};</span></code></pre></div>
+<p>Los puedes reconocer porque responden de manera distinta al operador <code>typeof</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">typeof</span> <span class="kw">true</span><span class="op">;</span>
+<span class="kw">typeof</span> <span class="fl">1234.5</span><span class="op">;</span>
+<span class="kw">typeof</span> <span class="st">&#39;I want to be a pirate!&#39;</span><span class="op">;</span>
+<span class="kw">typeof</span> <span class="op">{};</span>
+<span class="kw">typeof</span> <span class="kw">function</span> () <span class="op">{</span> <span class="cf">return</span> <span class="dv">42</span><span class="op">;</span> <span class="op">};</span></code></pre></div>
+<p>En JavaScript podemos declarar una variable y no asignarle ningún valor. En este caso el tipo de la variable será <code>undefined</code>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> x<span class="op">;</span>
+<span class="kw">typeof</span> x<span class="op">;</span>
+x <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// tan pronto como le demos un valor, el tipo dejará de ser undefined.</span>
+<span class="kw">typeof</span> x<span class="op">;</span></code></pre></div>
+<h3 id="objetos-en-javascript">Objetos en JavaScript</h3>
+<p>De entre todos los tipos, vamos a prestar atención a aquel cuyos valores permiten la composición con otros. Es decir, los de tipo <code>'object'</code>.</p>
+<p>En JavaScript, los objetos son colecciones de valores etiquetados. Por ejemplo, si queremos representar el punto <code>(10, 15)</code> del plano XY podemos etiquetar el valor en el eje X con la cadena <code>'x'</code> y el valor en el eje Y con la cadena <code>'y'</code>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> point <span class="op">=</span> <span class="op">{</span> <span class="st">&#39;x&#39;</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="st">&#39;y&#39;</span><span class="op">:</span> <span class="dv">15</span> <span class="op">};</span></code></pre></div>
+<p>Cada par etiqueta y valor se llama <strong>propiedad del objeto</strong>. No es algo estricto pero cuando se habla de las propiedades de un objeto se suele referir a los valores mientras que para hablar de las etiquetas se suele decir <strong>nombre de la propiedad</strong>.</p>
+<p>Si los nombres de las propiedades se escriben siguiendo las <a href="https://developer.mozilla.org/en-US/docs/Glossary/Identifier">reglas de formación de identificadores</a> en JavaScript, las comillas no son necesarias.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> point <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">};</span> <span class="co">// mucho más conveniente.</span></code></pre></div>
+<p>Este es el caso <strong>más normal</strong>, <strong>el recomendado</strong> y el que usaremos a los largo del curso pero conviene saber que por detrás, <strong>el nombre de la propiedad es una cadena</strong>.</p>
+<p>Para acceder a las propiedades de un objeto usamos los corchetes con el nombre de la propiedad en medio:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">point[<span class="st">&#39;x&#39;</span>]<span class="op">;</span>
+point[<span class="st">&#39;y&#39;</span>]<span class="op">;</span></code></pre></div>
+<p>De nuevo, si seguimos las reglas de formación de identificadores, podemos usar la notación punto para acceder a la propiedad, mucho más rápida de escribir:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">point</span>.<span class="at">x</span><span class="op">;</span>
+<span class="va">point</span>.<span class="at">y</span><span class="op">;</span></code></pre></div>
+<p>Para cambiar el valor de una propiedad usamos el operador de asignación:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">point</span>.<span class="at">x</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+<span class="va">point</span>.<span class="at">y</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+point[<span class="st">&#39;x&#39;</span>] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+point[<span class="st">&#39;y&#39;</span>] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></code></pre></div>
+<p>Si accedemos a una <strong>propiedad que no existe</strong>, obtendremos <code>undefined</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> label <span class="op">=</span> <span class="va">point</span>.<span class="at">label</span><span class="op">;</span> <span class="co">// será undefined. Compruébalo con typeof.</span></code></pre></div>
+<p>También es verdad que en cualquier momento podemos crear propiedades nuevas asignándles algo.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">point</span>.<span class="at">label</span> <span class="op">=</span> <span class="st">&#39;origin&#39;</span><span class="op">;</span>
+point<span class="op">;</span></code></pre></div>
+<h3 id="arrays">Arrays</h3>
+<p>Las <strong>listas</strong> o <strong>arrays</strong> son colecciones de <strong>datos ordenados</strong>.</p>
+<p>Por ejemplo, la lista de comandos de un menú:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> menu <span class="op">=</span> [<span class="st">&#39;Attack&#39;</span><span class="op">,</span> <span class="st">&#39;Defense&#39;</span><span class="op">,</span> <span class="st">&#39;Inventory&#39;</span>]<span class="op">;</span></code></pre></div>
+<p>En este tipo de objetos, el orden importa. Para acceder a los distintos valores usamos su <strong>índice</strong> en la lista entre corchetes. Los índices <strong>comienzan en 0</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">menu[<span class="dv">0</span>]<span class="op">;</span>
+menu[<span class="dv">1</span>]<span class="op">;</span>
+menu[<span class="dv">2</span>]<span class="op">;</span></code></pre></div>
+<p>Se puede consultar la longitud de un array, accediendo a la propiedad <code>length</code>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">menu</span>.<span class="at">length</span><span class="op">;</span></code></pre></div>
+<p>Se puede añadir un elemento al final del array, llamando al método <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/push"><code>push()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">menu</span>.<span class="at">push</span>(<span class="st">&#39;Magic&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>También se puede quitar un elemento por el final usando el método <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop"><code>pop()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">menu</span>.<span class="at">pop</span>()<span class="op">;</span></code></pre></div>
+<p>Se puede alterar una lista (insertar o borrar elementos) en cualquier lugar usando el método <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"><code>splice()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Inspecciona la lista tras cada operación.</span>
+menu <span class="op">=</span> [<span class="st">&#39;Attack&#39;</span><span class="op">,</span> <span class="st">&#39;Defense&#39;</span><span class="op">,</span> <span class="st">&#39;Inventory&#39;</span>]<span class="op">;</span>
+<span class="va">menu</span>.<span class="at">splice</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="st">&#39;Magic&#39;</span>)<span class="op">;</span> <span class="co">// añade Magic antes de Inventory.</span>
+<span class="va">menu</span>.<span class="at">splice</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="st">&#39;Ench. Inventory&#39;</span>)<span class="op">;</span> <span class="co">// reemplaza Magic and Inventory with Ench. Inventory.</span>
+<span class="va">menu</span>.<span class="at">splice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="st">&#39;Wait&#39;</span>)<span class="op">;</span> <span class="co">// añade Wait al principio de la lista.</span></code></pre></div>
+<p>Como en el caso de los objetos, podemos cambiar cualquier valor en cualquier momento usando el operador de asignación.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">menu[<span class="dv">0</span>] <span class="op">=</span> <span class="st">&#39;Special&#39;</span><span class="op">;</span> <span class="co">// reemplaza Wait con Special</span></code></pre></div>
+<p>También como en el caso de los objetos, podemos acceder a un valor que no existe y recuperarlo o asignarlo en cualquier momento.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">menu<span class="op">;</span>
+<span class="va">menu</span>.<span class="at">length</span><span class="op">;</span>
+<span class="kw">var</span> item <span class="op">=</span> menu[<span class="dv">10</span>]<span class="op">;</span>
+<span class="kw">typeof</span> item<span class="op">;</span> <span class="co">// será undefined.</span>
+menu[<span class="dv">10</span>] <span class="op">=</span> <span class="st">&#39;Secret&#39;</span><span class="op">;</span>
+menu<span class="op">;</span>
+<span class="va">menu</span>.<span class="at">length</span><span class="op">;</span></code></pre></div>
+<p>Si asignamos a un índice <strong>por encima de la longitud actual, extendemos el array hasta ese índice</strong>.</p>
+<h4 id="distinguir-entre-objetos-y-arrays">Distinguir entre objetos y arrays</h4>
+<p>Arrays y objetos tienen tipo <code>object</code> así que usaremos el método <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray"><code>Array.isArray()</code></a> para distinguirlos.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span> <span class="co">// el objeto vacío es tan válido como cualquier otro.</span>
+<span class="kw">var</span> arr <span class="op">=</span> []<span class="op">;</span> <span class="co">// una lista sin elementos, como te puedes imaginar.</span>
+<span class="kw">typeof</span> obj<span class="op">;</span> <span class="co">// será object.</span>
+<span class="kw">typeof</span> arr<span class="op">;</span> <span class="co">// será object.</span>
+<span class="va">Array</span>.<span class="at">isArray</span>(obj)<span class="op">;</span> <span class="co">// será false.</span>
+<span class="va">Array</span>.<span class="at">isArray</span>(arr)<span class="op">;</span> <span class="co">// será true.</span></code></pre></div>
+<h3 id="null"><code>null</code></h3>
+<p>Existe un último valor para el tipo objeto que es <code>null</code>. Este valor representa la <strong>ausencia de objeto</strong> y se suele utilizar para:</p>
+<ul>
+<li class="fragment">En funciones en las que se pregunta por un objeto, indicar que no se ha encontrado.</li>
+<li class="fragment">En relaciones de composición, indicar que el objeto compuesto ya no necesita al objeto componente.</li>
+</ul>
+<p>Por ejemplo, en un RPG, preguntamos por el siguiente enemigo vivo para comprobar si podemos seguir en batalla:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">getNextAliveEnemy</span>() <span class="op">{</span>
+  <span class="kw">var</span> nextEnemy<span class="op">;</span>
+  <span class="cf">if</span> (<span class="va">aliveEnemies</span>.<span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span>
+    nextEnemy <span class="op">=</span> aliveEnemies[<span class="dv">0</span>]<span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">else</span> <span class="op">{</span>
+    nextEnemy <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> nextEnemy<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>O bien, supon la ficha de personaje de un héroe:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> hero <span class="op">=</span> <span class="op">{</span> <span class="dt">sword</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">shield</span><span class="op">:</span> <span class="kw">null</span> <span class="op">};</span>
+<span class="va">hero</span>.<span class="at">sword</span> <span class="op">=</span> <span class="op">{</span> <span class="dt">attack</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">magic</span><span class="op">:</span> <span class="dv">5</span> <span class="op">};</span> <span class="co">// coge una espada.</span>
+<span class="va">hero</span>.<span class="at">sword</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span> <span class="co">// suelta la espada.</span></code></pre></div>
+<h3 id="composición-de-objetos">Composición de objetos</h3>
+<p>Objetos y arrays permiten cualquier composición de objetos. Es decir, sus valores pueden ser otros objetos y arrays, números, cadenas o funciones.</p>
+<p>Ficha de personaje:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> hero <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Link&#39;</span><span class="op">,</span>
+  <span class="dt">life</span><span class="op">:</span> <span class="dv">100</span><span class="op">,</span>
+  <span class="dt">weapon</span><span class="op">:</span> <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&#39;sword&#39;</span><span class="op">,</span> <span class="dt">power</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">magicPower</span><span class="op">:</span> <span class="dv">5</span> <span class="op">},</span>
+  <span class="dt">defense</span><span class="op">:</span> <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&#39;shield&#39;</span><span class="op">,</span> <span class="dt">power</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">magicPower</span><span class="op">:</span> <span class="dv">0</span> <span class="op">},</span>
+  <span class="co">// Inventario por slots. Dos slots vacion y una último con 5 pociones.</span>
+  <span class="dt">inventory</span><span class="op">:</span> [
+    <span class="op">{</span> <span class="dt">item</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">count</span><span class="op">:</span> <span class="dv">0</span><span class="op">},</span>
+    <span class="op">{</span> <span class="dt">item</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span> <span class="dt">count</span><span class="op">:</span> <span class="dv">0</span><span class="op">},</span>
+    <span class="op">{</span> <span class="dt">item</span><span class="op">:</span> <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&#39;potion&#39;</span><span class="op">,</span> <span class="dt">power</span><span class="op">:</span> <span class="dv">15</span> <span class="op">},</span> <span class="dt">count</span><span class="op">:</span> <span class="dv">5</span><span class="op">}</span>
+  ]
+<span class="op">};</span></code></pre></div>
+<p>Algunas propiedades:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">hero</span>.<span class="at">name</span><span class="op">;</span> <span class="co">// el nombre del héroe.</span>
+<span class="va">hero</span>.<span class="va">weapon</span>.<span class="at">kind</span><span class="op">;</span> <span class="co">// el tipo de arma.</span>
+<span class="va">hero</span>.<span class="at">inventory</span>[<span class="dv">0</span>]<span class="op">;</span> <span class="co">// el primer slot del inventario.</span>
+<span class="va">hero</span>.<span class="at">inventory</span>[<span class="dv">0</span>].<span class="at">item</span><span class="op">;</span> <span class="co">// qué hay en el primer slot del inventario.</span>
+<span class="va">hero</span>.<span class="at">inventory</span>[<span class="dv">2</span>].<span class="va">item</span>.<span class="at">power</span><span class="op">;</span> <span class="co">// el poder del item del tercer slot del inventario.</span></code></pre></div>
+<h2 id="identidad-de-los-objetos">Identidad de los objetos</h2>
+<p>En JavaScript, el operador de igualdad es <code>===</code> (el triple igual). Esto permite comparar dos objetos y decidir si <strong>son iguales</strong>. También existe el operador de desigualdad <code>!==</code> que compara dos objetos y decide si <strong>no son iguales</strong>.</p>
+<p>Para los tipos <code>bool</code>, <code>string</code>, <code>number</code> y <code>undefined</code>, dos valores son iguales si tienen la <strong>misma forma</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Todas estas comparaciones son verdaderas.</span>
+<span class="st">&quot;Hola&quot;</span> <span class="op">===</span> <span class="st">&quot;Hola&quot;</span><span class="op">;</span>
+<span class="st">&quot;Hola&quot;</span> <span class="op">!==</span> <span class="st">&quot;hola&quot;</span><span class="op">;</span>
+<span class="kw">true</span> <span class="op">===</span> <span class="kw">true</span><span class="op">;</span>
+<span class="dv">123</span> <span class="op">===</span> <span class="fl">123.0</span><span class="op">;</span>
+<span class="dv">123</span> <span class="op">===</span> <span class="dv">122</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// primero se resuelve la expresión, luego se compara.</span>
+<span class="kw">undefined</span> <span class="op">===</span> <span class="kw">undefined</span><span class="op">;</span></code></pre></div>
+<p>Para el tipo <code>object</code>, dos objetos son iguales sólo si se refieren al mismo objeto:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">(<span class="op">{}</span> <span class="op">!==</span> <span class="op">{}</span>)<span class="op">;</span> <span class="co">// da igual la forma, esto son dos objetos distintos.</span>
+(<span class="op">{}</span> <span class="op">!==</span> [])<span class="op">;</span>
+[] <span class="op">!==</span> []<span class="op">;</span> <span class="co">// igual que antes.</span>
+[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>] <span class="op">!==</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> <span class="co">// la forma da igual, los objetos son distintos.</span>
+<span class="kw">null</span> <span class="op">===</span> <span class="kw">null</span><span class="op">;</span> <span class="co">// pero con null funciona porque sólo hay un valor null.</span>
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span>
+<span class="kw">var</span> sameObj <span class="op">=</span> obj<span class="op">;</span>
+<span class="kw">var</span> another <span class="op">=</span> <span class="op">{};</span>
+sameObj <span class="op">===</span> obj<span class="op">;</span> <span class="co">// funciona porque ambos nombres se refieren al mismo objeto.</span>
+sameObj <span class="op">!==</span> another<span class="op">;</span> <span class="co">// insisto, distintos, pese a la forma.</span></code></pre></div>
+<h2 id="objetos-y-paso-de-mensajes">Objetos y paso de mensajes</h2>
+<p>Los objetos de JavaScript y el poder usar código como un valor más permite codificar los conceptos de objeto y paso de mensajes de la programación orientada a objetos.</p>
+<h3 id="codificando-el-estado">Codificando el estado</h3>
+<p>Con lo que se ha visto hasta ahora se tiene suficiente conocimiento para codificar el estado. El <strong>conjunto de atributos</strong> del objeto del modelado orientado a objetos se traduce al <strong>conjunto de propiedades</strong> de los objetos JavaScript.</p>
+<p>En el ejemplo de Space Invaders, el estado de los enemigos formado por: <img src="./imgs/space-invaders-enemy-state.png" alt="Estado del enemigo en el modelado de Space Invaders" /></p>
+<p>Se puede codificar mediante:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> enemy <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">graphic</span><span class="op">:</span> <span class="st">&#39;specie01.png&#39;</span><span class="op">,</span>
+  <span class="dt">currentDirection</span><span class="op">:</span> <span class="st">&#39;right&#39;</span><span class="op">,</span>
+  <span class="dt">position</span><span class="op">:</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">},</span>
+  <span class="dt">score</span><span class="op">:</span> <span class="dv">40</span>
+<span class="op">};</span></code></pre></div>
+<p>La primera limitación en JavsScript es que <strong>no se puede restringir el acceso a las propiedades de un objeto</strong>. Así, nada nos impide poder modificar la posición directamente.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="va">position</span>.<span class="at">x</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// perfectamente válido.</span></code></pre></div>
+<p>Lo único que podemos hacer es desaconsejar al usuario que utilice las propiedades que determinemos como atributos.</p>
+<p>Una práctica muy común es añadir un guíon bajo <code>_</code> a los atributos como indicando que son <strong>privados</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> enemy <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">_graphic</span><span class="op">:</span> <span class="st">&#39;specie01.png&#39;</span><span class="op">,</span>
+  <span class="dt">_currentDirection</span><span class="op">:</span> <span class="st">&#39;right&#39;</span><span class="op">,</span>
+  <span class="dt">_position</span><span class="op">:</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">},</span>
+  <span class="dt">_score</span><span class="op">:</span> <span class="dv">40</span>
+<span class="op">};</span></code></pre></div>
+<p>Pero esto es un convenio, y podemos seguir accediendo a los atributos.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> <span class="co">// perfectamente válido también.</span></code></pre></div>
+<h3 id="codificando-la-api">Codificando la API</h3>
+<p>Las acciones que forman la API de un objeto, los <strong>métodos</strong>, pueden implementarse como <strong>funciones</strong> en propiedades de un objeto. <img src="./imgs/space-invaders-enemy-state.png" alt="API del enemigo en el modelado de Space Invaders" /></p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> enemy <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">_graphic</span><span class="op">:</span> <span class="st">&#39;specie01.png&#39;</span><span class="op">,</span>
+  <span class="dt">_currentDirection</span><span class="op">:</span> <span class="st">&#39;right&#39;</span><span class="op">,</span>
+  <span class="dt">_position</span><span class="op">:</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">},</span>
+  <span class="dt">_score</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span>
+
+  <span class="dt">moveLeft</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Going left!&#39;</span>)<span class="op">;</span> <span class="op">},</span>
+  <span class="dt">moveRight</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Going right!&#39;</span>)<span class="op">;</span> <span class="op">},</span>
+  <span class="dt">advance</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Marching forward!&#39;</span>)<span class="op">;</span> <span class="op">},</span>
+  <span class="dt">shoot</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;PICHIUM!&#39;</span>)<span class="op">;</span> <span class="op">}</span> <span class="co">// (es un láser)</span>
+<span class="op">};</span></code></pre></div>
+<p>Enviar un mensaje a un objeto consiste sencillamente <strong>acceder a la propiedad del destinatario, que será una función, y llamarla</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="at">shoot</span>()<span class="op">;</span> <span class="co">// primero accedemos con punto, luego llamamos con ().</span>
+<span class="va">enemy</span>.<span class="at">moveLeft</span>()<span class="op">;</span>
+<span class="va">enemy</span>.<span class="at">moveLeft</span>()<span class="op">;</span>
+<span class="va">enemy</span>.<span class="at">advance</span>()<span class="op">;</span>
+enemy[<span class="st">&#39;shoot&#39;</span>]()<span class="op">;</span> <span class="co">// es lo mismo, acceder con corchetes y llamar con ().</span></code></pre></div>
+<p>Cualquier función puede actuar como método. Y como cualquier propiedad de un objeto, podemos cambiarla en cualquier momento:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="at">shoot</span>()<span class="op">;</span> <span class="co">// PICHIUM!</span>
+<span class="va">enemy</span>.<span class="at">shoot</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;PAÑUM!&#39;</span>)<span class="op">;</span> <span class="op">};</span>
+<span class="va">enemy</span>.<span class="at">shoot</span>()<span class="op">;</span> <span class="co">// PAÑUM!</span></code></pre></div>
+<p>Ahora bien, observa el siguiente comportamiento:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">enemy<span class="op">;</span> <span class="co">// fíjate en la posición.</span>
+<span class="va">enemy</span>.<span class="at">moveLeft</span>()<span class="op">;</span>
+enemy<span class="op">;</span> <span class="co">// fíjate en la posición otra vez.</span></code></pre></div>
+<p>Obviamente, echando un vistazo a lo que hace <code>moveLeft()</code> no podríamos decir que cambia el estado del objeto destinatario del mensaje.</p>
+<p>Como cualquier función puede actuar como método, necesitamos una forma de <strong>referirnos al destinatario del mensaje</strong>, si existe. Este se guarda en la variable <strong><code>this</code></strong>.</p>
+<p>Con ella, vamos a implementar los métodos de movimiento:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="at">moveLeft</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">-=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">enemy</span>.<span class="at">moveRight</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">enemy</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span></code></pre></div>
+<p>Ahora puedes probar el mismo experimento que antes y ver cómo efectivamente alteramos el estado del objeto.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">enemy<span class="op">;</span> <span class="co">// fíjate en la posición.</span>
+<span class="va">enemy</span>.<span class="at">moveLeft</span>()<span class="op">;</span>
+enemy<span class="op">;</span> <span class="co">// fíjate en la posición otra vez.</span></code></pre></div>
+<h3 id="el-valor-the-this">El valor the <code>this</code></h3>
+<p>El valor de <code>this</code> es uno de los aspectos más controvertidos de JavaScript.</p>
+<p>En otros lenguajes métodos y funciones son cosas distintas y un método <strong>siempre</strong> tiene asociado un y sólo un objeto así que <code>this</code> nunca cambia.</p>
+<p>Pero en JavaScript, <code>this</code> depende de cómo llamemos a la función. De si la llamamos como si fuera una función o si la llamamos como si fuera un método.</p>
+<p>Considera la siguiente función:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">inspect</span>() <span class="op">{</span>
+  <span class="co">// sólo inspecciona this</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Tipo:&#39;</span><span class="op">,</span> <span class="kw">typeof</span> <span class="kw">this</span>)<span class="op">;</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Valor:&#39;</span><span class="op">,</span> <span class="kw">this</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>Y prueba lo siguiente:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Piensa qué puede valer this antes de probar cada ejemplo.</span>
+<span class="kw">var</span> ship1 <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;T-Fighter&#39;</span><span class="op">,</span> <span class="dt">method</span><span class="op">:</span> inspect <span class="op">};</span>
+<span class="kw">var</span> ship2 <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;X-Wing&#39;</span><span class="op">,</span> <span class="dt">method</span><span class="op">:</span> inspect <span class="op">};</span>
+<span class="va">ship1</span>.<span class="at">method</span>()<span class="op">;</span>
+<span class="va">ship2</span>.<span class="at">method</span>()<span class="op">;</span>
+<span class="at">inspect</span>()<span class="op">;</span></code></pre></div>
+<p>En el último caso, el valor de <code>this</code> es <strong>undefined</strong> porque la función no se está usando como un método por lo que no hay destinatario.</p>
+<p>En JavaScript podemos hacer que cualquier objeto sea <code>this</code> en cualquier función. Para ello usaremos <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Function/apply"><code>apply()</code></a> en una función.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> onlyNameShip <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Death Star&#39;</span> <span class="op">};</span>
+<span class="va">inspect</span>.<span class="at">apply</span>(onlyNameShip)<span class="op">;</span> <span class="co">// hace que this valga onlyNameShip en inspect.</span></code></pre></div>
+<p>A <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/#this-value"><code>this</code></a> se le conoce también como <strong>objeto de contexto</strong> y utilizaremos este término de cuando en cuando.</p>
+<h2 id="consideraciones-adicionales">Consideraciones adicionales</h2>
+<h3 id="nombres-y-valores">Nombres y valores</h3>
+<p>Una <strong>variable es un nombre</strong>. Para el programa, quitando algunas excepciones, los nombres no tienen significado.</p>
+<p>Un <strong>valor no es un nombre</strong>. De hecho, sólo las funciones pueden tener nombre para poder implementar recursividad.</p>
+<p>Así que no es lo mismo el nombre <code>uno</code> que el valor <code>1</code>, y por supuesto, no es obligatoria ninguna relación coherente entre el nombre y el valor.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> uno <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> <span class="co">// para el programa tiene sentido. Puede que para el programador no.</span></code></pre></div>
+<p>En general, hablando de booleanos, cadenas y números, decimos que los <strong>nombres guardan valores</strong> mientras que si hablamos de objetos y funciones decimos que los <strong>nombres apuntan a objetos o funciones</strong> o <strong>son referencias a objetos o funciones</strong>.</p>
+<h3 id="funciones-referencias-a-funciones-y-llamadas-a-funciones">Funciones, referencias a funciones y llamadas a funciones</h3>
+<p>Hay dos formas de definir una función. Una es usando la <strong>declaración de función</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Introduce una variable factorial que apunta a la función factorial.</span>
+<span class="kw">function</span> <span class="at">factorial</span>(number) <span class="op">{</span>
+  <span class="cf">if</span> (number <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span>
+    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> number <span class="op">*</span> <span class="at">factorial</span>(number <span class="op">-</span> <span class="dv">1</span>)<span class="op">;</span>
+<span class="op">}</span> <span class="co">// no necesitas un &#39;;&#39; en este caso.</span></code></pre></div>
+<p>En este caso el nombre de la función (antes de los paréntesis) es obligatorio. Esto tiene dos implicaciones:</p>
+<ul>
+<li class="fragment">Permite implementar <strong>llamadas recursivas</strong> como la del ejemplo.</li>
+<li class="fragment"><strong>Crea un nombre</strong> <code>factorial</code> para referirnos a esa función.</li>
+</ul>
+<p>La otra forma es usa una <strong>expression de función</strong>. Esta se parece más a como creamos un número o una cadena:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Introduce una variable recursiveFunction que apunta a OTRA funcion factorial.</span>
+<span class="kw">var</span> recursiveFunction <span class="op">=</span> <span class="kw">function</span> <span class="at">factorial</span>(number) <span class="op">{</span>
+  <span class="cf">if</span> (number <span class="op">===</span> <span class="dv">0</span>) <span class="op">{</span>
+    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> number <span class="op">*</span> <span class="at">factorial</span>(number <span class="op">-</span> <span class="dv">1</span>)<span class="op">;</span>
+<span class="op">};</span> <span class="co">// ahora sí necesitas &#39;;&#39; como lo necesitarias con cualquier asignación.</span></code></pre></div>
+<p>En este último caso, hay dos nombres. Uno es el nombre de la función <code>factorial</code> que existe para poder referirnos a ella dentro del cuerpo de la función. El otro es la variable <code>recursiveFunction</code> que referencia a la función.</p>
+<p>La misma función puede referirse desde múltiples variables o, dicho de otra manera, tener muchos nombres:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> recursiveFunction<span class="op">;</span>
+<span class="kw">var</span> b <span class="op">=</span> recursiveFunction<span class="op">;</span>
+a <span class="op">===</span> b<span class="op">;</span> <span class="co">// es cierto, se refieren a la misma función.</span>
+<span class="va">a</span>.<span class="at">name</span><span class="op">;</span> <span class="co">// el nombre de la función no tiene que ver con el de la variable.</span>
+<span class="va">b</span>.<span class="at">name</span><span class="op">;</span> <span class="co">// tres cuartos de lo mismo.</span>
+recursiveFunction <span class="op">!==</span> factorial<span class="op">;</span></code></pre></div>
+<p>Tampoco podemos confundir la referencia a la función <code>factorial</code> y la llamada a la misma función <code>factorial(10)</code>.</p>
+<p>Con la primera forma <strong>nos referimos al objeto</strong> que encapsula el código que hay que ejecutar. No requiere parámetros porque no queremos ejecutar el código sino sólo referirnos a la función.</p>
+<p>Con la segunda estamos <strong>pidiendo a la función que se ejecute</strong> y por tanto tenemos que aportar todos los parámetros necesarios.</p>
+<h3 id="en-javascript-todo-es-un-objeto">En JavaScript todo es un objeto</h3>
+<p>Si como definición alternativa, consideramos como objeto aquello que puede responder a un mensaje, resulta que en JavaScript <strong>todo es un objeto</strong>.</p>
+<p>Considera los siguiente ejemplos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">true</span>.<span class="at">toString</span>()<span class="op">;</span>
+<span class="fl">3.1415</span>.<span class="at">toFixed</span>(<span class="dv">2</span>)<span class="op">;</span>
+<span class="st">&#39;I want to be a pirate!&#39;</span>.<span class="at">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">;</span>
+(<span class="op">{}</span>).<span class="at">hasOwnProperty</span>(<span class="st">&#39;x&#39;</span>)<span class="op">;</span>
+(<span class="kw">function</span> (parameter) <span class="op">{</span> <span class="cf">return</span> parameter<span class="op">;</span> <span class="op">}</span>).<span class="at">length</span><span class="op">;</span></code></pre></div>
+<h2 id="tipos-y-constructores-de-objetos">Tipos y constructores de objetos</h2>
+<p>Adelantábamos al comienzo que JavaScript no permite modelar tipos nuevos y que tendríamos que dar un rodeo. Esta es una de las principales diferencias con otros lenguajes orientados a objetos.</p>
+<p>Lo que vamos a hacer es saltarnos el concepto de tipo para abordar directamente el de constructor. <img src="./imgs/space-invaders-constructor-example.png" alt="Constructores de objetos" /></p>
+<p>Vamos a crear dos funciones constructoras, una para puntos y otra para disparos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newPoint</span>(x<span class="op">,</span> y) <span class="op">{</span>
+  <span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">obj</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span>
+  <span class="cf">return</span> obj<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">newShot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">obj</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+  <span class="op">};</span>
+  <span class="cf">return</span> obj<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>La forma de las funciones constructoras es muy similar: crear un objeto vacío, establecer las propiedades del objeto y devolver el nuevo objeto.</p>
+<p>Ahora podemos crear un nuevo disparo con algo así:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Velocidad positiva para que se mueva hacia abajo.</span>
+<span class="kw">var</span> enemyShot <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+
+<span class="co">// Velocidad negativa para que se mueva hacia arriba.</span>
+<span class="kw">var</span> allyShot <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">585</span>)<span class="op">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="op">;</span>
+
+enemyShot <span class="op">!==</span> allyShot<span class="op">;</span></code></pre></div>
+<h3 id="reaprovechando-funcionalidad">Reaprovechando funcionalidad</h3>
+<p>El problema con esta aproximación es que estamos creando funciones distintas para comportamientos idénticos. Una función por objeto.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> s1 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> s2 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> s3 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="va">s1</span>.<span class="at">advance</span> <span class="op">!==</span> <span class="va">s2</span>.<span class="at">advance</span><span class="op">;</span>
+<span class="va">s2</span>.<span class="at">advance</span> <span class="op">!==</span> <span class="va">s3</span>.<span class="at">advance</span><span class="op">;</span>
+<span class="va">s3</span>.<span class="at">advance</span> <span class="op">!==</span> <span class="va">s1</span>.<span class="at">advance</span><span class="op">;</span></code></pre></div>
+<p>Esto es altamente ineficiente dado que cada función ocupa un espacio distinto en memoria.</p>
+<p>No necesitamos distintas funciones sino una solamente actuando sobre distintos objetos.</p>
+<p>Así que vamos a <strong>crear un objeto que contenga sólamente la API</strong>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> shotAPI <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">advance</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span></code></pre></div>
+<p>Y a usarlo en la creación del objeto para referenciar la API:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newShot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">obj</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">advance</span> <span class="op">=</span> <span class="va">shotAPI</span>.<span class="at">advance</span><span class="op">;</span>
+  <span class="cf">return</span> obj<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>Ahora todas las instancias comparten la misma función pero cada función actúa sobre el objeto correspondiente gracias al uso de <code>this</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> s1 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> s2 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> s3 <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="va">s1</span>.<span class="at">advance</span> <span class="op">===</span> <span class="va">s2</span>.<span class="at">advance</span><span class="op">;</span> <span class="co">// ahora SÍ son iguales.</span>
+<span class="va">s2</span>.<span class="at">advance</span> <span class="op">===</span> <span class="va">s3</span>.<span class="at">advance</span><span class="op">;</span>
+<span class="va">s3</span>.<span class="at">advance</span> <span class="op">===</span> <span class="va">s1</span>.<span class="at">advance</span><span class="op">;</span></code></pre></div>
+<p>Para hacer todavía más fuerte la asociación entre el constructor y la API, vamos a realizar una pequeña modificación consistente en crear el <strong>objeto con la API como una propiedad de la función constructora</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newShot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="kw">var</span> obj <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">obj</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">advance</span> <span class="op">=</span> <span class="va">newShot</span>.<span class="va">api</span>.<span class="at">advance</span><span class="op">;</span>
+  <span class="cf">return</span> obj<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// Recuerda, una función es un objeto, así que le podemos añadir una propiedad.</span>
+<span class="va">newShot</span>.<span class="at">api</span> <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">advance</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span></code></pre></div>
+<h2 id="la-cadena-de-prototipos">La cadena de prototipos</h2>
+<p>JavaScript posee una característica muy representativa y única del lenguaje: ** la cadena de prototipos**.</p>
+<p>Puedes experimentar con ella en <a href="http://www.objectplayground.com/">Object Playground</a>, una excelente herramienta que te ayudará a visualizarla.</p>
+<p>La idea no es complicada. La cadena de prototipos <strong>es una lista de búsqueda para las propiedades</strong>. Cada elemento de la cadena es <strong>prototipo</strong> del objeto anterior.</p>
+<p>Cuando accedemos a la propiedad de un objeto, esta propiedad se busca en el objeto y si no se encuentra, se busca en el prototipo del objeto, y así sucesivamente hasta alcanzar la propiedad o el final de esta cadena.</p>
+<p>Por ejemplo:</p>
+<pre><code>obj1                    obj2               obj3
+{ a: 1, b: 2, c: 3} --&gt; { d: 4, e: 5 } --&gt; { f: 6 }
+obj1.c -------↑           ↑                  ↑
+obj1.d -------------------|                  |
+obj1.f --------------------------------------|
+obj1.z ------------------------------------------------X</code></pre>
+<p>Crear esta jerarquía en JavaScript requiere el uso de <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Object/create"><code>Object.create()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// La cadena se monta de atrás hacia adelante.</span>
+<span class="kw">var</span> obj3 <span class="op">=</span> <span class="op">{</span> <span class="dt">f</span><span class="op">:</span> <span class="dv">6</span> <span class="op">};</span>
+<span class="co">// Encadenamos obj2 a obj3</span>
+<span class="kw">var</span> obj2 <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(obj3)<span class="op">;</span>
+<span class="va">obj2</span>.<span class="at">d</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span>
+<span class="va">obj2</span>.<span class="at">e</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>
+<span class="co">// Encadenamos obj1 a obj3</span>
+<span class="kw">var</span> obj1 <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(obj2)<span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">b</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">c</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span>
+
+<span class="va">obj1</span>.<span class="at">c</span><span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">d</span><span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">f</span><span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">z</span><span class="op">;</span> <span class="co">// undefined</span></code></pre></div>
+<p>El método <code>Object.create()</code> crea un nuevo objeto vacío (como <code>{}</code>) cuyo prototipo es el objeto pasado como parámetro.</p>
+<p>Se puede usar el método <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty"><code>hasOwnProperty()</code></a> para determinar si una propiedad pertenece a un objeto sin atravesar la cadena de prototipos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">obj1</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;c&#39;</span>)<span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;d&#39;</span>)<span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;f&#39;</span>)<span class="op">;</span>
+<span class="va">obj1</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;z&#39;</span>)<span class="op">;</span>
+
+<span class="va">obj2</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;c&#39;</span>)<span class="op">;</span>
+<span class="va">obj2</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;d&#39;</span>)<span class="op">;</span>
+<span class="va">obj2</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;f&#39;</span>)<span class="op">;</span>
+<span class="va">obj2</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;z&#39;</span>)<span class="op">;</span>
+
+<span class="va">obj3</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;c&#39;</span>)<span class="op">;</span>
+<span class="va">obj3</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;d&#39;</span>)<span class="op">;</span>
+<span class="va">obj3</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;f&#39;</span>)<span class="op">;</span>
+<span class="va">obj3</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;z&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>Se puede usar el método <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf"><code>Object.getPrototypeOf</code></a> para obtener el prototipo de un objeto:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">Object</span>.<span class="at">getPrototypeOf</span>(obj1) <span class="op">===</span> obj2<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(obj2) <span class="op">===</span> obj3<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(obj3) <span class="op">===</span> <span class="va">Object</span>.<span class="at">prototype</span><span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(<span class="va">Object</span>.<span class="at">prototype</span>) <span class="op">===</span> <span class="kw">null</span><span class="op">;</span></code></pre></div>
+<h2 id="constructores-y-cadenas-de-prototipos">Constructores y cadenas de prototipos</h2>
+<p>Los prototipos se prestan a ser el lugar ideal para contener la API que es el comportamiento común de todos los objetos de un tipo.</p>
+<pre><code>var obj = newShot()                               newShot.api
+{ _position: { x: 10, y: 10 }, _velocity: 2 } --&gt; { advance: function ... };
+obj._position.y ------↑                             ↑
+obj.advance ----------------------------------------|
+obj.goBack ------------------------------------------------------------------X</code></pre>
+<p>Para crear este enlace modificaremos el constructor:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newShot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="co">// Con esto la API es el prototipo del objeto.</span>
+  <span class="kw">var</span> obj <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">newShot</span>.<span class="at">api</span>)<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="va">obj</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+  <span class="cf">return</span> obj<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">newShot</span>.<span class="at">api</span> <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">advance</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span></code></pre></div>
+<p>Y ahora probamos a crear un nuevo disparo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> shot <span class="op">=</span> <span class="at">newShot</span>(<span class="at">newPoint</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">0</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+shot<span class="op">;</span> <span class="co">// al inspeccionar shot sólo se muestran las propiedades del objeto.</span>
+<span class="va">shot</span>.<span class="at">advance</span><span class="op">;</span> <span class="co">// pero advance existe en su prototipo.</span>
+<span class="va">shot</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;advance&#39;</span>)<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(shot).<span class="at">hasOwnProperty</span>(<span class="st">&#39;advance&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>Si hiciéramos esto con todos los constructores, cláramente encontraríamos un patrón:</p>
+<ol type="1">
+<li class="fragment">Crea un objeto para contener la API.</li>
+<li class="fragment">Implementa la API como propiedades de este objeto.</li>
+<li class="fragment">En el constructor haz que este objeto sea el prototipo de un nuevo objeto.</li>
+<li class="fragment">Establece las propiedades del nuevo objeto con el estado.</li>
+<li class="fragment">Devuelve el nuevo objeto.</li>
+</ol>
+<p>Sólo los pasos 2 y 4 involucran diferencias de un constructor a otro. Todo lo demás es exactamente igual. Tanto es así que JavaScript lo tiene en cuenta y viene con los mecanismos para automatizar los pasos 1, 3 y 5.</p>
+<p>Primero, JavaScript permite que cualquier función pueda usarse como constructor.</p>
+<p>Cada vez que escribimos una función, JavaScript <strong>crea una propiedad de la función llamada <code>prototype</code></strong> que es un objeto con una única propiedad <code>constructor</code> que apunta a la función.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">anyFunction</span>() <span class="op">{}</span>
+<span class="va">anyFunction</span>.<span class="at">prototype</span><span class="op">;</span>
+<span class="va">anyFunction</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">===</span> anyFunction<span class="op">;</span></code></pre></div>
+<p>Esto automatiza el paso 1. Ya no es necesario el objeto <code>api</code> que preparábamos nosotros manualmente.</p>
+<p>Ahora, al llamar a la función con el operador <code>new</code> delante, se crea un <strong>nuevo objeto cuyo prototipo es precisamente la propiedad <code>prototype</code></strong> de la función:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> obj <span class="op">=</span> <span class="kw">new</span> <span class="at">anyFunction</span>()<span class="op">;</span>
+<span class="kw">var</span> anotherObj <span class="op">=</span> <span class="kw">new</span> <span class="at">anyFunction</span>()<span class="op">;</span>
+
+<span class="co">// Los objetos son distintos.</span>
+obj <span class="op">!==</span> anotherObj<span class="op">;</span>
+
+<span class="co">// Pero sus prototipos son iguales.</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(obj) <span class="op">===</span> <span class="va">Object</span>.<span class="at">getPrototypeOf</span>(anotherObj)<span class="op">;</span>
+
+<span class="co">// Y además son la propiedad prototype de la función.</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(obj) <span class="op">===</span> <span class="va">anyFunction</span>.<span class="at">prototype</span><span class="op">;</span></code></pre></div>
+<p>Con esto automatizamos el paso 3. Ya no es necesario llamar a <code>Object.create()</code> para establecer la cadena de prototipos entre objeto y API.</p>
+<p>Finalmente, cuando se llama con <code>new</code>, la <strong>función recibe como objeto de contexto (recuerda, el <code>this</code>) el elemento que está siendo creado</strong> lo que nos permite establecer sus atributos.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Hero</span>(name) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">name</span> <span class="op">=</span> name<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">sword</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">shield</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> hero <span class="op">=</span> <span class="kw">new</span> <span class="at">Hero</span>(<span class="st">&#39;Link&#39;</span>)<span class="op">;</span>
+hero<span class="op">;</span></code></pre></div>
+<p>Si la <strong>función devuelve nada</strong>, el resultado del operador <code>new</code> será el nuevo objeto. Esto automatiza el paso 5 puesto que no es necesario devolver el nuevo objeto, esta devolución se hace implícita.</p>
+<p>Veamos como queda el constructor de punto:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Point</span>(x<span class="op">,</span> y) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>Y el del disparo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Shot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// El prototipo ya existe, pero le añadimos el método advance()</span>
+<span class="va">Shot</span>.<span class="va">prototype</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>Ahora crear los objetos será cuestión de usar <code>new</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> enemyShot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(<span class="kw">new</span> <span class="at">Point</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="kw">var</span> allyShot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(<span class="kw">new</span> <span class="at">Point</span>(<span class="dv">15</span><span class="op">,</span> <span class="dv">585</span>)<span class="op">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="op">;</span>
+enemyShot <span class="op">!==</span> allyShot<span class="op">;</span></code></pre></div>
+<h2 id="herencia">Herencia</h2>
+<p>Estamos llegando al final de la lección. Sabemos como crear objetos con atributos y métodos y sabemos como hacerlo eficazmente usando constructores y la cadena de prototipos.</p>
+<p><img src="./imgs/space-invaders-hierarchy.png" alt="Relación de herencia entre nave y los enemigos y la nave aliada" /> Falta explicar cómo podemos crear una <strong>relación de herencia</strong>. Usemos el ejemplo de los enemigos y la nave protagonista de la lección anterior.</p>
+<p>Necesitaremos pues nuestros constructores de puntos y disparos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Point</span>(x<span class="op">,</span> y) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">x</span> <span class="op">=</span> x<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">y</span> <span class="op">=</span> y<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">Shot</span>(position<span class="op">,</span> velocity) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_velocity</span> <span class="op">=</span> velocity<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">Shot</span>.<span class="va">prototype</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="kw">this</span>.<span class="at">_velocity</span><span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>El constructor del enemigo podría ser:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Enemy</span>(graphic<span class="op">,</span> position<span class="op">,</span> score) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">_graphic</span> <span class="op">=</span> graphic<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_currentDirection</span> <span class="op">=</span> <span class="st">&#39;right&#39;</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_score</span> <span class="op">=</span> score<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">moveLeft</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">-=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">moveRight</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">shoot</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">var</span> firePosition <span class="op">=</span> <span class="kw">new</span> <span class="at">Position</span>(<span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+</span> <span class="dv">10</span>)<span class="op">;</span>
+  <span class="kw">var</span> shot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(firePosition<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+  <span class="cf">return</span> shot<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>Y el de la nave aliada:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Ally</span>(position) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">_graphic</span> <span class="op">=</span> <span class="st">&#39;ally.png&#39;</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">Ally</span>.<span class="va">prototype</span>.<span class="at">moveLeft</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">-=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Ally</span>.<span class="va">prototype</span>.<span class="at">moveRight</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Ally</span>.<span class="va">prototype</span>.<span class="at">shoot</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">var</span> firePosition <span class="op">=</span> <span class="kw">new</span> <span class="at">Position</span>(<span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>)<span class="op">;</span>
+  <span class="kw">var</span> shot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(firePosition<span class="op">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="op">;</span>
+  <span class="cf">return</span> shot<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>Podemos pensar en un constructor que capture las propiedades comunes de ambos tipos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Ship</span>(graphic<span class="op">,</span> position) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">_graphic</span> <span class="op">=</span> graphic<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_position</span> <span class="op">=</span> position<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">Ship</span>.<span class="va">prototype</span>.<span class="at">moveLeft</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">-=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span>
+<span class="va">Ship</span>.<span class="va">prototype</span>.<span class="at">moveRight</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span> <span class="op">};</span></code></pre></div>
+<p>No incluimos disparar porque unos disparan hacia arriba y otros hacia abajo.</p>
+<p><img src="./imgs/space-invaders-hierarchy-constructor.png" alt="Jerarquía de constructores" /> Recordemos que ahora los constructores de la nave aliada y los enemigos pedirán primero al constructor de nave una nave y luego la personalizarán.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">Enemy</span>(graphic<span class="op">,</span> position<span class="op">,</span> score) <span class="op">{</span>
+  <span class="va">Ship</span>.<span class="at">apply</span>(<span class="kw">this</span><span class="op">,</span> [graphic<span class="op">,</span> position])<span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_currentDirection</span> <span class="op">=</span> <span class="st">&#39;right&#39;</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="at">_score</span> <span class="op">=</span> score<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">Ally</span>(position) <span class="op">{</span>
+  <span class="va">Ship</span>.<span class="at">apply</span>(<span class="kw">this</span><span class="op">,</span> [<span class="st">&#39;ally.png&#39;</span><span class="op">,</span> position])<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>Con <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Function/apply"><code>apply()</code></a> se puede ejecutar una función indicando cuál será su objeto de contexto y sus parámetros.</p>
+<p>Con la configuración anterior, las nuevas instancias de enemigos y aliados pasarán primero por el constructor de <code>Ship</code> que establecerá los <strong>atributos comunes</strong> y luego serán modificados cada uno por el constructor pertinente para convertirse en enemigos o aliados concretamente.</p>
+<p>En cuanto a la API, lo ideal sería contar con una cadena de prototipos de esta forma:</p>
+<pre><code>var enemy = new Enemy()             Enemy.prototype      Ship.prototype
+{ _position: ..., _score: ... } --&gt; { advance: ... } --&gt; { moveLeft: ... }
+enemy._score -----↑                   ↑                    ↑
+enemy.advance ------------------------|                    |
+enemy.moveLeft --------------------------------------------|</code></pre>
+<p>De forma que los atributos del enemigo estén en la instancia, la API específica en la propiedad <code>prototype</code> del constructor <code>Enemy</code> y la API común en la propiedad <code>prototype</code> del constructor <code>Ship</code>.</p>
+<p>Como ocurría con el ejemplo en la sección anterior, tendremos que crear la cadena de atrás hacia adelante. El enlace entre las instancias y los constructores nos lo proporciona JavaScript al utilizar <code>new</code> pero el enlace entre la propiedad <code>prototype</code> de <code>Enemy</code> y de <code>Ship</code> <strong>tenemos que establecerlo manualmente</strong>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Inspecciona la propiedad prototype.</span>
+<span class="va">Enemy</span>.<span class="at">prototype</span><span class="op">;</span>
+
+<span class="co">// Enlaza ambas propiedades prototype.</span>
+<span class="va">Enemy</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Ship</span>.<span class="at">prototype</span>)<span class="op">;</span>
+
+<span class="co">// Inspecciona la propiedad prototype otra vez y busca diferencias.</span>
+<span class="va">Enemy</span>.<span class="at">prototype</span><span class="op">;</span>
+
+<span class="co">// Corrige la propiedad constructor.</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Enemy<span class="op">;</span>
+
+<span class="co">// Añade el método específico del tipo Enemy.</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">advance</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span>
+<span class="op">};</span>
+
+<span class="co">// Otro método específico.</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">shoot</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">var</span> firePosition <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">+</span> <span class="dv">10</span>)<span class="op">;</span>
+  <span class="kw">var</span> shot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(firePosition<span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+  <span class="cf">return</span> shot<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>Herencia en el tipo <code>Enemy</code>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// Lo mismo para el aliado.</span>
+<span class="va">Ally</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(<span class="va">Ship</span>.<span class="at">prototype</span>)<span class="op">;</span>
+<span class="va">Ally</span>.<span class="va">prototype</span>.<span class="at">constructor</span> <span class="op">=</span> Ally
+
+<span class="va">Ally</span>.<span class="va">prototype</span>.<span class="at">shoot</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="kw">var</span> firePosition <span class="op">=</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="kw">this</span>.<span class="va">_position</span>.<span class="at">x</span><span class="op">,</span> <span class="kw">this</span>.<span class="va">_position</span>.<span class="at">y</span> <span class="op">-</span> <span class="dv">10</span>)<span class="op">;</span>
+  <span class="kw">var</span> shot <span class="op">=</span> <span class="kw">new</span> <span class="at">Shot</span>(firePosition<span class="op">,</span> <span class="op">-</span><span class="dv">2</span>)<span class="op">;</span>
+  <span class="cf">return</span> shot<span class="op">;</span>
+<span class="op">};</span></code></pre></div>
+<p>Herencia en el tipo <code>Ally</code>.</p>
+<p>Ahora sí, podemos crear un enemigo y un aliado usando sus constructores:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> enemy <span class="op">=</span> <span class="kw">new</span> <span class="at">Enemy</span>(<span class="st">&#39;enemy1.png&#39;</span><span class="op">,</span> <span class="kw">new</span> <span class="at">Point</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>)<span class="op">,</span> <span class="dv">40</span>)<span class="op">;</span>
+<span class="kw">var</span> ally <span class="op">=</span> <span class="kw">new</span> <span class="at">Ally</span>(<span class="kw">new</span> <span class="at">Point</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">590</span>))<span class="op">;</span>
+
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(ally) <span class="op">===</span> <span class="va">Ally</span>.<span class="at">prototype</span><span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(enemy) <span class="op">===</span> <span class="va">Enemy</span>.<span class="at">prototype</span><span class="op">;</span>
+<span class="va">Ally</span>.<span class="at">prototype</span> <span class="op">!==</span> <span class="va">Enemy</span>.<span class="at">prototype</span><span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(<span class="va">Ally</span>.<span class="at">prototype</span>) <span class="op">===</span> <span class="va">Object</span>.<span class="at">getPrototypeOf</span>(<span class="va">Enemy</span>.<span class="at">prototype</span>)<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">getPrototypeOf</span>(<span class="va">Ally</span>.<span class="at">prototype</span>) <span class="op">===</span> <span class="va">Ship</span>.<span class="at">prototype</span><span class="op">;</span></code></pre></div>
+<p>Y comprobar dónde está cada propiedad.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;_score&#39;</span>)<span class="op">;</span>
+<span class="va">enemy</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;advance&#39;</span>)<span class="op">;</span>
+<span class="va">enemy</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;moveLeft&#39;</span>)<span class="op">;</span>
+
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;_score&#39;</span>)<span class="op">;</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;advance&#39;</span>)<span class="op">;</span>
+<span class="va">Enemy</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;moveLeft&#39;</span>)<span class="op">;</span>
+
+<span class="va">Ship</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;_score&#39;</span>)<span class="op">;</span>
+<span class="va">Ship</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;advance&#39;</span>)<span class="op">;</span>
+<span class="va">Ship</span>.<span class="va">prototype</span>.<span class="at">hasOwnProperty</span>(<span class="st">&#39;moveLeft&#39;</span>)<span class="op">;</span></code></pre></div>
+<h2 id="polimorfismo">Polimorfismo</h2>
+<p>Las relaciones de herencia que acabamos de establecer nos permiten decir que un enemigo es una instancia del tipo <code>Enemy</code> pero también lo es del tipo <code>Ship</code>. Una misma instancia <strong>tiene múltiples formas</strong> gracias a la herencia. En programación orientada a objetos a esto se lo llama <strong>polimorfismo</strong>.</p>
+<p>Alternativamente podemos decir que un enemigo es una instancia de <code>Enemy</code> porque tiene la API de <code>Enemy</code> o que es una instancia de <code>Ship</code> porque tiene la API de <code>Ship</code>. Esto es equivalente a decir que las propiedades <code>prototype</code> de <code>Enemy</code> y <code>Ship</code> están en la cadena de prototipos del objeto.</p>
+<p>El operador <code>instanceof</code> devuelve verdadero si la propiedad <code>prototype</code> de la función de la derecha está en la cadena de prototipos del objeto de la izquierda.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">enemy <span class="kw">instanceof</span> Enemy<span class="op">;</span>  <span class="co">// el primer eslabón.</span>
+enemy <span class="kw">instanceof</span> Ship<span class="op">;</span>   <span class="co">// el segundo.</span>
+enemy <span class="kw">instanceof</span> Object<span class="op">;</span> <span class="co">// el tercero.</span>
+
+enemy <span class="kw">instanceof</span> Ally<span class="op">;</span></code></pre></div>
+<p>En lo referente al estado, resulta conveniente saber qué constructor ha construido el objeto. Esto es como determinar cuál es el <strong>primer eslabón</strong> de la cadena de prototipos.</p>
+<p>Como todos los prototipos tienen una propiedad <code>constructor</code> que referencia al constructor que los tiene, proporcionar esta propiedad siempre recaerá sobre el primer prototipo.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">enemy</span>.<span class="at">constructor</span><span class="op">;</span>
+<span class="va">enemy</span>.<span class="at">constructor</span> <span class="op">===</span> Enemy<span class="op">;</span> <span class="co">// fue construido por Enemy, no por Ship.</span>
+<span class="va">enemy</span>.<span class="at">constructor</span> <span class="op">!==</span> Ship<span class="op">;</span> <span class="co">// es cierto que Ship fue utilizado pero nada más.</span></code></pre></div>
+<h3 id="duck-typing">Duck typing</h3>
+<blockquote>
+<p>In other words, don't check whether it IS-a duck: check whether it QUACKS-like-a duck, WALKS-like-a duck, etc, etc, depending on exactly what subset of duck-like behaviour you need to play your language-games with.</p>
+</blockquote>
+<p><a href="https://groups.google.com/forum/?hl=en#!msg/comp.lang.python/CCs2oJdyuzc/NYjla5HKMOIJ">Alex Martelli sobre polimorfismo</a></p>
+<p>La frase se refiere a que más que comprobar si algo es una instancia de un tipo, deberíamos comprobar si tiene la funcionalidad que necesitamos.</p>
+<p>JavaScript es tan dinámico que el operador <code>instanceof</code> y la propiedad <code>constructor</code> sólo tiene sentido si utilizamos seguimos los convenios aprendidos en la lección.</p>
+<p>Nada nos impide borrar la propiedad constructor de un prototipo o sobreescribirla en un objeto determinado. En las nuevas versiones de JavaScript, el prototipo de un objeto puede cambiar después de haber sido construido.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

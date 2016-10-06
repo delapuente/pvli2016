@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="batalla-rpg" class="slide level1">
+<h1>Batalla RPG</h1>
+<p>El ejercicio consiste en modelar un combate RPG por turnos en formato conversacional.</p>
+<p>Un grupo de héroes se enfrentará a un grupo de enemigos. Los combatientes actuarán en orden, turno por turno hasta que uno de los bandos haya sido completamente derrotado. Los héroes serán controlados por el jugador quien podrá elegir qué hacer de entre un menú de acciones. Los enemigos acutarán automáticamente.</p>
+<p>Si el grupo de héroes es derrotado, el juego termina con <em>Game Over</em>. Si el grupo de enemigos es aniquilado, comienza un siguiente combate.</p>
+<h2 id="consideraciones-iniciales">Consideraciones iniciales</h2>
+<p>Todos los personajes, héroes o monstruos tienen las mismas características: vitalidad, puntos de magia, agilidad y resistencia.</p>
+<p>La resistencia es un número del 1 al 100.</p>
+<p>Los puntos de magia, la vitalidad y la agilidad son enteros positivos, tienen un máximo pero este puede crecer sin límite mediante el uso de objetos.</p>
+<p>Además, héroes y monstruos tienen un nombre y una descripción, con su trasfondo o su apariencia física, por ejemplo.</p>
+<p>También tienen un arma, que es un <a href="#/objetos">objeto</a>.</p>
+<p>Los héroes tienen un libro de hechizos y un inventario común.</p>
+<p>Puedes crear algunos tipos de enemigos, unos más ágiles, otros más fuertes y otros más resistentes. Mínimo 3 tipos.</p>
+<p>Para los héroes, crea 3, uno con mucha resistencia y un arma muy poderosa. Otro con muchos puntos de magia y otro con una agilidad elevada.</p>
+<h2 id="fases-del-combate">Fases del combate</h2>
+<p>Las fases del combate son:</p>
+<ol type="1">
+<li class="fragment">Reposo</li>
+<li class="fragment">Configuración inicial</li>
+<li class="fragment">Ordenación por turnos</li>
+<li class="fragment">Turnos...</li>
+<li class="fragment">Resolución del combate</li>
+<li class="fragment">Adquisición de objetos</li>
+<li class="fragment">Subida de nivel</li>
+<li class="fragment">Fin del juego</li>
+</ol>
+<h3 id="reposo">Reposo</h3>
+<p>El jugador puede optar por comenzar una batalla, en tal caso pasará al estado <a href="#/configuracion-inicial">configuración inicial</a> o utilizar objetos del inventario.</p>
+<h3 id="configuración-inicial">Configuración inicial</h3>
+<p>Durante la configuración inicial se seleccionan de uno a tres monstruos al azar que lucharán siempre contra los tres héroes. Los héroes comienzan con la vitalidad y la magia al 150% de su vitalidad anterior, nunca por encima del máximo. Si un héroe estaba muerto, comienza con un 10% de su vitalidad máxima.</p>
+<p>Se asigna un premio a la batalla consistente en un objeto por enemigo y se pasa al estado de <a href="#/ordenacion-por-turnos">ordenación por turnos</a>.</p>
+<h3 id="ordenación-por-turnos">Ordenación por turnos</h3>
+<p>Al comienzo de la partida se creará una lista de jugadores y monstruos conjunta ordenada por la agilidad de cada personaje. Se pasa al estado <a href="#/turnos">turnos</a>.</p>
+<h3 id="turnos...">Turnos...</h3>
+<p>El juego comenzará por el primer personaje de la lista. El turno varía en función de si se trata de un enemigo o de un héroe:</p>
+<h4 id="turno-de-enemigos">Turno de enemigos</h4>
+<p>El enemigo elige un oponente al azar y utiliza las <a href="#/reglas-de-efecto">reglas de efecto</a> con su arma contra el oponente seleccionado.</p>
+<h4 id="turno-del-héroe">Turno del héroe</h4>
+<p>El jugador puede elegir entre <a href="#/atacar">atacar</a>, <a href="#/lanzar-hechizo">lanzar un hechizo</a> o <a href="#/objeto-del-inventario">usar el inventario</a>.</p>
+<h3 id="resolución-del-combate">Resolución del combate</h3>
+<p>Tras cada turno, se comprueba que los bandos siguen teniendo integrantes vivos. Si el bando enemigo ha sido derrotado, el juego pasa al estado de <a href="#/adquisicion-de-objetos">adquisición de objetos</a>. Si el bando amigo ha sido derrotado el juego pasa al estado <a href="#/fin-de-juego">fin de juego</a>.</p>
+<h3 id="adquisición-de-objetos">Adquisición de objetos</h3>
+<p>Los objetos que portasen los enemigos pasan al inventario y luego pasamos al estado <a href="#/reposo">reposo</a>.</p>
+<h3 id="fin-del-juego">Fin del juego</h3>
+<p>La partida termina y se muestra el número de combates superados.</p>
+<h2 id="interacciones">Interacciones</h2>
+<h3 id="atacar">Atacar</h3>
+<p>Si el jugador elige atacar, elegirá un oponente y usará las <a href="#/reglas-de-efect">reglas de efecto</a> con su arma contra el oponente seleccionado.</p>
+<h3 id="lanzar-hechizo">Lanzar hechizo</h3>
+<p>Si el jugador elige lanzar un hechizo, habrá de elegir qué hechizo del libro de hechizos común.</p>
+<p>El personaje sólo puede elegir hechizos que pueda pagar con sus puntos de magia actuales. Cuando haya elegido, habrá de elegir un objetivo.</p>
+<p>Sólo cuando haya elegido un objetivo consumirá los puntos de magia del coste del hechizo y utilizará las <a href="#/reglas-de-efecto">reglas de efecto</a> con el hechizo y el objetivo.</p>
+<h3 id="objeto-del-inventario">Objeto del inventario</h3>
+<p>Si elige utilizar el inventario, habrá de elegir un objeto del inventario.</p>
+<p>A continuación elegirá un objetivo. Sólo cuando elija el objetivo, el objeto será retirado del inventario.</p>
+<p>De nuevo, recurrirá a las <a href="#/reglas-de-efecto">reglas de efecto</a> con el objeto y el objetivo.</p>
+<h2 id="reglas-de-efecto">Reglas de efecto</h2>
+<p>Las reglas de efecto esperan un objeto, un objetivo y un flag que indica si el objeto fue empleado por un miembro del mismo bando o del contrario. El objeto debe tener un efecto asociado. El efecto recoge las modificaciones sobre las características del personaje como un valor entero positivo o negativo.</p>
+<p>El procedimiento es el siguiente:</p>
+<ol type="1">
+<li class="fragment">Si el flag indica que el objeto fue empleado por un miembro del otro bando:
+<ol type="1">
+<li class="fragment">Genera un número al azar del 1 al 100.</li>
+<li class="fragment">Si el resultado se encuentra por debajo de la resistencia del objetivo, suspende estos pasos.</li>
+</ol></li>
+<li class="fragment">Por cada característica afectada por el efecto
+<ol type="1">
+<li class="fragment">Súmalo el valor actual de la característica con el valor del efecto.</li>
+<li class="fragment">Si el valor tiene asociado un máximo y éste es superado, cambia el valor del efecto por el máximo.</li>
+<li class="fragment">Si el valor es inferior a cero, cambia el valor por 0.</li>
+</ol></li>
+</ol>
+<h2 id="objetos">Objetos</h2>
+<p>Eres libre de especificar los objetos que desees. Recuerda que deben llevar un efecto asociado. Algunas sugerencias:</p>
+<ul>
+<li class="fragment">Armas como espadas para los héroes o garras para los enemigos.</li>
+<li class="fragment">Elixires para aumentar en 1, 2, 3... los niveles máximos de resistencia, agilidad, vitalidad o puntos de magia.</li>
+<li class="fragment">Pociones para recuperar vida.</li>
+<li class="fragment">Venenos para reducir la vida en un porcentaje.</li>
+</ul>
+<p>Además del efecto asociado, los objetos pueden tener un nombre y una descripción.</p>
+<h2 id="hechizos">Hechizos</h2>
+<p>Los hechizos, además de un nombre y una descripción, se parecen mucho a las armas pero incluyen un coste en puntos de magia que se debe pagar para usar el hechizo.</p>
+<h2 id="otras-consideraciones">Otras consideraciones</h2>
+<p>Sois libres de interpretar como queráis los aspectos del juego no definidos en esta guía y de introducir cuantas mejoras creais necesarias para hacer el combate más interesante pero <strong>implementad esto primero</strong>.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
