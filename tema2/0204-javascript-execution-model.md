@@ -63,10 +63,6 @@ getEven([1, 2, 3, 4, 5, 6]);
 ```
 
 
-Declarar funciones dentro de las estructuras de control es **posible pero
-desaconsejado**. Es decir, esto está desaconsejado:
-
-
 Como el ámbito es el de la función, el **mismo nombre en una función anidada se
 referiere a otra cosa**:
 
@@ -221,13 +217,141 @@ Y si aun tenemos dudas, podemos bajar e investigar qué es esa función.
 ## _Closures_
 
 
+Las funciones son datos y se crean cada vez que se encuentra una instrucción
+`function`. De esta forma podemos crear una función que devuelva funciones.
+
+
+```js
+function buildFunction() {
+  return function () { return 42; };
+}
+
+var f = buildFunction();
+var g = buildFunction();
+
+typeof f === 'function';
+typeof g === 'function';
+
+f();
+g(); // Las funciones hacen lo mismo...
+
+f !== g; // ...pero NO son la misma función
+```
+
+
+Por sí sólo, este no es un mecanismo muy potente pero sabiendo que una
+función anidada puede acceder a las variables de los ámbitos superiores,
+podemos hacer algo así:
+
+
+```js
+function newDice(sides) {
+  return function () {
+    return Math.floor(Math.random() * sides) + 1;
+  };
+}
+var d100 = newDice(100);
+var d20 = newDice(20);
+
+d100();
+d20();
+```
+
+
+En JavaScript, **las funciones retienen el acceso a las variables en ámbitos
+superiores**.
+
+
+Una **función que se refiere a alguna de las variables en ámbitos superiores
+se denomina _closure_**.
+
+
+Esto **no afecta al valor de `this`** que seguirá siendo **el destinatario
+del mensaje**.
+
+
+### Métodos, closures y `this`
+
+
+Considera el siguiente ejemplo:
+
+```js
+var diceUtils = {
+  history: [], // Lleva el histórico de dados.
+
+  newDice: function (sides) {
+    return function die() {
+      var result = Math.floor(Math.random() * sides) + 1;
+      this.history.push([new Date(), sides, result]);
+      return result;
+    }
+  }
+}
+```
+
+
+Nuestra intención es poder crear dados y llevar un registro de todas las tiradas
+que se hagan con estos dados.
+
+
+Pero esto no funciona:
+
+```js
+var d10 = diceUtils.newDice(10);
+d10(); // error!
+```
+
+
+Y es así porque **`this` siempre es el destinatario del mensaje** y `d10` se
+está llamando como si fuera una función y no un método.
+
+
+Recordad que podíamos hacer que cualquier función tomara un valor forzoso como
+`this` con `.apply()` por lo que esto sí funciona pero es un engorro:
+
+```js
+d10.apply(diceUtils);
+d10.apply(diceUtils);
+diceUtils.history;
+```
+
+
+Lo que tenemos que hacer es que la función `die` dentro de `newDice` se refiera
+al `this` del ámbito superior, no al suyo. Podemos hacer esto con un truco muy
+simple:
+
+
+```js
+var diceUtils = {
+  history: [], // Lleva el histórico de dados.
+
+  newDice: function (sides) {
+    var self = this; // self es ahora el destinatario de newDice.
+    return function die() {
+      var result = Math.floor(Math.random() * sides) + 1;
+      // Usando self nos referimos al destinatario de newDice.
+      self.history.push([new Date(), sides, result]);
+      return result;
+    }
+  }
+}
+```
+
+
+Esto sí funciona y es mucho más conveniente:
+
+```js
+var d10 = diceUtils.newDice(10);
+var d6 = diceUtils.newDice(6);
+d10();
+d6();
+d10();
+```
+
+
 
 ## Programación asíncrona y eventos
 
-
-
-
-## Promesas
 
 
 
