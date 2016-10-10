@@ -11,7 +11,7 @@ estarán en un futuro.
 ## Ámbito y _hoisting_
 
 
-Como en muchos lenguajes, los nombres de las funciones **pueden reutilizarse** y
+Como en muchos lenguajes, los nombres de las variables **pueden reutilizarse** y
 guardar valores distintos siempre y cuando se encuentren en **ámbitos
 distintos**.
 
@@ -21,8 +21,8 @@ utilizada. **Variables con el mismo nombre en ámbitos distintos son variables
 distintas**.
 
 
-El **ámbito en JavaScript es el cuerpos de la función**, delimitado entre las
-llaves `{` y `}` que marcan el comienzo y final del cuerpo del mismo.
+El **ámbito en JavaScript es el cuerpo de la función**, delimitado entre el
+par de llaves `{` y `}` que siguen a la lista de parámetros de la función.
 
 
 ```js
@@ -63,8 +63,11 @@ getEven([1, 2, 3, 4, 5, 6]);
 ```
 
 
-Como el ámbito es el de la función, el **mismo nombre en una función anidada se
-referiere a otra cosa**:
+Como el ámbito es el de la función, el mismo nombre en una función anidada se
+puede referir a dos cosas:
+
+
+**Si se usa con `var`**, se estará declarando **otra variable distinta**:
 
 ```js
 function introduction() {
@@ -253,6 +256,8 @@ function newDie(sides) {
 var d100 = newDie(100);
 var d20 = newDie(20);
 
+d100 !== d20; // distintas, creadas en dos llamadas distintas a newDie.
+
 d100();
 d20();
 ```
@@ -277,7 +282,7 @@ Considera el siguiente ejemplo:
 
 ```js
 var diceUtils = {
-  history: [], // Lleva el histórico de dados.
+  history: [], // lleva el histórico de tiradas.
 
   newDie: function (sides) {
     return function die() {
@@ -298,7 +303,7 @@ Pero esto no funciona:
 
 ```js
 var d10 = diceUtils.newDie(10);
-d10(); // error!
+d10(); // ¡error!
 ```
 
 
@@ -317,8 +322,10 @@ diceUtils.history;
 
 
 Lo que tenemos que hacer es que la función `die` dentro de `newDie` se refiera
-al `this` del ámbito superior, no al suyo. Podemos hacer esto con un truco muy
-simple:
+al `this` del ámbito superior, no al suyo.
+
+
+Podemos hacer esto de dos maneras. La primera es un mero juego de variables:
 
 
 ```js
@@ -346,6 +353,53 @@ var d6 = diceUtils.newDie(6);
 d10();
 d6();
 d10();
+diceUtils.history;
+```
+
+
+La segunda forma es usando el método [`bind()`](
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind)
+de las funciones.
+
+
+El método `bind()` de una función **devuelve otra función cuyo `this` será
+el primer parámetro de `bind()`**. De este modo:
+
+
+```js
+var diceUtils = {
+  history: [], // Lleva el histórico de dados.
+
+  newDie: function (sides) {
+    return die.bind(this); // una nueva función que llamará a die con su
+                           // destinatario establecido al primer parámetro.
+
+    function die() {
+      var result = Math.floor(Math.random() * sides) + 1;
+      this.history.push([new Date(), sides, result]);
+      return result;
+    }
+  }
+}
+```
+
+
+Las dos formas son **ampliamente utilizadas** pero la segunda se ve escrita
+muchas veces de este modo:
+
+
+```js
+var diceUtils = {
+  history: [], // Lleva el histórico de dados.
+
+  newDie: function (sides) {
+    return function die() {
+      var result = Math.floor(Math.random() * sides) + 1;
+      this.history.push([new Date(), sides, result]);
+      return result;
+    }.bind(this); // el bind sigue a la expresión de función.
+  }
+}
 ```
 
 
@@ -363,10 +417,10 @@ Esto es así porque estamos usando el **ámbito global**. El ámbito global est�
 
 
 ```js
-// Esta es una variable text en el ámbito GLOBAL
+// Esta es una variable text en el ámbito GLOBAL.
 var text = 'I\'m Ziltoid, the Omniscient.';
 
-// Esta es una función en el ámbito GLOBAL
+// Esta es una función en el ámbito GLOBAL.
 function greetings(list) {
   // Esta es OTRA variable text en el ámbito de la función.
   var text = 'Greetings humans!';
@@ -391,8 +445,8 @@ var text = 'I\'m Ziltoid, the Omniscient.';
 var text = 'Greetings humans!';
 
 // En una consola iniciada en el mismo directorio que a y b
-require('a');
-require('b');
+require('./a');
+require('./b');
 text;
 ```
 
@@ -402,15 +456,16 @@ text;
 Esta sección presenta la característica _módulos_ que es específica de node.
 
 
-Una de las principales desventajas de JavaScript (hasta la próxima versión) es
-que no hay forma de organizar el código en módulos.
+Una de las principales desventajas de JavaScript ([hasta la próxima versión](
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Statements/import))
+es que no hay forma de organizar el código en módulos.
 
 
 Los módulos sirven para aglomerar funcionalidad relacionada: tipos, funciones,
 constantes, configuración...
 
 
-Node sí tienen módulo y, afortunadamente, existen herramientas que simulan
+**Node sí tiene módulos** y, afortunadamente, existen herramientas que simulan
 módulos como los de node en el navegador.
 
 
@@ -420,14 +475,22 @@ En node, **los ficheros JavaScript acabados en `.js` son módulos**.
 Node permite exponer o **exportar funcionalidad de un módulo**:
 
 ```js
-// En dice.js
-"use strict";
-function die100Sides() {
-  return Math.floor(Math.random() * 100) + 1;
+// En diceUtils.js
+"use strict"; // pone el módulo en modo estricto.
+
+var history = [];
+
+function newDie(sides) {
+  return function die() {
+    var result = Math.floor(Math.random() * sides) + 1;
+    history.push([new Date(), sides, result]);
+    return result;
+  };
 }
 
-// Asigna la función die100Sides a la propiedad d100 del objeto module.exports
-module.exports.d100 = die100Sides;
+// ¡Lo que se exporta realmente es el objeto module.exports!
+module.exports.newDie = newDie;
+module.exports.history = history;
 ```
 
 Poniéndola dentro del objeto `module.exports`
@@ -444,14 +507,24 @@ module.exports;
 Lo que pongas dentro, queda también exportado.
 
 
-Y ahora **importarlo desde otro módulo**:
+Aahora puedes **importarlo desde otro módulo**:
 
 ```js
 // En cthulhuRpg.js
 "use strcit"
-var dice = require('./dados');
-var sanityCheck = dice.d100();
-console.log(sanityCheck);
+var diceUtils = require('./diceUtils');
+var d100 = diceUtils.newDie(100);
+var howard = {
+  sanity: 45,
+  sanityCheck: function () {
+    if (d100() <= this.sanity) {
+      console.log('Horrible, pero lo superaré. Estuvo cerca.');
+    } else {
+      console.log('¡Ph\'nglui mglw\'nafh Cthulhu R\'lyeh wgah\'nagl fhtagn!');
+    }
+  }
+};
+howard.sanityCheck();
 ```
 
 
@@ -474,13 +547,17 @@ Prueba el siguiente ejemplo (copia, pega y espera 5 segundos):
 
 ```js
 var fiveSeconds = 5 * 1000; // en milisegundos.
+
+// Esto ocurre ahora.
+console.log('T: ', new Date());
+
 setTimeout(function () {
   // Esto ocurre pasados 5 segundos.
   console.log('T + 5 segundos: ', new Date());
 }, fiveSeconds);
 
-// Esto ocurre inmediatamente.
-console.log('T: ', new Date());
+// Esto ocurre inmediatamente después
+console.log('T + delta: ', new Date());
 ```
 
 
@@ -503,8 +580,10 @@ Esta sección presenta el módulo `readline` que es específico de node.
 
 
 La programación asíncrona en JavaScript y otros lenguajes se usa para **modelar
-eventos**, principalmente **esperas por entrada y salida**. En otras palabras:
-hitos que ocurren pero que **no sabemos cuándo ocurren**.
+eventos**, principalmente **esperas por entrada y salida**.
+
+
+En otras palabras: hitos que ocurren pero que **no sabemos cuándo ocurren**.
 
 
 La entrada y salida, a partir de ahora IO (del inglés _input / output_), no solo
@@ -512,7 +591,9 @@ supone lectura de ficheros o peticiones a la red, también incluye esperar por
 una acción del usuario.
 
 
-Por ejemplo:
+Vamos a implementar una consola de diálogo por líneas. Usaremos el módulo
+[`readline`](https://nodejs.org/api/readline.html) que es parte de la
+funcionalidad que vienen con node:
 
 ```js
 // En conversational.js
@@ -564,16 +645,13 @@ con dicho evento.
 Con todo, aun no puedes salir del programa. Necesitas algunos cambios más:
 
 ```js
-// Modifica el listener en conversational.js
+// Añade a conversational.js
 cmd.on('line', function (input) {
-  console.log('Has dicho "' + input  + '"');
   if (input === 'salir') {
     cmd.close();
   }
-  cmd.prompt();
 });
 
-// Y añade al final...
 cmd.on('close', function () {
   console.log('¡Nos vemos!');
   process.exit(0); // sale de node.
@@ -581,9 +659,32 @@ cmd.on('close', function () {
 ```
 
 
-Ahora, cuando la entrada sea exactamente `salir`, cerraremos la interfaz de
-línea de comandos. Esto produce un evento `close` y cuando lo recibamos,
-utilizaremos el _lístener_ de ese evento para terminar el programa.
+Has añadido un segundo lístener al evento `line` y **ambos se ejecutarán**.
+El primero gestiona el funcionamiento por defecto (que es repetir lo que has
+puesto) y el segundo trata específicamente el comando `salir`.
+
+
+Si la línea es exactamente `salir`, cerraremos la interfaz de línea de
+comandos. Esto produce un evento `close` y cuando lo recibamos, utilizaremos el
+_listener_ de ese evento para terminar el programa.
+
+
+El método `on()` es un segundo nombre para
+[`addListener()`](
+https://nodejs.org/api/events.html#events_emitter_addlistener_eventname_listener).
+
+
+Igual que puedes añadir un lístener, también puedes eliminarlo con
+[`removeListener()`](
+https://nodejs.org/api/events.html#events_emitter_removelistener_eventname_listener)
+y quitarlos todos con
+[`removeAllListeners()`](
+https://nodejs.org/api/events.html#events_emitter_removealllisteners_eventname).
+
+
+Puedes escuchar por un evento **sólo una vez** con
+[`once()`](
+https://nodejs.org/api/events.html#events_emitter_once_eventname_listener).
 
 
 ### Emisores de eventos
@@ -624,7 +725,7 @@ Nave.prototype = Object.create(EventEmitter.prototype);
 Nave.prototype.constructor = Nave;
 
 var nave = new Nave();
-nave.on; // existe!
+nave.on; // ¡existe!
 ```
 
 
@@ -638,12 +739,17 @@ Nave.prototype.shoot = function () {
 };
 
 nave.on('shoot', function (ammunition) {
-  console.log('La nave ha disparado: ', ammunition);
+  console.log('CENTRO DE MANDO. La nave ha disparado:', ammunition);
 });
 
 nave.shoot();
 ```
 
+
+Emitir un evento consiste en llamar al método
+[`emit()`](
+https://nodejs.org/api/events.html#events_emitter_emit_eventname_arg1_arg2)
+que hará que se ejecuten los _listeners_ escuchando por tal evento.
 
 Los eventos son increiblemente útiles para modelar interfaces de usuario de
 forma genérica.
