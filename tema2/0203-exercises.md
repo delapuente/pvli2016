@@ -509,3 +509,180 @@ var poem = 'Todo pasa y todo queda, ' +
 
 wordHistogram(poem);
 ```
+
+**11. Número variables de parámetros**
+
+Fíjate en esto:
+
+```js
+console.log('I\'m', 'Ziltoid');
+console.log('I\'m', 'Ziltoid,', 'the', 'Omniscient');
+Math.max(1);
+Math.max(1, 2);
+Math.max(1, 2, 3);
+```
+
+Como puedes ver, la función acepta un número cualquiera de variables. Podemos
+hacer los mismo gracias a la variable implícita `arguments`.
+
+```
+function f() {
+  console.log('Número de argumentos pasados:', arguments.length);
+  console.log('Argumentos:', arguments);
+}
+f();
+f(1);
+f('a', {});
+f(function () {}, [], undefined);
+```
+
+Busca la información sobre `arguments` en la
+[MDN](http://lmgtfy.com/?q=mdn+arguments). ¡Te hará falta!
+
+**12. Decoradores**
+
+Aparte de devolverse como parámetros, las funciones pueden ser devueltas desde
+otras functiones. Considera el siguiente ejemplo:
+
+```js
+function newLog(label) {
+  return function(value) {
+    console.log(label + ':', value);
+  }
+}
+```
+
+Esta función crea funciones que llamarán a `console.log()` pero con una
+etiqueta delante. Podríamos crear métodos `_log()` por clase, cada uno con
+un prefijo y así distinguir unos logs de otros.
+
+Sin embargo, advierte el siguiente comportamiento:
+
+```js
+var log1 = newLog('Default');
+var log2 = newLog('Ziltoid');
+
+var p = { x: 1, y: 10 };
+log1(p);
+log2(p);
+log1('Greetings', 'humans!');
+```
+
+¿Cual es el problema? ¿Por qué no funciona el último ejemplo?
+
+Para hacer que funcione, tendríamos que llamar a `console.log()` con un número
+de parámetros que no sabemos a priori. Podemos usar `arguments`, no obstante:
+
+```js
+function newLog(label) {
+  return function() {
+    // ¿Por qué tenemos que hacer esto?
+    var args = Array.prototype.slice.call(arguments);
+    args.splice(0, 0, label + ':');
+    console.log.apply(console, args);
+  }
+}
+
+var log1 = newLog('Default');
+var log2 = newLog('Ziltoid');
+
+var p = { x: 1, y: 10 };
+log1(p);
+log2(p);
+log1('Greetings', 'humans!');
+```
+
+¿Podrías decir qué hace cada línea en la función `newLog()`?
+
+**13. Asincronía y closures**
+
+Carga el siguiente código:
+
+```js
+function scheduleTasks(count) {
+  for(var i = 1; i <= count; i++) {
+    setTimeout(function () {
+      console.log('Executing task', i);
+    }, i * 1000);
+  }
+}
+```
+
+Trata de predecir qué pasará al ejecutar el siguiente código:
+
+```js
+scheduleTasks(5);
+```
+
+¿Hace lo que esperabas? Si no es así, ¿por qué? ¿cómo lo arreglarías? Pista:
+necesitas la función [`.bind()`](
+https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind).
+
+**14. Eventos y métodos**
+
+Hay veces en las que debemos llamar a un método de un objeto cuando ocurra algo.
+Por ejemplo, supón que el método avanzar de un supuesto objeto debe llamarse
+en un intervalo de tiempo. Pongamos cada segundo:
+
+```js
+var obj = {
+  x: 10,
+  y: 2,
+  advance: function () {
+    this.y += 2;
+    console.log('Ahora Y vale', this.y);
+  }
+};
+
+var id = setInterval(obj.advance, 1 * 1000);
+```
+
+Este ejemplo falla porque en la última línea **no estamos llamando** a la
+función sino sólo pasándola como parámetro. La función `setInterval()` no
+tiene idea del destinatario del mensaje y por tando no puede llamar a la función
+como si fuera un método.
+
+Podemos arreglarlo con `bind()` pero antes para el intervalo con:
+
+```js
+clearInterval(id);
+```
+
+Ahora podemos solucionarlo con:
+
+```js
+var id = setInterval(obj.advance.bind(obj), 1 * 1000);
+```
+
+**15. La función bind()**
+
+A estas alturas ya deberías saber cómo funciona `bind()` o qué hace. Si aun no
+lo tienes claro, búscalo en la MDN.
+
+La tarea es la siguiente: crea una función `bind()` que simule el comportamiento
+del método de las funciones `.bind()`. Como se pide una función y no un método,
+el primer parámetro será la función. Así pues, en vez de usarse así:
+
+```js
+function die(sides) {
+  var result = Math.floor(Math.random() * sides) + 1;
+  this.history.push(result);
+  return result;
+}
+var obj = { history: [] };
+var d20 = die.bind(obj, 20);
+d20();
+```
+
+La usaremos de esta otra forma:
+
+```js
+function die(sides) {
+  var result = Math.floor(Math.random() * sides) + 1;
+  this.history.push(result);
+  return result;
+}
+var obj = { history: [] };
+var d20 = bind(die, obj, 20); // fíjate en que ahora die es el primer parámetro
+d20();
+```
