@@ -1,7 +1,7 @@
 ---
 title: HOW-TO para PVLI
 author: Carlos León
-date: 19/09/16
+date: 10/10/2016
 vim: spelllang=es
 ...
 
@@ -68,3 +68,9 @@ Para hacer una publicación directa del contenido en Moodle, el directorio
 `compartido/` se hará público para los estudiantes a través del Google Drive de
 Carlos <cleon@ucm.es>, y se enlazarán como URL.
 
+# Crear un juego
+
+#. Copiar la carpeta `plantilla-juego`
+#. Poner en `package.json` el *autor*, el *repo git* y demás datos (además de
+mantener la versión.
+#. Seguir las instrucciones que hay en README

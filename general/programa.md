@@ -1,20 +1,9 @@
 ---
-title: Programación PVLI (2016/2017) (BORRADOR)
-author: Belén Albeza, Carlos León, Ismael Sagredo, Salvador de la Puente
-date: 'Última actualización: 27/09/2016'
+title: Programación PVLI (2016/2017) -- preliminar
+author: Belén Albeza, Carlos León, Salvador de la Puente, Ismael Sagredo
+date: 13/10/2016
 vim: spelllang=es
 ...
-
-<!-- Práctica 1: "aventura conversacional" / "pokémon te ataca" / lectura de -->
-<!-- comandos que da Salva -->
-
-<!-- Práctica 2: "Gráficos en browser" -->
-
-<!-- Práctica 3: Platformer --> 
-
-<!-- Práctica 4: Platformer con física -->
-
-<!-- Práctica 5: Platformer con todo y despliegue -->
 
 # 26-30 de septiembre
 
@@ -32,194 +21,221 @@ Tema 1: Programación de aplicaciones en HTML5
 
 # 03-07 de octubre 
 
-<!-- Salva - max 3 -->
-
 Tema 2: Javascript (I)
 
-<!-- [P1]  -->
 - 03/10 (Salva)
     - Programación orientada a objetos con JavaScript
     - Datos primitivos
     - La función como tipo de datos
     - Constructores y prototipos
-<!-- [P0] -->
 - 04/10 (Salva)
     - El modelo de datos de JavaScript
-    - Closures
-    - La cadena de prototipos
-<!-- [P3] -->
 - 07/10 (Salva)
-    - Práctica 1: juego sin consola
+    - El modelo de datos de JavaScript: ejercicios
 
 # 10-14 de octubre 
 
 <!-- (Salva - max 3) -->
 
-Tema 2: Javascript (II)
-
- <!-- [P0] -->
-
 - 10/10 (Salva)
-    - Programación asíncrona
-<!-- [P2] -->
+    - La cadena de prototipos
 - 11/10 (Salva)
-    - Eventos: el patrón suscriptor / publicador
-<!-- [P1] -->
+    - Closures
 - 14/10 (Salva)
-    - Práctica 1: entrega
+    - Programación asíncrona
+    - Eventos: el patrón suscriptor / publicador
 
+# 17-21 de octubre 
 
-
-<!-- # 17-21 de octubre --> 
 <!-- <1!-- (Belén - max 3) --1> -->
 
-<!-- Tema 3: Programación de videojuegos en un canvas de HTML5 -->
+Tema 3: Programación de videojuegos en un canvas de HTML5
 
 <!--  <1!-- x? --1> -->
-<!-- - 17/10 (Belén) -->
-<!--     - Creación y acceso a un canvas -->
-<!--     - Canvas 2D/WebGL -->
-<!--     - Pintado y repintado, ciclo -->
-<!--     - Ciclo básico de juego en JS -->
+- 17/10 (Belén)
+    - Creación y acceso a un `canvas`
+    - Canvas 2D/WebGL
+    - Pintado y repintado, ciclo
+    - Ciclo básico de juego en JavaScript
 <!-- <1!-- x? --1> -->
-<!-- - 18/10  (Belén) -->
-<!--     - Entrada básica. Clicks por lo menos - Cómo se gestionan los eventos navegador/DOM (capa Phaser que abstrae y unifica) -->
+- 18/10  (Belén)
+    - Entrada básica 
+    <!--. Clicks por lo menos  -->
+    - Eventos navegador/DOM
+    - Eventos con Phaser
 <!--     ESTO NO DA TIEMPO    - Entrada avanzada (giro, accel, touch, pad…) -->
 <!--     - Fullscreen: limitación (browsers fuerzan que fullscreen venga de un evento de usuario por seguridad) -->
 <!-- <1!-- [2] --1> -->
-<!-- - 21/10  (Belén) -->
-<!--     - Práctica 2: pintar plataformas -->
+- 21/10  (Belén)
+    - Práctica 1: Batalla conversacional RPG
 
-<!-- # 24-28 de octubre -->
+# 24-28 de octubre
 
-<!-- Tema 4: Arquitectura de un motor de juegos en JavaScript: componentes y eventos -->
+<!-- prepara Carlos -->
 
-<!-- - 24/10 (Ismael) -->
-<!--    - Introducción a la arquitectura de videojuegos -->
-<!--    - Programación orientada a objetos (nociones/repaso) -->
-<!-- - 25/10 (Carlos) -->
-<!-- - 28/10 (Carlos) -->
-<!--    - Componentes -->
-<!--    - Ejercicios (sistema de RPG en Node.js o HTML) --> 
-<!--       - Sistema de combate RPG -->
-<!--       - Aventura gráfica simple (inventario) -->
+Tema 4: Arquitectura de un motor de juegos en JavaScript: componentes y eventos
+
+- 24/10 (Carlos)
+   - Introducción a la arquitectura de videojuegos
+   - Programación orientada a objetos (nociones/repaso)
+- 25/10 (Carlos)
+   - Componentes
+- 28/10 (Ismael)
+   - Ejercicios para evaluar: herencia vs. componentes
+      - Sistema de combate RPG
+   <!-- TODO [Carlos, 13-10-2016 15:35]: meter canvas, y comparación herencia
+   vs. componentes -->
 
 <!-- <1!-- Aquí revisitamos lo hecho hasta ahora y le damos un baño de componentes, sin meter low level javascript ni nada, sólo arquitectura --1> -->
 
-<!-- # 31 de octubre - 4 de noviembre -->
+# 31 de octubre - 4 de noviembre
 
-<!-- Tema 5: Carga de recursos -->
+<!-- prepara Ismael -->
 
-<!-- - 31/10 -->
-<!--    - Game states: carga y descarga de recursos. Pila de game states -->
-<!--    - Cross-origin. Ejecutar Phaser en local server -->
-<!--    - URL/URIs -->
-<!--    - Localización de recursos -->
-<!--    - Carga en memoria -->
-<!--    - Uso y liberación de recursos -->
-<!--    - Spritesheets texturas (contar texturas? multitexturas phaser) -->
-<!-- <1!-- - 01/11 es festivo --1> -->
-<!-- - 04/11 -->
+Tema 5: Carga de recursos <!-- con Phaser -->
 
-<!-- # 07-11 de noviembre - <1!-- Belen planifica día por día y nos repartimos los temas --1> -->
+- 31/10 (Ismael)
+    - Game states: carga y descarga de recursos. Pila de game states
+    - URL/URIs
+    - Localización de recursos
+    - Carga en memoria
+    - Uso y liberación de recursos
+    <!-- - Spritesheets texturas (contar texturas? multitexturas phaser) -->
+- 04/11 (Carlos)
+    - Cargador de recursos para el juego
+    - Cross-origin. Ejecutar Phaser en local server
+    - Práctica 2: pintar plataformas
 
-<!-- Tema 6: Gestión de entidades (I) -->
+# 07-11 de noviembre 
+
+<!-- Belen planifica día por día y nos repartimos los temas -->
+
+Tema 6: Gestión de entidades (I)
 
 <!-- <1!-- TODO [Carlos, 11-09-2016 14:38]: El 14 es fiesta --1> -->
+<!-- (no sprites) esto tiene que venir antes de sprites -->
 
-<!-- - 07/11 -->
-<!--    - Creación y destrucción de entidades -->
-<!--    - Groups en Phaser -->
-<!--    - Imágenes (no sprites) esto tiene que venir antes de sprites -->
-<!--    - Sprite Pools (no tiene que estar separada de grupos) -->
-<!-- - 08/11 -->
-<!-- - 11/11 -->
-<!--    - Práctica -->
+- 07/11 (Belén)
+   - Creación y destrucción de entidades
+   - Groups en Phaser
+- 08/11 (Belén)
+   - Imágenes
+   - Sprite pools 
+<!-- (no tiene que estar separada de grupos) -->
+- 11/11 (Belén)
+   - Práctica 2: Batallas RPG en el navegador
 
-<!-- # 14-18 de noviembre --> 
+# 14-18 de noviembre 
 
-<!-- Tema 6: Gestión de entidades (II) -->
+Tema 6: Gestión de entidades (II)
 
-<!-- - 14/11 -->
-<!--     - Texto (prio 100) -->
-<!--     - bitmap fonts -->
-<!--          - fuentes web / sistema -->
-<!--  <1!-- [0] --1> -->
-<!-- - 15/11 -->
-<!--     - Tiles (prio 0) -->
-<!-- - 18/11 -->
-<!--     - Práctica (prio 100) -->
+- 14/11 (Belén)
+    - Tiles 
+    - Creación de tiles ([`tiled`](http://www.mapeditor.org/))
+<!-- (prio 0) -->
+ <!-- [0] -->
+- 15/11 (Belén)
+    - Texto 
+    <!-- (prio 100) -->
+    - Fuentes de mapa de bits
+    - Fuentes Web y fuentes del sistema
+- 18/11 (Belén)
+    - Trabajo en Práctica 2
 
-<!-- # 21-25 de noviembre -->
+# 21-25 de noviembre
 
-<!-- Tema 6: Gestión de entidades (III) -->
+Tema 6: Gestión de entidades (III)
 
-<!-- - 21/11 -->
-<!--     - Audio -->
-<!-- - 22/11 -->
-<!--     - Explicación juego arcade? -->
-<!-- - 25/12 -->
-<!--     - Práctica -->
+- 21/11 (Ismael)
+    - Audio
+    - Web Audio
+    - Música y sonidos
+- 22/11 (Carlos)
+    - Audio en Phaser
+    - Explicación juego arcade?
+- 25/11 (Ismael)
+    - Ejercicio con Web Audio
+    - Trabajo en Práctica 2
 
-<!-- # 28 de noviembre - 2 de diciembre -->
+# 28 de noviembre - 2 de diciembre
 
-<!-- Tema 7: Física para juegos en 2D -->
+<!-- prepara ismael -->
 
-<!-- - 28/11 -->
-<!--     - Física simple -->
-<!--     - Bounding boxes -->
-<!-- - 29/11 -->
-<!-- - 02/12 -->
+<!-- TODO [Carlos, 13-10-2016 16:10]: Isma repasa esta plani -->
 
-<!-- # 05-09 de diciembre -->
+<!-- prepara ismael -->
+Tema 7: Colisiones y triggers
 
-<!-- <1!-- TODO: [Salva] Puente de la constitución. Yo lo saltaría directamente. Si acaso, clases de reuerzo. --1> -->
+- 28/11 (Ismael)
+    - Colisiones básicas (rectángulos)
+- 29/11 (Carlos)
+    - *Overlapping*
+    - *Triggers*
+- 02/12 (Carlos)
+    - Examen parcial
 
-<!-- # 12-16 de diciembre -->
+# 05-09 de diciembre
 
-<!-- Tema 8: Colisiones -->
+- 5/12 (Ismael)
+    - Práctica 3: Juego de plataformas
+- 9/12 (Ismael)
+    - Trabajo en Práctica 3
 
-<!-- - 12/12 -->
-<!--     - Colisiones básicas (rectángulos) -->
-<!--     - Arcade/Ninja/P2 -->
-<!-- - 13/12 -->
-<!--     - Overlap -->
-<!-- - 16/12 -->
-<!--     - Práctica 3: platformer -->
+# 12-16 de diciembre
 
-<!-- # 19-22 de diciembre -->
+Tema 8: Física para juegos en 2D
 
-<!-- Tema 9: Animaciones basadas en sprites -->
+- 12/12 (Ismael)
+    - Física simple
+    - Bounding boxes
+    - Física con Phaser
+- 13/12 (Carlos)
+    - Sistemas de colisiones *arcade*/*ninja*/*p2*
+- 16/12 (Carlos)
+    - Trabajo en Práctica 3
 
-<!-- - 19/12 -->
-<!--     - Secuencias de sprites -->
-<!--     - Animación basada en secuencia -->
-<!--     - Ciclos de animación -->
-<!-- - 20/12 -->
-<!--     - Spritesheets (contar texturas? multitexturas phaser) -->
-<!--     - Tweening. -->
-<!--     - Animación por bones (contar al menos) -->
-<!-- - 22/12 -->
-<!--     - Práctica 4: añadir animaciones al platformer -->
 
-<!-- # 9-13 de enero -->
+# 19-22 de diciembre
 
-<!-- <1!-- TODO [Carlos, 11-09-2016 14:48]: Hay que meter aquí esto como ejercicio: programación de extensiones de motores físicos, de comportamiento y sistemas de part ículas. --1> -->
+<!-- prepara Carlos -->
 
-<!-- - 9/1 -->
-<!--     - Práctica 5: añadir física al platformer -->
-<!-- - 10/1 -->
-<!--     - Tutorías -->
-<!-- - 13/1 -->
-<!--     - Práctica 5: finalización de práctica -->
+<!-- TODO [Carlos, 13-10-2016 16:12]: darle una vuelta a los items (Carlos) -->
+Tema 9: Animaciones basadas en sprites
 
-<!-- # 16-20 de enero -->
+- 19/12 (Carlos)
+    - Secuencias de sprites
+    - Animación basada en secuencia
+    - Ciclos de animación
+- 20/12 (Carlos)
+    - Spritesheets
+    - Tweening
+    - Animación por huesos
+    <!-- TODO [Carlos, 13-10-2016 16:12]: ver Spine -->
+- 23/12 (Ismael)
+    - Trabajo en Práctica 4: Animaciones y física
 
-<!-- Tutorías de proyecto -->
+# 9-13 de enero
 
-<!-- - 16/1 -->
-<!--     - Tutorías -->
-<!-- - 17/1 -->
-<!--     - Tutorías -->
-<!-- - 20/1 -->
-<!--     - Presentación de proyectos -->
+<!-- la idea es que la práctica 5 tenga plug-ins y partículas, hay que cumplir
+con el programa -->
+
+Tutorías de proyecto
+
+- 9/1 (Ismael)
+    - Práctica 5: Plug-ins y *release*
+- 10/1 (Carlos)
+    - Tutorías
+- 13/1 (Carlos)
+    - Tutorías y trabajo en Práctica 5
+
+# 16-20 de enero
+
+Presentaciones
+
+- 16/1 (Ismael)
+    - Presentación de proyectos
+- 17/1 (Carlos)
+    - Presentación de proyectos
+- 20/1 (Carlos)
+    - Presentación de proyectos
+
