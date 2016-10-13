@@ -1,5 +1,5 @@
 ---
-title: Programación PVLI (2016/2017) -- preliminar
+title: Programación PVLI (2016/2017) - preliminar
 author: Belén Albeza, Carlos León, Salvador de la Puente, Ismael Sagredo
 date: 13/10/2016
 vim: spelllang=es
@@ -76,13 +76,13 @@ Tema 3: Programación de videojuegos en un canvas de HTML5
 Tema 4: Arquitectura de un motor de juegos en JavaScript: componentes y eventos
 
 - 24/10 (Carlos)
-   - Introducción a la arquitectura de videojuegos
-   - Programación orientada a objetos (nociones/repaso)
+    - Introducción a la arquitectura de videojuegos
+    - Programación orientada a objetos (nociones/repaso)
 - 25/10 (Carlos)
-   - Componentes
+    - Componentes
 - 28/10 (Ismael)
-   - Ejercicios para evaluar: herencia vs. componentes
-      - Sistema de combate RPG
+    - Ejercicios para evaluar: herencia vs. componentes
+        - Sistema de combate RPG
    <!-- TODO [Carlos, 13-10-2016 15:35]: meter canvas, y comparación herencia
    vs. componentes -->
 
@@ -116,14 +116,15 @@ Tema 6: Gestión de entidades (I)
 <!-- (no sprites) esto tiene que venir antes de sprites -->
 
 - 07/11 (Belén)
-   - Creación y destrucción de entidades
-   - Groups en Phaser
+    - Imágenes
+    - Creación y destrucción de entidades
 - 08/11 (Belén)
-   - Imágenes
-   - Sprite pools 
-<!-- (no tiene que estar separada de grupos) -->
+    - Groups en Phaser
+    - Sprite pools 
 - 11/11 (Belén)
-   - Práctica 2: Batallas RPG en el navegador
+    - Práctica 2: Batallas RPG en el navegador
+
+<!-- (spritepools no tiene que estar separada de grupos) -->
 
 # 14-18 de noviembre 
 
