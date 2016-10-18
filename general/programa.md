@@ -53,21 +53,23 @@ Tema 3: Programación de videojuegos en un canvas de HTML5
 
 <!--  <1!-- x? --1> -->
 - 17/10 (Belén)
-    - Creación y acceso a un `canvas`
-    - Canvas 2D/WebGL
-    - Pintado y repintado, ciclo
-    - Ciclo básico de juego en JavaScript
+    - JavaScript en el navegador
+    - DOM
 <!-- <1!-- x? --1> -->
 - 18/10  (Belén)
-    - Entrada básica 
-    <!--. Clicks por lo menos  -->
-    - Eventos navegador/DOM
-    - Eventos con Phaser
+    - Creación y acceso a un `canvas`
+    - Canvas 2D/WebGL
+<!-- - Pintado y repintado, ciclo -->
+<!-- - Entrada básica --> 
+<!-- Clicks por lo menos  -->
+<!-- - Eventos navegador/DOM -->
+<!-- - Eventos con Phaser -->
+    - Explicación de la práctica 1: Batalla conversacional RPG
 <!--     ESTO NO DA TIEMPO    - Entrada avanzada (giro, accel, touch, pad…) -->
 <!--     - Fullscreen: limitación (browsers fuerzan que fullscreen venga de un evento de usuario por seguridad) -->
 <!-- <1!-- [2] --1> -->
 - 21/10  (Belén)
-    - Práctica 1: Batalla conversacional RPG
+    - Ejercicios con `canvas`
 
 # 24-28 de octubre
 
@@ -76,13 +78,16 @@ Tema 3: Programación de videojuegos en un canvas de HTML5
 Tema 4: Arquitectura de un motor de juegos en JavaScript: componentes y eventos
 
 - 24/10 (Carlos)
-    - Introducción a la arquitectura de videojuegos
-    - Programación orientada a objetos (nociones/repaso)
+    - Programación orientada a objetos (nociones)
+    - Arquitectura de videojuegos
+    - Arquitectura con herencia
+    - Arquitectura de componentes
 - 25/10 (Carlos)
-    - Componentes
+    - Ciclo básico de juego en JavaScript
+    - Ejemplo de arquitectura de componentes
 - 28/10 (Ismael)
     - Ejercicios para evaluar: herencia vs. componentes
-        - Sistema de combate RPG
+<!-- - Sistema de combate RPG -->
    <!-- TODO [Carlos, 13-10-2016 15:35]: meter canvas, y comparación herencia
    vs. componentes -->
 
@@ -100,7 +105,7 @@ Tema 5: Carga de recursos <!-- con Phaser -->
     - Localización de recursos
     - Carga en memoria
     - Uso y liberación de recursos
-    <!-- - Spritesheets texturas (contar texturas? multitexturas phaser) -->
+<!-- - Spritesheets texturas (contar texturas? multitexturas phaser) -->
 - 04/11 (Carlos)
     - Cargador de recursos para el juego
     - Cross-origin. Ejecutar Phaser en local server
