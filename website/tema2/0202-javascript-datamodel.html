@@ -515,7 +515,7 @@ obj1.z ------------------------------------------------X</code></pre>
 <span class="kw">var</span> obj2 <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(obj3)<span class="op">;</span>
 <span class="va">obj2</span>.<span class="at">d</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span>
 <span class="va">obj2</span>.<span class="at">e</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>
-<span class="co">// Encadenamos obj1 a obj3</span>
+<span class="co">// Encadenamos obj1 a obj2</span>
 <span class="kw">var</span> obj1 <span class="op">=</span> <span class="va">Object</span>.<span class="at">create</span>(obj2)<span class="op">;</span>
 <span class="va">obj1</span>.<span class="at">a</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
 <span class="va">obj1</span>.<span class="at">b</span> <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
@@ -780,8 +780,8 @@ enemy <span class="kw">instanceof</span> Ally<span class="op">;</span></code></p
 </blockquote>
 <p><a href="https://groups.google.com/forum/?hl=en#!msg/comp.lang.python/CCs2oJdyuzc/NYjla5HKMOIJ">Alex Martelli sobre polimorfismo</a></p>
 <p>La frase se refiere a que más que comprobar si algo es una instancia de un tipo, deberíamos comprobar si tiene la funcionalidad que necesitamos.</p>
-<p>JavaScript es tan dinámico que el operador <code>instanceof</code> y la propiedad <code>constructor</code> sólo tiene sentido si utilizamos seguimos los convenios aprendidos en la lección.</p>
-<p>Nada nos impide borrar la propiedad constructor de un prototipo o sobreescribirla en un objeto determinado. En las nuevas versiones de JavaScript, el prototipo de un objeto puede cambiar después de haber sido construido.</p>
+<p>JavaScript es tan dinámico que el operador <code>instanceof</code> y la propiedad <code>constructor</code> sólo tienen sentido si seguimos los convenios aprendidos en la lección.</p>
+<p>Nada nos impide borrar la propiedad <code>constructor</code> de un prototipo o sobreescribirla en un objeto determinado. En las nuevas versiones de JavaScript, el prototipo de un objeto puede cambiar después de haber sido construido.</p>
 </section>
     </div>
   </div>
