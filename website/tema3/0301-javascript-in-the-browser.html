@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="javascript-en-el-navegador" class="titleslide slide level1"><h1>JavaScript en el navegador</h1></section><section id="por-qué" class="slide level2">
+<h1>¿Por qué?</h1>
+<p>Si queréis publicar juegos en la web, <em>necesitáis</em> saber cómo funciona un navegador, y cómo funciona la web</p>
+<h3 id="por-qué-conocer-los-navegadores">¿Por qué conocer los navegadores?</h3>
+<ul>
+<li class="fragment">Hay consideraciones técnicas a tener en cuenta, tanto a nivel de interfaz como de seguridad</li>
+<li class="fragment">¡Herramientas de desarrollo! Debugger, profiler, network requests, etc.</li>
+</ul>
+<h3 id="por-qué-conocer-tecnologías-web">¿Por qué conocer tecnologías web?</h3>
+<ul>
+<li class="fragment">Como poco, vuestro juego deberá estar contenido en una página web (HTML), que tendrá cierta apariencia (CSS).</li>
+<li class="fragment">Es útil para implementar cosas como un botón de fullscreen, o una splash screen, o usar fuentes custom en vuestros juegos</li>
+<li class="fragment">Si tenéis un bug, necesitáis conocimientos de APIs Web para poder debuggar con éxito (p.ej la API de Gamepad, o WebGL)</li>
+<li class="fragment">Si queréis modificar el engine o framework para añadir features o arreglar un bug…</li>
+</ul>
+</section><section id="navegadores" class="slide level2">
+<h1>Navegadores</h1>
+<ul>
+<li class="fragment">Son programas que permiten acceder a la Web</li>
+<li class="fragment">¡No todos los navegadores son iguales!
+<ul>
+<li class="fragment">No todos incluyen el mismo motor de renderizado. P.ej: Gecko (Firefox), Blink (Chrome, Opera)</li>
+<li class="fragment">No todos incluyen la misma VM de JavaScript. P.ej: SpiderMonkey (Firefox), V8 (Chrome)</li>
+</ul></li>
+</ul>
+<h3 id="cómo-detectar-qué-soporta-cada-navegador">¿Cómo detectar qué soporta cada navegador?</h3>
+<ul>
+<li class="fragment"><a href="http://caniuse.com">caniuse.com</a>, rápida e intuitiva</li>
+<li class="fragment"><a href="http://developer.mozilla.org">MDN</a>, tiene detalles concretos sobre la implementación y diferencias entre navegadores</li>
+</ul>
+</section><section id="lenguajes-en-la-web" class="slide level2">
+<h1>Lenguajes en la web</h1>
+<h3 id="html">HTML</h3>
+<ul>
+<li class="fragment"><p>Representa el <strong>contenido</strong> de una página: párrafos, títulos, imágenes, vídeos, elementos de canvas, etc.</p></li>
+<li class="fragment"><p>Es un lenguaje de <strong>marcado</strong> basado en etiquetas. P.ej:</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;h1&gt;</span>Esto es un título<span class="kw">&lt;/h1&gt;</span></code></pre></div>
+<h3 id="css">CSS</h3>
+<ul>
+<li class="fragment"><p>Nos permite personalizar la <strong>apariencia</strong> de los elementos HTML: colores, fondos, bordes, posición, columnas, tamaños…</p></li>
+<li class="fragment"><p>Es un lenguage <strong>declarativo</strong> basado en reglas. P.ej:</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">h1 <span class="kw">{</span>
+  <span class="kw">color:</span> <span class="dt">red</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<h3 id="javascript">JavaScript</h3>
+<ul>
+<li class="fragment"><p>Nos permite implementar <strong>comportamiento</strong> y <strong>lógica</strong>.</p></li>
+<li class="fragment"><p>Es un <strong>lenguaje dinámico</strong> orientado a prototipos, con características funcionales.</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, world!&quot;</span>)<span class="op">;</span></code></pre></div>
+</section><section id="qué-pasa-cuando-accedéis-a-una-web-en-un-navegador" class="slide level2">
+<h1>¿Qué pasa cuando accedéis a una web en un navegador?</h1>
+<h3 id="petición-http-get-a-un-servidor">1. Petición HTTP GET a un servidor</h3>
+<figure>
+<img src="imgs/request_dance_step1.png" alt="Paso 1" /><figcaption>Paso 1</figcaption>
+</figure>
+<p>Se hace un HTTP GET a una URL, y si el recurso existe (y no está cacheado), el servidor lo retorna.</p>
+<h3 id="descarga-de-archivos">2. Descarga de archivos</h3>
+<figure>
+<img src="imgs/request_dance_step2.png" alt="Paso 2" /><figcaption>Paso 2</figcaption>
+</figure>
+<p>Los archivos HTML pueden hacer referencia a otros recursos… que el navegador deberá pedir al servidor.</p>
+<p>Mientras tanto, se va renderizando el HTML descargado.</p>
+<h3 id="un-js-salvaje-apareció">¡Un JS salvaje apareció!</h3>
+<p>Cuando un archivo JS se acaba de descargar, su código se parsea y se <strong>ejecuta</strong>.</p>
+<p>Mientras se ejecuta, el navegador queda <em>bloqueado</em>.</p>
+<h3 id="carga-finalizada">3. Carga finalizada</h3>
+<p>Cuando todas las imágenes, scripts, CSS, etc. se han cargado, se dispara el <strong>evento <code>load</code></strong> de <code>window</code>.</p>
+<p>Es muy común incluir el código que inicializa la ejecución del programa en el <em>handler</em> de ese evento.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span>
+  <span class="co">// hello world</span>
+<span class="op">};</span></code></pre></div>
+</section><section id="cómo-incluir-javascript-en-una-web" class="slide level2">
+<h1>Cómo incluir JavaScript en una web</h1>
+<h3 id="estructura-básica-de-un-documento-html">Estructura básica de un documento HTML</h3>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="er">&lt;</span>!doctype html&gt;
+<span class="kw">&lt;html&gt;</span>
+  <span class="co">&lt;!-- el head es metadata --&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="kw">&lt;title&gt;</span>Cancamusa<span class="kw">&lt;/title&gt;</span>
+    <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;utf-8&quot;</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;/head&gt;</span>
+  <span class="co">&lt;!-- el body es contenido --&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>Monkey Island<span class="kw">&lt;/h1&gt;</span>
+    <span class="kw">&lt;p&gt;</span>Mira detrás de ti, ¡un mono de tres cabezas!<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></code></pre></div>
+<h3 id="dónde-va-el-código-javascript">¿Dónde va el código JavaScript?</h3>
+<ul>
+<li class="fragment">Podemos incluir JavaScript tanto en el <code>&lt;head&gt;</code> como en el <code>&lt;body&gt;</code>…</li>
+<li class="fragment">…pero tened en cuenta el flujo de carga de una web!
+<ul>
+<li class="fragment">En el <code>&lt;head&gt;</code> se iniciará la carga antes que el resto de recursos… pero bloqueará el renderizado mientras se ejecuta.</li>
+<li class="fragment">Al final de <code>&lt;body&gt;</code> permitirá que se renderice la web… pero tardará más en ejecutarse.</li>
+</ul></li>
+</ul>
+<p><small>Esto es una simplificación, info más completa en <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/">este artículo de Jake Archibald</a></small></p>
+<h3 id="scripts-inline">Scripts inline</h3>
+<p>Podemos incluir código JavaScript inline en el HTML con la etiqueta <code>&lt;script&gt;</code>.</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script&gt;</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Hello, world!&quot;</span>)<span class="op">;</span>
+<span class="op">&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
+<h3 id="scripts-externos">Scripts externos</h3>
+<p>Podemos incluir archivos JavaScript con la etiqueta <code>&lt;script&gt;</code> también:</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;js/game.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span></code></pre></div>
+</section><section id="cómo-se-ejecuta-javascript" class="slide level2">
+<h1>Cómo se ejecuta JavaScript</h1>
+<h3 id="modelo-asíncrono">Modelo asíncrono</h3>
+<ul>
+<li class="fragment">Mientras JavaScript se está ejecutando, <strong>bloquea todo lo demás</strong> (incluida la UI).</li>
+<li class="fragment">La manera de programar JavaScript en la Web es <strong>subscribiéndonos a eventos</strong> (o usando <strong>callbacks</strong>) y ejecutando código sólo cuando esos eventos se disparan.</li>
+<li class="fragment">Si los eventos no se disparan, o los callbacks no se llaman, no se ejecuta código.</li>
+</ul>
+<h3 id="un-solo-hilo">Un solo hilo</h3>
+<ul>
+<li class="fragment">Los callbacks de los eventos se ejecutan <strong>de uno en uno</strong>.</li>
+<li class="fragment">Los callbacks se ejecutan inmediatamente cuando el evento se dispara (el resto del código espera su finalización).</li>
+</ul>
+<h3 id="ejemplo">Ejemplo</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">button</span>.<span class="at">onclick</span> <span class="op">=</span> <span class="kw">function</span> (evt) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Click&quot;</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// ...</span>
+
+<span class="va">button</span>.<span class="at">trigger</span>(<span class="st">&#39;click&#39;</span>)<span class="op">;</span>
+<span class="co">// el botón no se desactiva hasta que el handler de &quot;click&quot;</span>
+<span class="co">// haya acabado de ejecutarse</span>
+<span class="va">button</span>.<span class="at">disabled</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></code></pre></div>
+<p><small><a href="https://jsfiddle.net/1wqevdob/">Snippet de código</a></small></p>
+</section><section id="el-dom" class="slide level2">
+<h1>El DOM</h1>
+<h3 id="document-object-model">Document Object Model</h3>
+<ul>
+<li class="fragment">Los documentos HTML presentan una estructura de árbol.</li>
+<li class="fragment">Los navegadores nos dan una <strong>interfaz para interactuar</strong> con esta estructura: el <strong>DOM</strong></li>
+<li class="fragment">El punto de entrada para acceder al DOM es el objeto <strong>global <code>document</code></strong>.</li>
+</ul>
+<h3 id="ejemplo-de-una-sección-del-dom">Ejemplo de una sección del DOM</h3>
+<figure>
+<img src="imgs/dom_section.png" alt="Sección del DOM" /><figcaption>Sección del DOM</figcaption>
+</figure>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;article&gt;</span>
+  <span class="kw">&lt;header&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>Un título molón<span class="kw">&lt;/h1&gt;</span>
+  <span class="kw">&lt;/header&gt;</span>
+  <span class="kw">&lt;p&gt;</span>Bla bla bla.<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;p&gt;</span>
+    Más bla, bla, bla y
+    <span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;http://wikipedia.org&quot;</span><span class="kw">&gt;</span>aquí un enlace<span class="kw">&lt;/a&gt;</span>.
+  <span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/article&gt;</span></code></pre></div>
+<h3 id="qué-podemos-hacer-con-el-dom">¿Qué podemos hacer con el DOM?</h3>
+<ul>
+<li class="fragment">Leer/Escribir las propiedades de los elementos, y usar sus métodos.</li>
+<li class="fragment">Eliminar elementos del DOM.</li>
+<li class="fragment">Insertar nuevos elementos en el DOM.</li>
+</ul>
+</section><section id="acceder-a-elementos-del-dom" class="slide level2">
+<h1>Acceder a elementos del DOM</h1>
+<h3 id="acceder-a-elementos-por-id">Acceder a elementos por ID</h3>
+<p>Sólo selecciona un elemento (las ID's deben ser únicas).</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;button</span><span class="ot"> id=</span><span class="st">&quot;show-fullscreen&quot;</span><span class="kw">&gt;</span>Fullscreen<span class="kw">&lt;/button&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> button <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;show-fullscreen&#39;</span>)<span class="op">;</span></code></pre></div>
+<h3 id="acceder-a-elementos-por-selector">Acceder a elementos por selector</h3>
+<p>Esto usa la sintaxis de los selectores CSS para localizar uno (o varios) elementos.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// selecciona el primer párrafo que encuentra</span>
+<span class="kw">var</span> paragraph <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span>
+<span class="co">// selecciona el primer elemento con clase .warning</span>
+<span class="kw">var</span> label <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;.warning&#39;</span>)<span class="op">;</span>
+<span class="co">// selecciona TODOS los párrafos</span>
+<span class="kw">var</span> allPars <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelectorAll</span>(<span class="st">&#39;p&#39;</span>)<span class="op">;</span></code></pre></div>
+<p><small>Más info sobre selectores para usar con <code>querySelector</code> en <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors">la MDN</a></small></p>
+<h3 id="iterar-sobre-una-lista-de-elementos">Iterar sobre una lista de elementos</h3>
+<ul>
+<li class="fragment"><code>querySelectorAll</code> <em>no</em> devuelve un array, sino una <a href="https://developer.mozilla.org/en/docs/Web/API/NodeList">NodeList</a>.</li>
+<li class="fragment">No podemos utilizar métodos de <code>Array</code> sobre ella. Pero tiene la propiedad <code>length</code> y el operador <code>[]</code>, así que podemos acceder en un bucle:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> buttons <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelectorAll</span>(<span class="st">&#39;button&#39;</span>)<span class="op">;</span>
+<span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">buttons</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    buttons[i].<span class="at">style</span> <span class="op">=</span> <span class="st">&quot;display: none&quot;</span><span class="op">;</span> <span class="co">// hide buttons</span>
+<span class="op">}</span></code></pre></div>
+<p><small>Aunque también podemos iterar con <code>Array.forEach</code> si lo utilizamos con <code>apply</code>…</small></p>
+<h3 id="navegar-en-el-dom">Navegar en el DOM</h3>
+<ul>
+<li class="fragment">Se accede al <strong>padre</strong> de un elemento con la propiedad <code>parentNode</code>.</li>
+<li class="fragment">Se accede a la lista de <strong>hijos</strong> de un elemento con <code>childNodes</code>.</li>
+<li class="fragment">Se accede al <strong>hermano</strong> anterior o siguiente con <code>previousSibling</code> y <code>nextSibling</code>.</li>
+</ul>
+<p>Con esto podemos recorrer todo el DOM en cualquier dirección.</p>
+</section><section id="propiedades-interesantes-de-elementos-del-dom" class="slide level2">
+<h1>Propiedades interesantes de elementos del DOM</h1>
+<h3 id="innerhtml">innerHTML</h3>
+<ul>
+<li class="fragment">El <em>interior</em> (o contenido) del elemento.</li>
+<li class="fragment">Podemos escribir HTML dentro, creando al vuelo nuevos elementos del DOM.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">button</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;Aceptar&#39;</span><span class="op">;</span>
+<span class="va">p</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;Párrafo con &lt;b&gt;negrita&lt;/b&gt;&#39;</span><span class="op">;</span></code></pre></div>
+<h3 id="style">style</h3>
+<ul>
+<li class="fragment">Nos permite aplicar <strong>estilos CSS inline</strong> (tienen la máxima prioridad).</li>
+<li class="fragment">Muy útiles para ocultar/mostrar elementos.</li>
+<li class="fragment">También podemos <em>leer</em> la propiedad CSS.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> previousDisplay <span class="op">=</span> <span class="va">button</span>.<span class="va">style</span>.<span class="at">display</span><span class="op">;</span>
+<span class="va">button</span>.<span class="at">style</span><span class="op">=</span><span class="st">&quot;display:none&quot;</span><span class="op">;</span> <span class="co">// oculta cualquier elemento</span>
+<span class="va">button</span>.<span class="at">style</span><span class="op">=</span><span class="st">&quot;display:inline-block;&quot;</span> <span class="co">// muestra el botón</span></code></pre></div>
+<p><small>Nota: <code>display:none</code> es universal, pero para mostrar un elemento debéis elegir entre varios valores, los más comunes son <code>inline</code>, <code>inline-block</code> y <code>block</code>, pero hay muchos otros.</small></p>
+<h3 id="classlist">classList</h3>
+<ul>
+<li class="fragment">Nos permite acceder a las <strong>clases CSS</strong> de un elemento.</li>
+<li class="fragment">Útil para cambiar el aspecto de la UI en función de las interacciones.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">button</span>.<span class="va">classList</span>.<span class="at">add</span>(<span class="st">&#39;loading&#39;</span>)<span class="op">;</span>
+<span class="va">button</span>.<span class="va">classList</span>.<span class="at">remove</span>(<span class="st">&#39;loading&#39;</span>)<span class="op">;</span>
+<span class="va">button</span>.<span class="va">classList</span>.<span class="at">contains</span>(<span class="st">&#39;loading&#39;</span>)<span class="op">;</span> <span class="co">// query</span>
+<span class="va">button</span>.<span class="va">classList</span>.<span class="at">toggle</span>(<span class="st">&#39;loading&#39;</span>)<span class="op">;</span> <span class="co">// doesn&#39;t work on IE</span></code></pre></div>
+<p><small><a href="https://developer.mozilla.org/en/docs/Web/API/Element/classList">Snippet de código</a> online</small></p>
+</section><section id="manipular-el-dom" class="slide level2">
+<h1>Manipular el DOM</h1>
+<h3 id="insertar-elementos">Insertar elementos</h3>
+<ul>
+<li class="fragment">Podemos insertar elementos nuevos con <code>innerHTML</code>…</li>
+<li class="fragment">…pero también se pueden crear desde cero.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> button <span class="op">=</span> <span class="va">document</span>.<span class="at">createElement</span>(<span class="st">&#39;button&#39;</span>)<span class="op">;</span>
+<span class="va">button</span>.<span class="at">innerHTML</span> <span class="op">=</span> <span class="st">&#39;Start&#39;</span><span class="op">;</span>
+<span class="va">button</span>.<span class="at">setAttribute</span>(<span class="st">&#39;type&#39;</span><span class="op">,</span> <span class="st">&#39;button&#39;</span>)<span class="op">;</span>
+
+<span class="co">// &lt;button type=&quot;button&quot;&gt;Start&lt;/button&gt;</span></code></pre></div>
+<ul>
+<li class="fragment">Cuando creamos un elemento con <code>createElement</code> está <strong>huérfano</strong> y no lo veremos renderizado en la página.</li>
+<li class="fragment">Hay que añadirlo como &quot;familiar&quot; de algún otro elemento con <code>appendChild</code>, <code>insertBefore</code>, etc.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">document</span>.<span class="va">body</span>.<span class="at">appendChild</span>(button)<span class="op">;</span></code></pre></div>
+<p><small><a href="https://jsfiddle.net/mpsjmz11/1/">Snippet de código</a> online</small></p>
+<h3 id="eliminar-elementos">Eliminar elementos</h3>
+<ul>
+<li class="fragment">Podemos reemplazar un elemento por otro con <code>replaceChild</code>.</li>
+<li class="fragment">Podemos <strong>eliminar</strong> un elemento con <code>removeChild</code>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> button <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;start&#39;</span>)<span class="op">;</span>
+<span class="va">button</span>.<span class="va">parentNode</span>.<span class="at">removeChild</span>(button)<span class="op">;</span></code></pre></div>
+</section><section id="eventos" class="slide level2">
+<h1>Eventos</h1>
+<h3 id="eventos-en-el-dom">Eventos en el DOM</h3>
+<ul>
+<li class="fragment"><p>Los elementos del DOM disparan eventos a los que podemos subscribirnos (click en un botón, cambio del texto de un <code>&lt;input&gt;</code>, cuando seleccionamos una checkbox, etc.)</p></li>
+<li class="fragment"><p><code>window</code> también dispara eventos! P.ej: <code>load</code>, <code>resize</code>, etc.</p></li>
+</ul>
+<h3 id="escuchar-eventos">Escuchar eventos</h3>
+<ul>
+<li class="fragment">Hay dos maneras de escuchar eventos disparados por un elemento:
+<ul>
+<li class="fragment">Usando el método <code>Event.addEventListener</code></li>
+<li class="fragment">Usando los <em>on-event handlers</em> (p.ej <code>onclick</code>, <code>onfocus</code>, etc.)</li>
+</ul></li>
+</ul>
+<h3 id="on-event-handlers">On-event handlers</h3>
+<ul>
+<li class="fragment"><strong>Sólo hay un handler</strong> por evento!</li>
+<li class="fragment">Registramos y desregistramos el handler con una <strong>asignación</strong>.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// subscripción</span>
+<span class="va">button</span>.<span class="at">onclick</span> <span class="op">=</span> <span class="kw">function</span> (evt) <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">};</span>
+<span class="co">// cancelar la subscripción</span>
+<span class="va">button</span>.<span class="at">onclick</span> <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></code></pre></div>
+<p><small>Documentación <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/Events/Event_handlers">en la MDN</a></small></p>
+<h3 id="event-listeners">Event listeners</h3>
+<ul>
+<li class="fragment">Podemos subscribirnos <strong>múltiples veces</strong> al mismo evento.</li>
+<li class="fragment">Es la manera recomendada y más segura</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> sayHi <span class="op">=</span> <span class="kw">function</span> () <span class="op">{</span> <span class="co">/* */</span> <span class="op">};</span>
+<span class="co">// subscripción</span>
+<span class="va">button</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> sayHi)<span class="op">;</span>
+<span class="co">// cancelar la subscripción</span>
+<span class="va">button</span>.<span class="at">removeEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> sayHi)<span class="op">;</span></code></pre></div>
+<p><small>Documentación <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener">en la MDN</a></small></p>
+<h3 id="bubbling">Bubbling</h3>
+<ul>
+<li class="fragment">El <strong>bubbling</strong> es la metáfora con la que explicamos cómo se comportan los eventos del DOM.</li>
+<li class="fragment">Cuando un elemento dispara un evento, <strong>se propaga</strong> hacia arriba en el árbol del DOM.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;section&gt;</span>
+    <span class="kw">&lt;button&gt;</span>Click me<span class="kw">&lt;/button&gt;</span>
+<span class="kw">&lt;/section&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> section <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;section&#39;</span>)
+<span class="va">section</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Clicked…&#39;</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p><small><a href="https://jsfiddle.net/mcx0hkou/1/">Snippet de código</a> online</small></p>
+<h3 id="interrumpir-el-bubbling">Interrumpir el bubbling</h3>
+<ul>
+<li class="fragment">Los callbacks de los eventos pueden recibir <strong>un argumento</strong> con información sobre el evento.</li>
+<li class="fragment">El argumento es un objeto de tipo <code>Event</code> y tiene métodos para interrumpir el bubbling</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">button</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> (evt) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(evt)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>Podemos evitar el bubbling con <strong><code>Event.stopPropagation</code></strong>.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">button</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> (e) <span class="op">{</span>
+    <span class="va">e</span>.<span class="at">stopPropagation</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<h3 id="cancelar-el-evento">Cancelar el evento</h3>
+<ul>
+<li class="fragment">Esto <strong><em>no</em> es interrumpir el bubbling</strong>!</li>
+<li class="fragment">Es cancelar el evento y evitar acciones por defecto asociadas a él. Es útil para interceptar formularios, p.ej.</li>
+<li class="fragment">Usamos <strong><code>Event.preventDefault</code></strong></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;a</span><span class="ot"> href=</span><span class="st">&quot;file.zip&quot;</span><span class="ot"> download</span><span class="kw">&gt;</span>Download zip<span class="kw">&lt;/a&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> link <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;a&#39;</span>)<span class="op">;</span>
+<span class="va">link</span>.<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span> (evt) <span class="op">{</span>
+    <span class="co">// the browser won&#39;t detect the link has been clicked</span>
+    <span class="va">evt</span>.<span class="at">preventDefault</span>()<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+</section><section id="toda-la-documentación-de-esto-está-en-la-mdn" class="slide level2">
+<h1>Toda la documentación de esto está en la MDN</h1>
+<p><a href="http://developer.mozilla.org" class="uri">http://developer.mozilla.org</a></p>
+<p>Truco: añadir <code>mdn</code> a cualquier búsqueda</p>
+<figure>
+<img src="imgs/search.png" alt="Buscador" /><figcaption>Buscador</figcaption>
+</figure>
+</section></section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

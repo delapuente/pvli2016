@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section><section id="canvas" class="titleslide slide level1"><h1>Canvas</h1></section><section id="el-elemento-canvas" class="slide level2">
+<h1>El elemento <code>&lt;canvas&gt;</code></h1>
+<h3 id="canvas-1"><code>&lt;canvas&gt;</code></h3>
+<ul>
+<li class="fragment">Introducido en HTML5</li>
+<li class="fragment">Nos permite pintar gráficos 2D o 3D usando JavaScript</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;canvas</span><span class="ot"> width=</span><span class="st">&quot;320&quot;</span><span class="ot"> height=</span><span class="st">&quot;200&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></code></pre></div>
+<h3 id="escalado">Escalado</h3>
+<ul>
+<li class="fragment">Las dimensiones del canvas no tienen por qué corresponderse con las dimensiones en pantalla.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">canvas <span class="kw">{</span>
+    <span class="kw">width:</span> <span class="dt">640px</span><span class="kw">;</span>
+    <span class="kw">height:</span> <span class="dt">480px</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<p><small>Podemos usar esto a nuestro favor y jugar con los escalados, o adaptar nuestro juego a distintos tamaños de pantalla. Ejemplo: <a href="https://belenalbeza.com/retro-crisp-pixel-art-in-html-5-games/">Retro, crisp pixel art in HTML5 games</a></small></p>
+<h3 id="contextos">Contextos</h3>
+<ul>
+<li class="fragment">Para hacer cualquier operación de pintado, necesitamos el <strong>contexto</strong> de un <code>&lt;canvas&gt;</code>.</li>
+<li class="fragment">Lo obtenemos con <code>getContext</code>, al que debemos indicar si lo queremos 2D o 3D.</li>
+</ul>
+<pre><code>var c = document.querySelector(&#39;canvas&#39;).getContext(&#39;2d&#39;);</code></pre>
+</section><section id="canvas-api" class="slide level2">
+<h1>Canvas API</h1>
+<ul>
+<li class="fragment">Es la API de dibujo 2D en canvas</li>
+<li class="fragment">Permite pintar imágenes, manipular píxeles, dibujar primitivas, curvas, etc.</li>
+<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">Documentación en la MDN</a></li>
+<li class="fragment"><a href="http://joshondesign.com/p/books/canvasdeepdive/toc.html">Canvas Deep Dive</a> (libro online conciso, pero bastante completo)</li>
+</ul>
+<h3 id="ejemplo">Ejemplo</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> ctx <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;canvas&#39;</span>).<span class="at">getContext</span>(<span class="st">&#39;2d&#39;</span>)<span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></code></pre></div>
+<figure>
+<img src="imgs/canvas_ex01.png" alt="Screenshot" /><figcaption>Screenshot</figcaption>
+</figure>
+<p><small><a href="https://jsfiddle.net/nea366Lm/">Snippet de código</a> online.</small></p>
+<h3 id="colores-bordes-etc.">Colores, bordes, etc.</h3>
+<ul>
+<li class="fragment">Es similar a cómo funciona un programa de dibujo</li>
+<li class="fragment">En el <strong>contexto</strong> indicamos los estilos que queremos que las &quot;herramientas&quot; (operaciones) usen.</li>
+<li class="fragment">¡Ojo que hay que &quot;deshacer&quot;!</li>
+</ul>
+<h3 id="ejemplo-1">Ejemplo</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">// red rectangles</span>
+<span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&#39;#FF004D&#39;</span><span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">10</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">190</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span>
+<span class="co">// blue rect with white border</span>
+<span class="va">ctx</span>.<span class="at">fillStyle</span> <span class="op">=</span> <span class="st">&#39;rgba(41, 173, 255, 0.8)&#39;</span><span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">fillRect</span>(<span class="dv">50</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">strokeStyle</span> <span class="op">=</span> <span class="st">&#39;#fff&#39;</span><span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">lineWidth</span> <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>
+<span class="va">ctx</span>.<span class="at">strokeRect</span>(<span class="dv">50</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">100</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">;</span></code></pre></div>
+<figure>
+<img src="imgs/canvas_ex02.png" alt="Screenshot" /><figcaption>Screenshot</figcaption>
+</figure>
+<p><small><a href="https://jsfiddle.net/x8knv6w3/2/">Snippet de código</a> online.</small></p>
+<h3 id="imágenes">Imágenes</h3>
+<ul>
+<li class="fragment">Las imágenes deben estar <strong>ya cargadas</strong> (p.ej, con <code>&lt;img&gt;</code>) para poder pintarlas</li>
+<li class="fragment">Podemos obtener <em>sources</em> de imágenes de otros medios: la webcam del usuario, un <code>&lt;video&gt;</code>, otro <code>&lt;canvas&gt;</code>, etc.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">&quot;kitten.png&quot;</span><span class="ot"> alt=</span><span class="st">&quot;A cute kitten&quot;</span><span class="ot"> id=</span><span class="st">&quot;kitten&quot;</span><span class="kw">&gt;</span>
+<span class="kw">&lt;canvas</span><span class="ot"> width=</span><span class="st">&quot;300&quot;</span><span class="ot"> height=</span><span class="st">&quot;300&quot;</span><span class="kw">&gt;&lt;/canvas&gt;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> img <span class="op">=</span> <span class="va">document</span>.<span class="at">getElementById</span>(<span class="st">&#39;kitten&#39;</span>)<span class="op">;</span>
+<span class="kw">var</span> ctx <span class="op">=</span> <span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;canvas&#39;</span>)
+    .<span class="at">getContext</span>(<span class="st">&#39;2d&#39;</span>)<span class="op">;</span>
+
+<span class="va">ctx</span>.<span class="at">drawImage</span>(img<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></code></pre></div>
+<figure>
+<img src="imgs/canvas_ex03.png" alt="Screenshot" /><figcaption>Screenshot</figcaption>
+</figure>
+<p><small><a href="https://jsfiddle.net/j4hbb46h/1/">Snippet de código</a> online</small></p>
+<h3 id="cargar-imágenes-al-vuelo">Cargar imágenes al vuelo</h3>
+<p>Podemos cargar imágenes al vuelo <strong>desde JavaScript</strong>.</p>
+<ol type="1">
+<li class="fragment">Usamos el constructor <strong><code>Image</code></strong></li>
+<li class="fragment">Nos subscribimos al evento de <strong><code>load</code></strong> (para pintar la imagen cuando se haya producido)</li>
+<li class="fragment">Establecemos el atributo <strong><code>src</code></strong> de la imagen para iniciar la carga.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> img <span class="op">=</span> <span class="kw">new</span> <span class="at">Image</span>()<span class="op">;</span>
+<span class="va">img</span>.<span class="at">addEventListener</span>(<span class="st">&#39;load&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="va">ctx</span>.<span class="at">drawImage</span>(img<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">img</span>.<span class="at">src</span> <span class="op">=</span> <span class="st">&#39;https://placekitten.com/g/300/300&#39;</span><span class="op">;</span></code></pre></div>
+<p><small><a href="https://jsfiddle.net/Lm56dcb6/">Snippet de código</a> online</small></p>
+<h3 id="sobre-la-carga-de-imágenes">Sobre la carga de imágenes</h3>
+<ul>
+<li class="fragment">Las <code>&lt;img&gt;</code> con el estilo <code>display:none</code> se siguen cargando igualmente.</li>
+<li class="fragment"><code>window.onload</code> se dispara cuando las imágenes creadas con <code>&lt;img&gt;</code> se han cargado.</li>
+<li class="fragment">Para precargar varias imágenes, se suelen utilizar <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promesas</a>, o bien un contador para detectar cuándo se han cargado todas.</li>
+</ul>
+<h3 id="qué-más-se-puede-hacer-con-la-api">Qué más se puede hacer con la API</h3>
+<ul>
+<li class="fragment">Dibujar curvas y paths complejos</li>
+<li class="fragment">Pintar gradientes</li>
+<li class="fragment">Clipping</li>
+<li class="fragment">Transformaciones</li>
+<li class="fragment">Manipultar píxeles</li>
+<li class="fragment">Etc.</li>
+</ul>
+</section><section id="webgl" class="slide level2">
+<h1>WebGL</h1>
+<ul>
+<li class="fragment">Implementación en JavaScript de OpenGL ES 2.0</li>
+<li class="fragment">Es una API estándar de gráficos 3D</li>
+<li class="fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API">Documentación MDN</a></li>
+<li class="fragment">Para pedir un contexto 3D a <code>&lt;canvas&gt;</code> debemos especificar <strong><code>webgl</code></strong><sup>1</sup> en <code>getContext</code></li>
+</ul>
+<p><small>1. O <code>experimental-webgl</code> en algunos navegadores.</small></p>
+<h3 id="gráficos-2d-en-webgl">¿Gráficos 2D en WebGL?</h3>
+<ul>
+<li class="fragment">Podemos dibujar gráficos 2D usando una API 3D como WebGL.</li>
+<li class="fragment">El &quot;truco&quot; es utilizar una proyección ortográfica, que no deforme los objetos con perspectiva.</li>
+</ul>
+<h3 id="recursos">Recursos</h3>
+<ul>
+<li class="fragment"><em>Introduction to WebGL</em> <a href="https://dev.opera.com/articles/introduction-to-webgl-part-1/">parte 1</a> y <a href="https://dev.opera.com/articles/introduction-to-webgl-part-2-porting-3d/">parte 2</a></li>
+<li class="fragment"><a href="http://webglfundamentals.org/">WebGL fundamentals</a>: tutoriales paso a paso</li>
+</ul>
+</section><section id="librerías" class="slide level2">
+<h1>Librerías</h1>
+<h3 id="d-pixi.js">2D: Pixi.js</h3>
+<ul>
+<li class="fragment"><a href="http://www.pixijs.com/">www.pixijs.com</a></li>
+<li class="fragment">Renderiza gráficos 2D</li>
+<li class="fragment">Funciona por defecto con WebGL, pero tiene fallback a Canvas 2D.</li>
+<li class="fragment">Phaser utiliza Pixi para renderizar gráficos</li>
+</ul>
+<h3 id="d-three.js">3D: THREE.js</h3>
+<ul>
+<li class="fragment"><a href="https://threejs.org/">THREE.js</a></li>
+<li class="fragment">Es la librería de referencia para trabajar con WebGL</li>
+<li class="fragment">Hay infinidad de tutoriales, libros, etc.</li>
+</ul>
+</section><section id="animaciones" class="slide level2">
+<h1>Animaciones</h1>
+<h3 id="cómo-animar-gráficos">¿Cómo animar gráficos?</h3>
+<ul>
+<li class="fragment">Necesitamos renderizar 60 veces por segundo (idealmente)</li>
+<li class="fragment"><strong><code>setTimeout</code></strong> y <code>setInterval</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/setTimeout#Reasons_for_delays_longer_than_specified"><em>no</em> nos sirven</a></li>
+<li class="fragment"><strong><code>requestAnimationFrame</code></strong> FTW</li>
+</ul>
+<h3 id="requestanimationframe"><code>requestAnimationFrame</code></h3>
+<ul>
+<li class="fragment">Proporcionamos un <strong>callback</strong> con nuestras operaciones de dibujo.</li>
+<li class="fragment">Se llama automáticamente la siguiente vez que el navegador <strong><em>pueda</em> pintar</strong> en pantalla.</li>
+<li class="fragment">Si llamamos a <code>requstAnimationFrame</code> cada vez que acabamos de pintar, establecemos un <strong>bucle</strong></li>
+</ul>
+<h3 id="ejemplo-2">Ejemplo</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">render</span>() <span class="op">{</span>
+    <span class="va">ctx</span>.<span class="at">clearRect</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">,</span> <span class="va">canvas</span>.<span class="at">height</span>)<span class="op">;</span>
+    <span class="va">ctx</span>.<span class="at">fillRect</span>(x<span class="op">,</span> <span class="dv">25</span><span class="op">,</span> <span class="dv">50</span><span class="op">,</span> <span class="dv">50</span>)<span class="op">;</span>
+  x <span class="op">=</span> (x <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">;</span>
+
+  <span class="at">requestAnimationFrame</span>(render)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">requestAnimationFrame</span>(render)<span class="op">;</span></code></pre></div>
+<ul>
+<li class="fragment"><a href="https://jsfiddle.net/oxx3h8dp/2/">Snippet de código</a> con <code>requestAnimationFrame</code></li>
+<li class="fragment"><a href="https://jsfiddle.net/m92kpe4n/2/">Snippet de código</a> con <code>setInterval</code></li>
+</ul>
+<h3 id="tiempo-delta">Tiempo delta</h3>
+<ul>
+<li class="fragment"><code>requestAnimationFrame</code> pasa un <strong>timestamp</strong> como parámetro al callback</li>
+<li class="fragment">El timestamp es el tiempo en <strong>milisegundos</strong> desde que se llamó por primera vez</li>
+<li class="fragment">El timestamp se obtiene con <code>Performance.now()</code> (más eficiente y preciso que construir un <code>Date</code>)</li>
+<li class="fragment">Con este timestamp podemos calcular el tiempo que ha pasado entre este frame y el anterior (<strong>delta time</strong>)</li>
+</ul>
+<h3 id="ejemplo-3">Ejemplo</h3>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">const</span> SPEED <span class="op">=</span> <span class="dv">60</span><span class="op">;</span> <span class="co">// pixels per second</span>
+<span class="kw">var</span> oldTimestamp <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">render</span>(timestamp) <span class="op">{</span>
+  <span class="kw">var</span> delta <span class="op">=</span> (timestamp <span class="op">-</span> oldTimestamp) / <span class="fl">1000.0</span><span class="op">;</span>
+  oldTimestamp <span class="op">=</span> timestamp<span class="op">;</span>
+
+  <span class="co">// ...</span>
+  x <span class="op">=</span> (x <span class="op">+</span> SPEED <span class="op">*</span> delta) <span class="op">%</span> <span class="va">canvas</span>.<span class="at">width</span><span class="op">;</span>
+  <span class="at">requestAnimationFrame</span>(render)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p><small><a href="https://jsfiddle.net/0e11fv91/2/">Snippet de código</a> online</small></p>
+<h3 id="consideraciones-con-el-tiempo-delta">Consideraciones con el tiempo delta</h3>
+<ul>
+<li class="fragment"><em>Siempre</em> tenéis que poner una <strong>cota superior</strong> al valor del tiempo delta (p.ej 250ms) para evitar glitches en la lógica del juego.</li>
+<li class="fragment">A veces es recomendable saltarse el <em>update</em> de nuestro juego un frame (p.ej <a href="https://github.com/photonstorm/phaser/blob/master/src/core/Game.js#L784">como hace Phaser</a>)</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

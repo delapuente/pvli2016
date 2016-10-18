@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="ejercicios-de-laboratorio" class="slide level1">
+<h1>Ejercicios de laboratorio</h1>
+<p>Probad estos ejemplos y tratad de responder a las preguntas. Si os atascáis con lo que hace una función, buscad en Internet la función acompañado de &quot;mdn&quot;.</p>
+<p><strong>1. Valores booleanos en JavaScript.</strong></p>
+<p>En JavaScript cualquier valor puede considerarse verdadero o falso según el contexto. Por ejemplo, el <code>0</code> es considerado <code>false</code> y cualquier número distinto de <code>0</code> es <code>true</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> v <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> <span class="co">// después de esta prueba, cambia el valor de v por otro número.</span>
+<span class="op">!!</span>v<span class="op">;</span> <span class="co">// la doble negación al comienzo lo convierte en booleano.</span></code></pre></div>
+<p>Descubre qué valores son ciertos y cuales falsos para todos los tipos: números, cadenas, objetos, funciones y undefined.</p>
+<p><strong>2. Expresiones booleanas en JavaScript.</strong></p>
+<p>En JavaScript, las expresiones booleanas son <em>vagas</em>, esto significa que en cuanto sabemos lo que va a valer la expresión, dejamos de evaluar. Por ejemplo, ¿qué crees que le pasará a la siguiente expressión?</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> hero <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Link&#39;</span><span class="op">,</span> <span class="dt">weapon</span><span class="op">:</span> <span class="kw">null</span> <span class="op">};</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hero weapon power is:&#39;</span><span class="op">,</span> <span class="va">hero</span>.<span class="va">weapon</span>.<span class="at">power</span>)<span class="op">;</span></code></pre></div>
+<p>Pero, ¿y ahora?</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> hero <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Link&#39;</span><span class="op">,</span> <span class="dt">weapon</span><span class="op">:</span> <span class="kw">null</span> <span class="op">};</span>
+<span class="cf">if</span> (<span class="va">hero</span>.<span class="at">weapon</span> <span class="op">&amp;&amp;</span> <span class="va">hero</span>.<span class="va">weapon</span>.<span class="at">power</span>) <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Hero weapon power is:&#39;</span><span class="op">,</span> <span class="va">hero</span>.<span class="va">weapon</span>.<span class="at">power</span>)<span class="op">;</span>
+<span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;The hero has no weapon.&#39;</span>)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>En caso de expresiones <code>&amp;&amp;</code> (<em>and</em> o <em>y</em>), la evaluación termina tan pronto como encontramos un término falso.</p>
+<p>En caso de expresiones <code>||</code> (<em>or</em> u <em>o</em>), la evaluación termina tan pronto como encontramos un término verdadero.</p>
+<p><strong>3. El resultado de las expresiones booleanas.</strong></p>
+<p>Contra el sentido común, el resultado de una expresión booleana no es un booleano sino el último término evaluado. Recuerda que la evaluación es <em>vaga</em> y dejamos de evaluar tan pronto como podemos determinar el resultado de la expresión. Con esto en cuenta, trata de predecir el resultado de las siguientes expresiones:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> v<span class="op">;</span>
+<span class="kw">function</span> <span class="at">noop</span>() <span class="op">{</span> <span class="cf">return</span><span class="op">;</span> <span class="op">};</span>
+
+<span class="dv">1</span> <span class="op">&amp;&amp;</span> <span class="kw">true</span> <span class="op">&amp;&amp;</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Link&#39;</span> <span class="op">};</span>
+[] <span class="op">&amp;&amp;</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> <span class="st">&quot;Spam!&quot;</span><span class="op">;</span>
+<span class="kw">null</span> <span class="op">||</span> v <span class="op">||</span> noop <span class="op">||</span> <span class="kw">true</span><span class="op">;</span>
+<span class="kw">null</span> <span class="op">||</span> v <span class="op">||</span> <span class="kw">void</span> <span class="st">&quot;Eggs!&quot;</span> <span class="op">||</span> <span class="dv">0</span><span class="op">;</span></code></pre></div>
+<p><strong>4. Parámetros por defecto.</strong></p>
+<p>Puedes ver una aplicación real de lo anterior en esta función para rellenar números. En JavaScript no hay parámetros por defecto, pero los parámetros omitidos tienen el valor especial <code>undefined</code> que es falso.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">pad</span>(target<span class="op">,</span> targetLength<span class="op">,</span> fill) <span class="op">{</span>
+  <span class="kw">var</span> result <span class="op">=</span> <span class="va">target</span>.<span class="at">toString</span>()<span class="op">;</span>
+  <span class="kw">var</span> targetLength <span class="op">=</span> targetLength <span class="op">||</span> <span class="va">result</span>.<span class="at">length</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="kw">var</span> fill <span class="op">=</span> fill <span class="op">||</span> <span class="st">&#39;0&#39;</span><span class="op">;</span>
+  <span class="cf">while</span> (<span class="va">result</span>.<span class="at">length</span> <span class="op">&lt;</span> targetLength) <span class="op">{</span>
+    result <span class="op">=</span> fill <span class="op">+</span> result<span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> result<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// intenta predecir el resultado de las siguientes llamadas</span>
+<span class="at">pad</span>(<span class="dv">3</span>)<span class="op">;</span>
+<span class="at">pad</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">5</span>)<span class="op">;</span>
+<span class="at">pad</span>(<span class="dv">2</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="st">&#39;*&#39;</span>)<span class="op">;</span></code></pre></div>
+<p><strong>5. Buenas prácticas en el diseño de APIs.</strong></p>
+<p>Hemos dicho muchas veces que el estado no se debería exponer pero siempre acabamos enseñando este tipo de modelado para los puntos:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">5</span> <span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">scale</span>(point<span class="op">,</span> factor) <span class="op">{</span>
+  <span class="va">point</span>.<span class="at">x</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">x</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="va">point</span>.<span class="at">y</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">y</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="cf">return</span> p<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">scale</span>(p<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></code></pre></div>
+<p>La implementación correcta sería:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">_x</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  <span class="dt">_y</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  <span class="dt">getX</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_x</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">getY</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_y</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">setX</span><span class="op">:</span> <span class="kw">function</span> (v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_x</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">setY</span><span class="op">:</span> <span class="kw">function</span> (v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_y</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">scale</span>(point<span class="op">,</span> factor) <span class="op">{</span>
+  <span class="va">point</span>.<span class="at">setX</span>(<span class="va">point</span>.<span class="at">getX</span>() <span class="op">*</span> factor)<span class="op">;</span>
+  <span class="va">point</span>.<span class="at">setY</span>(<span class="va">point</span>.<span class="at">getY</span>() <span class="op">*</span> factor)<span class="op">;</span>
+  <span class="cf">return</span> p<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">scale</span>(p<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></code></pre></div>
+<p>Pero reconozcámoslo, escribir esto es un rollo soberano.</p>
+<p><strong>6. Propiedades computadas al rescate.</strong></p>
+<p>JavaScript permite definir un tipo especial de propiedades llamadas normalmente <em>propiedades computadas</em> de esta guisa:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">_x</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  <span class="dt">_y</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  get <span class="at">x</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_x</span><span class="op">;</span>
+  <span class="op">},</span>
+  get <span class="at">y</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_y</span><span class="op">;</span>
+  <span class="op">},</span>
+  set <span class="at">x</span>(v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_x</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">},</span>
+  set <span class="at">y</span>(v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_y</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">scale</span>(point<span class="op">,</span> factor) <span class="op">{</span>
+  <span class="va">point</span>.<span class="at">x</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">x</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="va">point</span>.<span class="at">y</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">y</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="cf">return</span> p<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">scale</span>(p<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></code></pre></div>
+<p>Escribirlo sigue siendo un muermo (menos mal que estudiaremos como hacer factorías de objetos) pero utilizarlo es mucho más claro. Así, si ahora decides que sería mejor exponer el nombre de los ejes en mayúscula, puedes hacer:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">_x</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  <span class="dt">_y</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  get <span class="at">X</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_x</span><span class="op">;</span>
+  <span class="op">},</span>
+  get <span class="at">Y</span>() <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_y</span><span class="op">;</span>
+  <span class="op">},</span>
+  set <span class="at">X</span>(v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_x</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">},</span>
+  set <span class="at">Y</span>(v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_y</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">scale</span>(point<span class="op">,</span> factor) <span class="op">{</span>
+  <span class="va">point</span>.<span class="at">X</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">X</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="va">point</span>.<span class="at">Y</span> <span class="op">=</span> <span class="va">point</span>.<span class="at">Y</span> <span class="op">*</span> factor<span class="op">;</span>
+  <span class="cf">return</span> p<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">scale</span>(p<span class="op">,</span> <span class="dv">10</span>)<span class="op">;</span></code></pre></div>
+<p>¿Se te ocurre la manera de hacer que una propiedad pueda ser de sólo lectura? Es decir, que su valor no pueda cambiarse (asumiendo que el usuario no accederá a las propiedades que comiencen por '_').</p>
+<p>Si quisieras añadir una propiedad a un objeto ya existente tendrías que utilizar <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">Object.defineProperty()</a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> point <span class="op">=</span> <span class="op">{};</span>
+<span class="va">Object</span>.<span class="at">defineProperty</span>(point<span class="op">,</span> <span class="st">&#39;_x&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">5</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">defineProperty</span>(point<span class="op">,</span> <span class="st">&#39;_y&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">5</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">defineProperty</span>(point<span class="op">,</span> <span class="st">&#39;x&#39;</span><span class="op">,</span> <span class="op">{</span>
+  <span class="dt">get</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_x</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">set</span><span class="op">:</span> <span class="kw">function</span> (v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_x</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">Object</span>.<span class="at">defineProperty</span>(point<span class="op">,</span> <span class="st">&#39;y&#39;</span><span class="op">,</span> <span class="op">{</span>
+  <span class="dt">get</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="at">_y</span><span class="op">;</span>
+  <span class="op">},</span>
+  <span class="dt">set</span><span class="op">:</span> <span class="kw">function</span> (v) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">_y</span> <span class="op">=</span> v<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span>
+point<span class="op">;</span> <span class="co">// no se observan propiedades...</span>
+<span class="va">point</span>.<span class="at">x</span><span class="op">;</span> <span class="co">// ...pero aquí están.</span>
+<span class="va">point</span>.<span class="at">y</span><span class="op">;</span></code></pre></div>
+<p>¿Te atreves a decir por qué cuando inspeccionamos el objeto no aparecen sus propiedades? ¿Cómo podrías arreglarlo? ¿Cómo harías para que sólo se vieran las propiedades que son parte de la API?</p>
+<p>No te lances a usar <code>Object.defineProperty()</code> si no tienes <strong>muy claro</strong> qué significan los términos <strong>configurable</strong>, <strong>enumerable</strong> y <strong>writable</strong>.</p>
+<p><strong>7. Usando funciones como si fueran métodos.</strong></p>
+<p>Hemos visto que cualquier función puede usarse como un método si se referencia como una propiedad de un objeto y entonces se llama. Pero lo cierto es que también podemos hacer que una función cualquiera, sin estar referenciada desde una propiedad, pueda ser usada como el método de un objeto si indicamos explícitamente cual es el objeto destinatario. Esto puede hacerse con <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply"><code>.apply()</code></a> y con <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"><code>.call()</code></a>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> ship <span class="op">=</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Death Star&#39;</span> <span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">fire</span>(shot) <span class="op">{</span>
+  <span class="va">console</span>.<span class="at">log</span>(<span class="kw">this</span>.<span class="at">name</span> <span class="op">+</span> <span class="st">&#39; is firing: &#39;</span> <span class="op">+</span> <span class="va">shot</span>.<span class="at">toUpperCase</span>() <span class="op">+</span> <span class="st">&#39;!!!&#39;</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="va">ship</span>.<span class="at">fire</span><span class="op">;</span> <span class="co">// ¿qué crees que será esto?</span>
+<span class="va">fire</span>.<span class="at">apply</span>(ship<span class="op">,</span> [<span class="st">&#39;pichium&#39;</span>])<span class="op">;</span>
+<span class="va">fire</span>.<span class="at">call</span>(ship<span class="op">,</span> <span class="st">&#39;pañum&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>¿Cuál es la diferencia entre <code>.apply()</code> y <code>.call()</code>?</p>
+<p><strong>8. Propiedades dinámicas.</strong></p>
+<p>La notación corchete para acceder a las propiedades de un objeto es especialmente útil para acceder a propiedades de manera genérica. Por ejemplo, imagina el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> hero <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Link&#39;</span><span class="op">,</span>
+  <span class="dt">hp</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span>
+  <span class="dt">stamina</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span>
+  <span class="dt">weapon</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;sword&#39;</span><span class="op">,</span> <span class="dt">effect</span><span class="op">:</span> <span class="op">{</span> <span class="dt">hp</span><span class="op">:</span> <span class="op">-</span><span class="dv">2</span> <span class="op">}</span> <span class="op">}</span>
+<span class="op">};</span>
+<span class="kw">var</span> enemy <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;Ganondorf&#39;</span><span class="op">,</span>
+  <span class="dt">hp</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span>
+  <span class="dt">stamina</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span>
+  <span class="dt">weapon</span><span class="op">:</span> <span class="op">{</span> <span class="dt">name</span><span class="op">:</span> <span class="st">&#39;wand&#39;</span><span class="op">,</span> <span class="dt">effect</span><span class="op">:</span> <span class="op">{</span> <span class="dt">hp</span><span class="op">:</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span> <span class="dt">stamina</span><span class="op">:</span> <span class="op">-</span><span class="dv">5</span> <span class="op">}</span> <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">attack</span>(character<span class="op">,</span> target) <span class="op">{</span>
+  <span class="cf">if</span> (<span class="va">character</span>.<span class="at">stamina</span> <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="va">character</span>.<span class="at">name</span> <span class="op">+</span> <span class="st">&#39; uses &#39;</span> <span class="op">+</span> <span class="va">character</span>.<span class="va">weapon</span>.<span class="at">name</span> <span class="op">+</span> <span class="st">&#39;!&#39;</span>)<span class="op">;</span>
+    <span class="at">applyEffect</span>(<span class="va">character</span>.<span class="va">weapon</span>.<span class="at">effect</span><span class="op">,</span> target)<span class="op">;</span>
+    <span class="va">character</span>.<span class="at">stamina</span><span class="op">--;</span>
+  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="va">character</span>.<span class="at">name</span> <span class="op">+</span> <span class="st">&#39; is too tired to attack!&#39;</span>)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">applyEffect</span>(effect<span class="op">,</span> target) <span class="op">{</span>
+  <span class="co">// Obtiene los nombres de las propiedades del objeto. Búscalo en la MDN.</span>
+  <span class="kw">var</span> propertyNames <span class="op">=</span> <span class="va">Object</span>.<span class="at">keys</span>(effect)<span class="op">;</span>
+  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">propertyNames</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    <span class="kw">var</span> name <span class="op">=</span> propertyNames[i]<span class="op">;</span>
+    target[name] <span class="op">+=</span> effect[name]<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="at">attack</span>(hero<span class="op">,</span> enemy)<span class="op">;</span>
+<span class="at">attack</span>(enemy<span class="op">,</span> hero)<span class="op">;</span>
+<span class="at">attack</span>(hero<span class="op">,</span> enemy)<span class="op">;</span>
+<span class="at">attack</span>(enemy<span class="op">,</span> hero)<span class="op">;</span>
+<span class="at">attack</span>(hero<span class="op">,</span> enemy)<span class="op">;</span></code></pre></div>
+<p>¿Podrías modificar el efecto del arma del héroe para incapacitar al enemigo pero no matarlo ni dañarlo? Intenta hacerlo sin reescribir el ejemplo entero.</p>
+<p><strong>9. Objetos como algo más que objetos.</strong></p>
+<p>Los objetos de JavaScript no solo sirven para modelar los objetos de la programación orientada a objetos sino que permiten realizar clasificaciones por nombre. Un histograma, es decir un conteo de un conjunto con repeticiones, es un ejemplo clásico de la utilidad de un objeto JavaScript:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> wordList <span class="op">=</span> <span class="va">text</span>.<span class="at">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">;</span>
+  <span class="kw">var</span> histogram <span class="op">=</span> <span class="op">{};</span>
+  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="va">wordList</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    <span class="kw">var</span> word <span class="op">=</span> wordList[i]<span class="op">;</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">histogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+      histogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>
+    histogram[word]<span class="op">++;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> histogram<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<p>Prueba a usar la función por ti mismo.</p>
+<p>Lo que JavaScript llama objetos se conoce en otros lenguajes de programación como mapas o diccionarios y a los nombres de las propiedades se los llama <em>claves</em>.</p>
+<p>¿Puedes pensar en al menos una aplicacion más?</p>
+<p><strong>10. Funciones como parámetros.</strong></p>
+<p>Las listas de JavaScript tiene algunos métodos que aceptan funciones como parámetros, por ejemplo <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/forEach"><code>.forEach()</code></a>. De hecho es común encontrar <code>.forEach()</code> cuando se tiene la certeza de que se van a recorrer <strong>todos</strong> los elementos de una lista.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> wordList <span class="op">=</span> <span class="va">text</span>.<span class="at">split</span>(<span class="st">&#39; &#39;</span>)<span class="op">;</span>
+  <span class="kw">var</span> histogram <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">wordList</span>.<span class="at">forEach</span>(<span class="kw">function</span> (word) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">histogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+      histogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>
+    histogram[word]<span class="op">++;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+  <span class="cf">return</span> histogram<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> poem <span class="op">=</span> <span class="st">&#39;Todo pasa y todo queda, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pero lo nuestro es pasar, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pasar haciendo caminos, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;caminos sobre la mar&#39;</span><span class="op">;</span>
+
+<span class="at">wordHistogram</span>(poem)<span class="op">;</span></code></pre></div>
+<p>El resultado no es correcto porque al separar las palabras por los espacios estamos dejando caracteres que no son palabras como parte de ellas. Podemos arreglarlo si en vez de partir el texto por los espacios usamos una <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">expresión regular</a> para partir el texto por los límites de las palabras:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> wordList <span class="op">=</span> <span class="va">text</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\b</span><span class="ss">/</span>)<span class="op">;</span> <span class="co">// Eso entre / / es una expresión regular.</span>
+  <span class="kw">var</span> histogram <span class="op">=</span> <span class="op">{};</span>
+  <span class="va">wordList</span>.<span class="at">forEach</span>(<span class="kw">function</span> (word) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">histogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+      histogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>
+    histogram[word]<span class="op">++;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+  <span class="cf">return</span> histogram<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> poem <span class="op">=</span> <span class="st">&#39;Todo pasa y todo queda, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pero lo nuestro es pasar, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pasar haciendo caminos, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;caminos sobre la mar&#39;</span><span class="op">;</span>
+
+<span class="at">wordHistogram</span>(poem)<span class="op">;</span></code></pre></div>
+<p>Pero ahora tenemos cosas que no son palabras (como espacios y comas). Podemos filtrar una lista con <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/filter"><code>.filter()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">isEven</span>(n) <span class="op">{</span> <span class="cf">return</span> n <span class="op">%</span> <span class="dv">2</span> <span class="op">===</span> <span class="dv">0</span><span class="op">;</span> <span class="op">}</span>
+[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span>].<span class="at">filter</span>(isEven)<span class="op">;</span></code></pre></div>
+<p>Y así quitar lo que no sean palabras:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">isWord</span>(candidate) <span class="op">{</span>
+  <span class="cf">return</span> <span class="ss">/</span><span class="sc">\w+</span><span class="ss">/</span>.<span class="at">test</span>(candidate)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> wordList <span class="op">=</span> <span class="va">text</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\b</span><span class="ss">/</span>)<span class="op">;</span>
+  wordList <span class="op">=</span> <span class="va">wordList</span>.<span class="at">filter</span>(isWord)<span class="op">;</span>
+  <span class="kw">var</span> histogram <span class="op">=</span> <span class="op">{};</span>
+
+  <span class="va">wordList</span>.<span class="at">forEach</span>(<span class="kw">function</span> (word) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">histogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+      histogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>
+    histogram[word]<span class="op">++;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+  <span class="cf">return</span> histogram<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> poem <span class="op">=</span> <span class="st">&#39;Todo pasa y todo queda, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pero lo nuestro es pasar, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pasar haciendo caminos, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;caminos sobre la mar&#39;</span><span class="op">;</span>
+
+<span class="at">wordHistogram</span>(poem)<span class="op">;</span></code></pre></div>
+<p>También deberíamos normalizar las palabras (pasarlas a minúsculas por ejemplo) para no encontrarnos con entradas distintas en el histograma para la misma palabra. Para transformar una lista en otra lista de los mismos elementos, usamos <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/map"><code>.map()</code></a>.</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">isWord</span>(candidate) <span class="op">{</span>
+  <span class="cf">return</span> <span class="ss">/</span><span class="sc">\w+</span><span class="ss">/</span>.<span class="at">test</span>(candidate)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">toLowerCase</span>(word) <span class="op">{</span>
+  <span class="cf">return</span> <span class="va">word</span>.<span class="at">toLowerCase</span>()<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> wordList <span class="op">=</span> <span class="va">text</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\b</span><span class="ss">/</span>)<span class="op">;</span>
+  wordList <span class="op">=</span> <span class="va">wordList</span>.<span class="at">filter</span>(isWord)<span class="op">;</span>
+  wordList <span class="op">=</span> <span class="va">wordList</span>.<span class="at">map</span>(toLowerCase)<span class="op">;</span>
+  <span class="kw">var</span> histogram <span class="op">=</span> <span class="op">{};</span>
+
+  <span class="va">wordList</span>.<span class="at">forEach</span>(<span class="kw">function</span> (word) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">histogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+      histogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+    <span class="op">}</span>
+    histogram[word]<span class="op">++;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+  <span class="cf">return</span> histogram<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> poem <span class="op">=</span> <span class="st">&#39;Todo pasa y todo queda, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pero lo nuestro es pasar, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pasar haciendo caminos, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;caminos sobre la mar&#39;</span><span class="op">;</span>
+
+<span class="at">wordHistogram</span>(poem)<span class="op">;</span></code></pre></div>
+<p>Una última función nos permite transformar una lista en un sólo valor. Esto es precisamente el histograma, una clasificación de todos los valores de la lista. Esta transformación se consigue mediante <a href="https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Objetos_globales/Array/reduce"><code>.reduce()</code></a>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">isWord</span>(candidate) <span class="op">{</span>
+  <span class="cf">return</span> <span class="ss">/</span><span class="sc">\w+</span><span class="ss">/</span>.<span class="at">test</span>(candidate)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">toLowerCase</span>(word) <span class="op">{</span>
+  <span class="cf">return</span> <span class="va">word</span>.<span class="at">toLowerCase</span>()<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">buildHistogram</span>(inProgressHistogram<span class="op">,</span> word) <span class="op">{</span>
+  <span class="cf">if</span> (<span class="op">!</span><span class="va">inProgressHistogram</span>.<span class="at">hasOwnProperty</span>(word)) <span class="op">{</span>
+    inProgressHistogram[word] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+  <span class="op">}</span>
+  inProgressHistogram[word]<span class="op">++;</span>
+  <span class="cf">return</span> inProgressHistogram<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">wordHistogram</span>(text) <span class="op">{</span>
+  <span class="kw">var</span> emptyHistogram <span class="op">=</span> <span class="op">{};</span>
+  <span class="cf">return</span> <span class="va">text</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">\b</span><span class="ss">/</span>)
+             .<span class="at">filter</span>(isWord)
+             .<span class="at">map</span>(toLowerCase)
+             .<span class="at">reduce</span>(buildHistogram<span class="op">,</span> emptyHistogram)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> poem <span class="op">=</span> <span class="st">&#39;Todo pasa y todo queda, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pero lo nuestro es pasar, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;pasar haciendo caminos, &#39;</span> <span class="op">+</span>
+           <span class="st">&#39;caminos sobre la mar&#39;</span><span class="op">;</span>
+
+<span class="at">wordHistogram</span>(poem)<span class="op">;</span></code></pre></div>
+<p><strong>11. Número variables de parámetros</strong></p>
+<p>Fíjate en esto:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I</span><span class="sc">\&#39;</span><span class="st">m&#39;</span><span class="op">,</span> <span class="st">&#39;Ziltoid&#39;</span>)<span class="op">;</span>
+<span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;I</span><span class="sc">\&#39;</span><span class="st">m&#39;</span><span class="op">,</span> <span class="st">&#39;Ziltoid,&#39;</span><span class="op">,</span> <span class="st">&#39;the&#39;</span><span class="op">,</span> <span class="st">&#39;Omniscient&#39;</span>)<span class="op">;</span>
+<span class="va">Math</span>.<span class="at">max</span>(<span class="dv">1</span>)<span class="op">;</span>
+<span class="va">Math</span>.<span class="at">max</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span>)<span class="op">;</span>
+<span class="va">Math</span>.<span class="at">max</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>)<span class="op">;</span></code></pre></div>
+<p>Como puedes ver, la función acepta un número cualquiera de variables. Podemos hacer los mismo gracias a la variable implícita <code>arguments</code>.</p>
+<pre><code>function f() {
+  console.log(&#39;Número de argumentos pasados:&#39;, arguments.length);
+  console.log(&#39;Argumentos:&#39;, arguments);
+}
+f();
+f(1);
+f(&#39;a&#39;, {});
+f(function () {}, [], undefined);</code></pre>
+<p>Busca la información sobre <code>arguments</code> en la <a href="http://lmgtfy.com/?q=mdn+arguments">MDN</a>. ¡Te hará falta!</p>
+<p><strong>12. Decoradores</strong></p>
+<p>Aparte de devolverse como parámetros, las funciones pueden ser devueltas desde otras functiones. Considera el siguiente ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newLog</span>(label) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>(value) <span class="op">{</span>
+    <span class="va">console</span>.<span class="at">log</span>(label <span class="op">+</span> <span class="st">&#39;:&#39;</span><span class="op">,</span> value)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>Esta función crea funciones que llamarán a <code>console.log()</code> pero con una etiqueta delante. Podríamos crear métodos <code>_log()</code> por clase, cada uno con un prefijo y así distinguir unos logs de otros.</p>
+<p>Sin embargo, advierte el siguiente comportamiento:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> log1 <span class="op">=</span> <span class="at">newLog</span>(<span class="st">&#39;Default&#39;</span>)<span class="op">;</span>
+<span class="kw">var</span> log2 <span class="op">=</span> <span class="at">newLog</span>(<span class="st">&#39;Ziltoid&#39;</span>)<span class="op">;</span>
+
+<span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">};</span>
+<span class="at">log1</span>(p)<span class="op">;</span>
+<span class="at">log2</span>(p)<span class="op">;</span>
+<span class="at">log1</span>(<span class="st">&#39;Greetings&#39;</span><span class="op">,</span> <span class="st">&#39;humans!&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>¿Cual es el problema? ¿Por qué no funciona el último ejemplo?</p>
+<p>Para hacer que funcione, tendríamos que llamar a <code>console.log()</code> con un número de parámetros que no sabemos a priori. Podemos usar <code>arguments</code>, no obstante:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">newLog</span>(label) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>() <span class="op">{</span>
+    <span class="co">// ¿Por qué tenemos que hacer esto?</span>
+    <span class="kw">var</span> args <span class="op">=</span> <span class="va">Array</span>.<span class="va">prototype</span>.<span class="va">slice</span>.<span class="at">call</span>(arguments)<span class="op">;</span>
+    <span class="va">args</span>.<span class="at">splice</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> label <span class="op">+</span> <span class="st">&#39;:&#39;</span>)<span class="op">;</span>
+    <span class="va">console</span>.<span class="va">log</span>.<span class="at">apply</span>(console<span class="op">,</span> args)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> log1 <span class="op">=</span> <span class="at">newLog</span>(<span class="st">&#39;Default&#39;</span>)<span class="op">;</span>
+<span class="kw">var</span> log2 <span class="op">=</span> <span class="at">newLog</span>(<span class="st">&#39;Ziltoid&#39;</span>)<span class="op">;</span>
+
+<span class="kw">var</span> p <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="dv">10</span> <span class="op">};</span>
+<span class="at">log1</span>(p)<span class="op">;</span>
+<span class="at">log2</span>(p)<span class="op">;</span>
+<span class="at">log1</span>(<span class="st">&#39;Greetings&#39;</span><span class="op">,</span> <span class="st">&#39;humans!&#39;</span>)<span class="op">;</span></code></pre></div>
+<p>¿Podrías decir qué hace cada línea en la función <code>newLog()</code>?</p>
+<p><strong>13. Asincronía y closures</strong></p>
+<p>Carga el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">scheduleTasks</span>(count) <span class="op">{</span>
+  <span class="cf">for</span>(<span class="kw">var</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> count<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    <span class="at">setTimeout</span>(<span class="kw">function</span> () <span class="op">{</span>
+      <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Executing task&#39;</span><span class="op">,</span> i)<span class="op">;</span>
+    <span class="op">},</span> i <span class="op">*</span> <span class="dv">1000</span>)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>Trata de predecir qué pasará al ejecutar el siguiente código:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="at">scheduleTasks</span>(<span class="dv">5</span>)<span class="op">;</span></code></pre></div>
+<p>¿Hace lo que esperabas? Si no es así, ¿por qué? ¿cómo lo arreglarías? Pista: necesitas la función <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_objects/Function/bind"><code>.bind()</code></a>.</p>
+<p><strong>14. Eventos y métodos</strong></p>
+<p>Hay veces en las que debemos llamar a un método de un objeto cuando ocurra algo. Por ejemplo, supón que el método avanzar de un supuesto objeto debe llamarse en un intervalo de tiempo. Pongamos cada segundo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">x</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span>
+  <span class="dt">y</span><span class="op">:</span> <span class="dv">2</span><span class="op">,</span>
+  <span class="dt">advance</span><span class="op">:</span> <span class="kw">function</span> () <span class="op">{</span>
+    <span class="kw">this</span>.<span class="at">y</span> <span class="op">+=</span> <span class="dv">2</span><span class="op">;</span>
+    <span class="va">console</span>.<span class="at">log</span>(<span class="st">&#39;Ahora Y vale&#39;</span><span class="op">,</span> <span class="kw">this</span>.<span class="at">y</span>)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">};</span>
+
+<span class="kw">var</span> id <span class="op">=</span> <span class="at">setInterval</span>(<span class="va">obj</span>.<span class="at">advance</span><span class="op">,</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">1000</span>)<span class="op">;</span></code></pre></div>
+<p>Este ejemplo falla porque en la última línea <strong>no estamos llamando</strong> a la función sino sólo pasándola como parámetro. La función <code>setInterval()</code> no tiene idea del destinatario del mensaje y por tando no puede llamar a la función como si fuera un método.</p>
+<p>Podemos arreglarlo con <code>bind()</code> pero antes para el intervalo con:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="at">clearInterval</span>(id)<span class="op">;</span></code></pre></div>
+<p>Ahora podemos solucionarlo con:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> id <span class="op">=</span> <span class="at">setInterval</span>(<span class="va">obj</span>.<span class="va">advance</span>.<span class="at">bind</span>(obj)<span class="op">,</span> <span class="dv">1</span> <span class="op">*</span> <span class="dv">1000</span>)<span class="op">;</span></code></pre></div>
+<p><strong>15. La función bind()</strong></p>
+<p>A estas alturas ya deberías saber cómo funciona <code>bind()</code> o qué hace. Si aun no lo tienes claro, búscalo en la MDN.</p>
+<p>La tarea es la siguiente: crea una función <code>bind()</code> que simule el comportamiento del método de las funciones <code>.bind()</code>. Como se pide una función y no un método, el primer parámetro será la función. Así pues, en vez de usarse así:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">die</span>(sides) <span class="op">{</span>
+  <span class="kw">var</span> result <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> sides) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="va">history</span>.<span class="at">push</span>(result)<span class="op">;</span>
+  <span class="cf">return</span> result<span class="op">;</span>
+<span class="op">}</span>
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">history</span><span class="op">:</span> [] <span class="op">};</span>
+<span class="kw">var</span> d20 <span class="op">=</span> <span class="va">die</span>.<span class="at">bind</span>(obj<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span>
+<span class="at">d20</span>()<span class="op">;</span></code></pre></div>
+<p>La usaremos de esta otra forma:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">die</span>(sides) <span class="op">{</span>
+  <span class="kw">var</span> result <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">Math</span>.<span class="at">random</span>() <span class="op">*</span> sides) <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="kw">this</span>.<span class="va">history</span>.<span class="at">push</span>(result)<span class="op">;</span>
+  <span class="cf">return</span> result<span class="op">;</span>
+<span class="op">}</span>
+<span class="kw">var</span> obj <span class="op">=</span> <span class="op">{</span> <span class="dt">history</span><span class="op">:</span> [] <span class="op">};</span>
+<span class="kw">var</span> d20 <span class="op">=</span> <span class="at">bind</span>(die<span class="op">,</span> obj<span class="op">,</span> <span class="dv">20</span>)<span class="op">;</span> <span class="co">// fíjate en que ahora die es el primer parámetro</span>
+<span class="at">d20</span>()<span class="op">;</span></code></pre></div>
+</section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
