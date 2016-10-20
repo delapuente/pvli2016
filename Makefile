@@ -7,6 +7,7 @@ SHARED=shared
 # WEB=website
 # LESSON=tema
 # IMGS=imgs
+# REVEALURL=
 REVEALURL=../$(SHARED)/lib/reveal
 TEMPLATE=$(SHARED)/pvli-template-pandoc.html
 GENERAL=general
@@ -31,7 +32,7 @@ DOCS=docs.css
 
 
 # BASERUN=pandoc --filter pandoc-include --filter /home/clnznr/programas/pandocfilters/examples/plantuml.py -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref -s --mathjax
-BASERUN=pandoc --filter pandoc-include -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref -s --mathjax
+BASERUN=pandoc  -s --mathjax --filter pandoc-include -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref
 
 
 all: $(GENERAL) $(TEMAS) # $(HTML) $(SVGS) $(PNGS) $(JPGS) $(GENERAL) $(INFO) #$(WEB)/$(GENERAL)/criterios_evaluacion.html $(WEB)/$(GENERAL)/programa.html 
@@ -43,12 +44,11 @@ tema1: $(TEMA1FILES)
 
 tema4: $(TEMA4FILES)
 
-
-$(GENERAL)/%.html: $(GENERAL)/%.md ../$(SHARED)/docs.css
-	$(BASERUN) --css ../$(SHARED)/docs.css $< -o $@
-
 %.html: %.md $(TEMPLATE)
-	$(BASERUN) -i --variable revealjs-url=$(REVEALURL) -t revealjs --template $(TEMPLATE) $< -o $@
+	$(BASERUN) -i --variable revealjs-url=../$(SHARED)/lib/reveal -t revealjs --template $(TEMPLATE) $< -o $@
+
+$(GENERAL)/%.html: $(GENERAL)/%.md $(SHARED)/$(DOCS)
+	$(BASERUN) --css ../$(SHARED)/docs.css $< -o $@
 
 %.dot.svg: %.dot
 	dot -T svg $< -O
@@ -82,6 +82,6 @@ $(GENERAL)/%.html: $(GENERAL)/%.md ../$(SHARED)/docs.css
 clean: 
 	rm -f $(TEMA1FILES)
 	rm -f $(TEMA4FILES)
-	rm -rf $(GENERALFILES)
+	rm -f $(GENERALFILES)
 
 .PHONY: all clean $(TEMAS) $(GENERAL) # clean
