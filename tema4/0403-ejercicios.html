@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Carlos León">
+  <title>Ejercicios de arquitecturas de componentes con JavaScript</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Ejercicios de arquitecturas de componentes con JavaScript</h1>
+  <h2 class="author">Carlos León</h2>
+  <h3 class="date">18/10/16</h3>
+</section>
+
+<section id="introducción" class="slide level1">
+<h1>Introducción</h1>
+<p>Estos ejercicios se entregarán en el Campus Virtual, siguiendo las <a href="../general/criterios_evaluacion.html#cómo-entregar">instrucciones usuales de entrega</a>. La fecha de entrega está publicada en la tarea correspondiente.</p>
+<p>Todos los ejercicios son ampliaciones sobre el código del tema 4. Por lo tanto, la entrega consistirá en un solo repositorio y un solo <code>commit</code>.</p>
+<p>En los comentarios de la práctica debéis comentar qué ejercicios resolvéis, y cómo lo hacéis. <strong>Un ejercicio resuelto pero no indicado en los comentarios de la entrega será considerado <em>no resuelto</em></strong>.</p>
+</section>
+<section id="ejercicio-1" class="slide level1">
+<h1>Ejercicio 1</h1>
+<p>Basándote en el código del tema 4, añade un tipo de mensaje llamado <code>Sleep</code>, que haga que la entidad que lo reciba no haga nada durante su ciclo, pasen los ciclos que pasen, hasta que reciba un mensaje <code>WakeUp</code> (también tienes que implementar este mensaje).</p>
+</section>
+<section id="ejercicio-2" class="slide level1">
+<h1>Ejercicio 2</h1>
+<p>Basándote en el código del tema 4, crea un tipo de componente que, en cada ciclo, aumente la vida de una entidad. Llámalo <code>Healer</code>. Ten en cuenta que en el diseño original del código del tema 4, las entidades no tienen vida. Tendrás que crear, para implementar este componente, otro componente que usen las entidades que tienen vida.</p>
+<p>Piensa en cómo deben comunicarse estas entidades. La idea del ejercicio es que el diseño siga siendo orientado a componentes y que sea lo más puro posible.</p>
+</section>
+<section id="ejercicio-3" class="slide level1">
+<h1>Ejercicio 3</h1>
+<p>Modifica el código original para que la función <code>tick</code> de <code>Game</code> no se envíe el mensaje <code>Presence</code>, sino que cada entidad lance el mensaje según lo considere oportuno.</p>
+<p>(PISTA: las entidades &quot;dormidas&quot; no tienen que anunciar su presencia, pero esto no debería modificar mucho el código del <a href="ejercicio-1">ejercicio 1</a>).</p>
+</section>
+<section id="ejercicio-4" class="slide level1">
+<h1>Ejercicio 4</h1>
+<ol type="1">
+<li class="fragment">Haz un componente para entidades que se muevan. No te preocupes por la implementación, con que la entidad imprima &quot;me estoy moviendo&quot; en cada ciclo, junto a su nombre, es suficiente.</li>
+<li class="fragment">Haz un componente para entidades que tengan volumen físico (entidades con las que se pueda colisionar). No te preocupes por la implementación, con que la entidad imprima &quot;tengo volumen&quot; en cada ciclo, junto a su nombre, es suficiente.</li>
+<li class="fragment">Crea una entidad que se mueva, pero no tenga volumen físico. Añádela al juego.</li>
+<li class="fragment">Crea una entidad que tenga volumen físico, pero que no se mueva. Añádela al juego.</li>
+<li class="fragment">Crea una entidad que tenga volumen físico y que se mueva. Añádela al juego.</li>
+</ol>
+</section>
+<section class="slide level1">
+
+<p>Ahora, teniendo en cuenta que <em>tienes que usar herencia</em>, añade en alguna parte de tu código un comentario con una jerarquía de clases que te permita implementar los puntos 3, 4 y 5. <strong>No tienes que implementarla, sólo pensar en ella y añadir un bloque de comentario en el archivo con lo que se te ocurra</strong>. Sé original y piensa en las alternativas.</p>
+</section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
