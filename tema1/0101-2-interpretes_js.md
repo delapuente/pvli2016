@@ -18,16 +18,17 @@ procesador, sino en otro programa.
 
 Es decir, hay un programa que emula a un procesador: el **intérprete**.
 
-![Esquema de lenguaje interpretado](interpretes.svg){height=30%}
+![Esquema de lenguaje interpretado](interpretes.dot.svg){height=30%}
+
 
 ## Cómo funcionan
 
-![Funcionamiento de un intérprete](instrucciones.svg)
+![Funcionamiento de un intérprete](instrucciones.dot.svg)
 
 ## En comparación con los compilados
 
 
-![Funcionamiento de un programa compilado](compilado.svg)
+![Funcionamiento de un programa compilado](compilado.dot.svg)
 
 
 ## ECMAScript

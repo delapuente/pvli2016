@@ -172,11 +172,11 @@ Las versiones de código, bien usadas, permiten:
 
 ---
 
-![Proceso sin herramientas](trabajo_manual.svg)
+![Proceso sin herramientas](trabajo_manual.dot.svg)
 
 ---
 
-![Proceso con herramientas](trabajo_general.svg)
+![Proceso con herramientas](trabajo_general.dot.svg)
 
 # Herramientas para este curso
 
@@ -366,7 +366,7 @@ En las entregas, poned un texto así:
 
 ---
 
-![Proceso con las herramientas del curso](trabajo_curso.svg)
+![Proceso con las herramientas del curso](trabajo_curso.dot.svg)
 
 # Cómo empezar a programar
 
