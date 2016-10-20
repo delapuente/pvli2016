@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Carlos León">
+  <title>Introducción a la arquitectura de videojuegos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/../tabzilla/css/tabzilla.css"/>
+  <link rel="stylesheet" href="../shared/lib/reveal/css/theme/mozilla-devrel-light.css"/>
+
+  <link rel="stylesheet" href="../shared/lib/reveal/lib/css/solarized-light.css" />
+
+
+
+
+  <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+<!--  -->
+<!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
+<!--  -->
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? '../shared/lib/reveal/css/print/pdf.css' : '../shared/lib/reveal/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="../shared/lib/reveal/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+
+<!-- FIXME megahack because `pandoc` only generates h1's. -->
+<style type="text/css">
+    .level2 h1 {
+        
+    border-top: 0.1em solid #484848;
+    border-bottom: 0.1em solid #484848;
+    
+    padding: 1em 0;
+    margin-bottom: 1em;
+    font-size: 1.6em;
+    margin: 0 0 20px 0;
+    color: #484848;
+    font-family: "Fira Sans", Helvetica, sans-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    text-shadow: none;
+    word-wrap: break-word;
+}
+
+</style>
+
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Introducción a la arquitectura de videojuegos</h1>
+  <h2 class="author">Carlos León</h2>
+  <h3 class="date">18/10/2016</h3>
+</section>
+
+<section id="qué-es-la-arquitectura-de-un-juego" class="slide level1">
+<h1>Qué es la arquitectura de un juego</h1>
+</section>
+<section class="slide level1">
+
+<p>Los videojuegos son, normalmente, sistemas complejos y grandes</p>
+</section>
+<section class="slide level1">
+
+<!-- TODO [Carlos, 19-10-2016 12:32]: foto de subsistemas -->
+</section>
+<section class="slide level1">
+
+<p>La complejidad puede crecer tanto, que carecer de un diseño global coherente <em>puede hacer inmanejable el desarrollo</em></p>
+</section>
+<section class="slide level1">
+
+<!-- TODO [Carlos, 19-10-2016 12:34]: foto de Unity -->
+</section>
+<section class="slide level1">
+
+<p>¿Podríais implementar Unity?</p>
+</section>
+<section class="slide level1">
+
+<p>Unity es un motor de juego entero</p>
+<p class="fragment">
+(y, además, un editor)
+<p>
+</section>
+<section class="slide level1">
+
+<p>Cada parte de un motor de juego como Unity tiene que:</p>
+<ul>
+<li class="fragment">Ser modificable</li>
+<li class="fragment">Ser ampliable</li>
+<li class="fragment">Ser independiente</li>
+<li class="fragment">Comunicarse con las demás</li>
+<li class="fragment">Hacer todo esto de forma que los <em>programadores</em> empleen el mínimo esfuerzo</li>
+</ul>
+</section>
+<section id="por-qué-pensar-en-la-arquitectura" class="slide level1">
+<h1>Por qué pensar en la arquitectura</h1>
+<p>La arquitectura software de un videojuego no es para la <em>máquina</em>, es para el <em>programador</em></p>
+<p>Pensad en un juego cuyo código comunique los módulos de varias maneras distintas</p>
+<p>Cuando se tienen 6 subsistemas distintos, la organización del código es <em>indispensable</em></p>
+<p>Además, puede tener impacto en la eficiencia</p>
+</section>
+<section id="repaso-de-programación-orientada-a-objetos" class="slide level1">
+<h1>Repaso de programación orientada a objetos</h1>
+<p>Un paradigma de programación muy usado para sistemas software que requieren arquitecturas complejas es la <em>programación orientada a objetos</em> basada en clases</p>
+<h2 id="clases">Clases</h2>
+<p>Las clases son los tipos, las estructuras de las que se crean instancias</p>
+<figure>
+<img src="imgs/inherit_graph_0.png" alt="Ejemplo de clases" /><figcaption>Ejemplo de clases</figcaption>
+</figure>
+<pre class="plantuml"><code>Entity &lt;|-- Movable
+Entity &lt;|-- Weapon
+Movable &lt;|-- Player
+abstract Movable &lt;|-- Enemy
+Game &quot;1&quot; *-- &quot;*&quot; Entity
+Player o-- Weapon : aggregation
+hide members</code></pre>
+<h2 id="instancias">Instancias</h2>
+<p>Las instancias son cada uno de los elementos</p>
+<p>Aquí, <code class="sourceCode cpp">player</code> y <code class="sourceCode cpp">enemy</code> son instancias de <code class="sourceCode cpp">Player</code> y <code class="sourceCode cpp">Enemy</code> respectivamente:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">Player player(<span class="st">&quot;player&quot;</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">100</span>);
+Enemy enemy(<span class="st">&quot;enemy&quot;</span>, <span class="dv">15</span>, <span class="dv">15</span>, <span class="dv">0</span>, <span class="dv">0</span>, &amp;player);</code></pre></div>
+<h2 id="relaciones">Relaciones</h2>
+<p>Las clases, como módulos, se relacionan en un sistema</p>
+<p>Hay muchos tipos de relaciones y muchas maneras de usarlas, aquí sólo comentamos algunas</p>
+<h3 id="herencia">Herencia</h3>
+<p>Las clases pueden <em>heredarse</em>, de forma que una clase <em>hija</em> <strong>es-una</strong> (<code>is-a</code>) clase padre también</p>
+<figure>
+<img src="imgs/classEntity__inherit__graph.png" alt="Clases para estructurar un juego" /><figcaption>Clases para estructurar un juego</figcaption>
+</figure>
+<h3 id="uso">Uso</h3>
+<p>Las clases pueden <em>usarse</em> unas a otras, de forma que se <em>pasen mensajes</em></p>
+<!-- TODO [Carlos, 19-10-2016 14:16]: player->arma -->
+<p>&lt;<code>0</code>&gt;</p>
+<h3 id="composición">Composición</h3>
+<p>Las clases pueden <em>componerse</em>, de forma que</p>
+<h2 id="arquitecturas-basadas-en-herencia">Arquitecturas basadas en herencia</h2>
+</section>
+<section id="sistemas-de-componentes" class="slide level1">
+<h1>Sistemas de componentes</h1>
+<h2 id="qué-es-un-componente">Qué es un componente</h2>
+<h2 id="entidades">Entidades</h2>
+<h2 id="blueprints">Blueprints</h2>
+<h2 id="arquetipos">Arquetipos</h2>
+</section>
+<section id="sistemas-de-entidades" class="slide level1">
+<h1>Sistemas de entidades</h1>
+</section>
+<section id="comparativa-ventajas-e-inconvenientes" class="slide level1">
+<h1>Comparativa (ventajas e inconvenientes)</h1>
+</section>
+<section id="enlaces-interesantes" class="slide level1">
+<h1>Enlaces interesantes</h1>
+<p>No es JavaScript, pero muestra todo bastante claro</p>
+<p><a href="https://www.raywenderlich.com/24878/introduction-to-component-based-architecture-in-games" class="uri">https://www.raywenderlich.com/24878/introduction-to-component-based-architecture-in-games</a></p>
+</section>
+    </div>
+  </div>
+
+  <script src="../shared/lib/reveal/lib/js/head.min.js"></script>
+  <script src="../shared/lib/reveal/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: '../shared/lib/reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: '../shared/lib/reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: '../shared/lib/reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

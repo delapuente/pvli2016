@@ -1,59 +1,30 @@
-SHARED=shared
-WEB=website
-LESSON=tema
-IMGS=imgs
-REVEALURL=../$(SHARED)/lib/reveal
-TEMPLATE=$(SHARED)/pvli-template-pandoc.html
-GENERAL=general
-DOCS=docs.css
-SHAREDDOCS=$(SHARED)/$(DOCS)
-FINALDOCS=$(WEB)/$(SHAREDDOCS)
+GENERAL=general/criterios_evaluacion.html general/grupos.html general/programa.html
+TEMA1=tema1/0101-1-introduccion-pvli.html tema1/0101-2-interpretes_js.html tema1/0102-tooling.html tema1/compilado.dot.svg  tema1/instrucciones.dot.svg  tema1/interpretes.dot.svg  tema1/trabajo_curso.dot.svg  tema1/trabajo_general.dot.svg  tema1/trabajo_manual.dot.svg
+TEMA2=
+TEMA3=
+TEMA4=tema4/0401-introduccion-arquitectura-videojuegos.html tema4/0402-ejemplo-componentes-completo.html tema4/0403-ejercicios.html
+TEMA5=
+TEMA6=
+TEMA7=
+TEMA8=
+TEMA9=
 
-SRCS=$(wildcard $(LESSON)*/*.md)
-INFOMD=$(wildcard $(GENERAL)/*.md)
-DOTS=$(wildcard $(LESSON)*/*.dot)
-PNGSO=$(wildcard $(LESSON)*/$(IMGS)/*.png)
-JPGSO=$(wildcard $(LESSON)*/$(IMGS)/*.jpg)
+TEMAS=$(TEMA1) $(TEMA2) $(TEMA3) $(TEMA4) $(TEMA5) $(TEMA6) $(TEMA7) $(TEMA8) $(TEMA9) 
+TODO=$(GENERAL) $(TEMAS)
+BASERUN=pandoc  -s --mathjax --filter pandoc-include -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref
 
-HTML=$(addsuffix .html,$(addprefix $(WEB)/,$(basename $(SRCS:.md=.html))))
-INFO=$(addsuffix .html,$(addprefix $(WEB)/,$(basename $(INFOMD:.md=.html))))
-WEBSHARED=$(WEB)/$(SHARED)
-SVGS=$(addsuffix .svg,$(addprefix $(WEB)/,$(basename $(DOTS:.dot=.svg))))
-PNGS=$(addprefix $(WEB)/,$(PNGSO))
-JPGS=$(addprefix $(WEB)/,$(JPGSO))
+all: $(TODO)
 
+%.html: %.md shared/pvli-template-pandoc.html
+	$(BASERUN) -i --variable revealjs-url=../shared/lib/reveal -t revealjs --template shared/pvli-template-pandoc.html $< -o $@
 
-BASERUN=pandoc --filter pandoc-include -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref -s --mathjax
+general/%.html: general/%.md shared/docs.css
+	$(BASERUN) --css ../shared/docs.css $< -o $@
 
-all: $(HTML) $(SVGS) $(PNGS) $(JPGS) $(GENERAL) $(INFO) #$(WEB)/$(GENERAL)/criterios_evaluacion.html $(WEB)/$(GENERAL)/programa.html 
-
-$(WEBSHARED): | $(WEB)
-	cp -a $(SHARED) $(WEB)
-
-$(FINALDOCS): $(SHAREDDOCS) | $(WEB)
-	mkdir -p $(dir $@)
-	cp -a $(SHAREDDOCS) $(WEB)/$(SHARED)
-
-$(WEB)/$(GENERAL)/%.html: $(GENERAL)/%.md $(FINALDOCS) | $(WEB)
-	mkdir -p $(dir $@)
-	$(BASERUN) --css ../$(SHARED)/docs.css $< -o $@
-
-$(WEB)/%.html: %.md  $(TEMPLATE) | $(WEBSHARED) 
-	mkdir -p $(dir $@)
-	$(BASERUN) -i --variable revealjs-url=$(REVEALURL) -t revealjs --template $(TEMPLATE) $< -o $@
-
-$(WEB)/%.svg: %.dot | $(WEB)
-	mkdir -p $(dir $@)
-	dot -T svg -o $@ $<
-	
-$(WEB)/%: % | $(WEB)
-	mkdir -p $(dir $@)
-	cp -a $< $(dir $@)
-
-$(WEB):
-	mkdir -p $@
+%.dot.svg: %.dot
+	dot -T svg $< -O
 
 clean: 
-	rm -rf $(WEB)
+	rm -f $(TODO)
 
 .PHONY: all clean
