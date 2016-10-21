@@ -508,7 +508,7 @@ party.forEach(function (char, index) {
   var y;
   if (char.hp === 0) {
     context.fillStyle = 'grey';
-    y = 700; // en el suelo porque está muerto.
+    y = 500; // en el suelo porque está muerto.
   } else if (char.name === 'Bat') {
     context.fillStyle = 'blue';
     y = 50 * Math.sin(t/100) + 300; // flotando en el aire.
