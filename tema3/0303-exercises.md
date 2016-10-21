@@ -328,3 +328,239 @@ Recursos:
 Notas:
 
 - Podemos usar `querySelector` sobre cualquier elemento del DOM, no sólo sobre `document`. En este caso, limitaremos la búsqueda sólo a sus hijos.
+
+## Ejercicio 4. Estado de la _party_
+
+Vamos a pintar ahora el estado de la _party_ de la práctica anterior en un
+`<canvas>`.
+
+### Paso 1. Adapta el ejercicio anterior
+
+Modifica tu fichero HTML para cambiar el título, el texto del botón e incluir un
+elemento `<canvas>` como se muestra a continuación:
+
+```html
+<!doctype html>
+<html>
+<head>
+    <title>Ejercicios</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="main.js"></script>
+</head>
+<body>
+    <!-- ¡Cambia el título! Vamos a matar a los monstruos, pero despacito. -->
+    <h1>Attack the monsters!</h1>
+    <canvas width="800" height="600"></canvas>
+    <ul id="party-monsters">
+    </ul>
+    <form name="killing-machine">
+        <p>
+            <select name="chara"></select>
+            <!-- También hemos cambiado el texto del botón. -->
+            <button type="submit">Hit!</button>
+        </p>
+    </form>
+    <section class="resources">
+      <img id="background" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Fields_at_Crossgates_(geograph_3096445).jpg/800px-Fields_at_Crossgates_(geograph_3096445).jpg" alt="background" />
+    </section>
+</body>
+</html>
+```
+
+Modifica el fichero CSS también para añadir la siguiente regla y ocultar las
+imágenes:
+
+```css
+.resources {
+  display: none;
+}
+```
+
+Y finalmente, abre el fichero `main.js` y modifica la _party_ para incluir los
+puntos de vida:
+
+```javascript
+var party = [
+    {name: 'Bat', id: 'bat1', hp: 10, maxHp: 20},
+    {name: 'Slime', id: 'slime', hp: 50, maxHp: 50},
+    {name: 'Bat', id: 'bat2', hp: 5, maxHp: 20}
+];
+```
+
+Modifica el método submit de la siguiente forma para que en vez de matar
+directamente, dirija un ataque contra el enemigo de 5 puntos de vida:
+
+```js
+event.preventDefault();
+var charaID = form.querySelector('[name=chara]').value;
+var character = findCharById(charaID);
+character.hp -= 5;
+if (character.hp <= 0) {
+  character.hp = 0; // corrige el valor en caso de que sea negativo.
+  var li = list.querySelector('[data-charaid=' + charaID + ']');
+  li.classList.add('dead');
+}
+```
+
+La función `findCharById` luce así:
+
+```js
+function findCharById(charaID) {
+   return party.filter(function (char) { return char.id === charaID; })[0];
+}
+```
+
+Ahora necesitarás más de un click para acabar con un enemigo. Puedes usar el
+depurador para ver cómo los enemigos pierden vida a cada click.
+
+### Paso 2. El bucle de renderizado
+
+Lo que vamos a hacer ahora es implementar un bucle de renderizado muy sencillo.
+Como explicamos en clase, no podemos hacer algo como:
+
+```js
+while (true) {
+  renderParty();
+}
+```
+
+Porque bloquearíamos el hilo principal y dejaríamos la página inutilizada. Lo
+que tenemos que hacer es programar un renderizado a cada frame utilizando
+`requestAnimationFrame`. Dentro de la función `onload` añade lo siguiente:
+
+```js
+var lastRender = 0;
+var canvas = document.querySelector('canvas');
+var context = canvas.getContext('2d');
+
+function render() {
+  requestAnimationFrame(function (t) {
+    // Borra todo...
+    context.clearRect(0, 0, 800, 600);
+    // ...y repinta.
+    renderParty();
+    console.log('Delta time:', t - lastRender);
+    lastRender = t;
+    render();
+  });
+}
+
+function renderParty(t) {
+  console.log('Pintando la party en tiempo', t);
+}
+
+render();
+```
+
+Observa la salida por consola. **¿Qué representa la cantidad impresa?**
+
+### Paso 3. Pintar el fondo
+
+Vamos a esbozar en qué consiste pintar la party. Eso es fácil. Cambia el código
+de `renderParty` para que sea:
+
+```js
+function renderParty(t) {
+  renderBackground();
+  renderCharacters(t); // pásale t a la función que pinta los enemigos.
+  renderUI();
+}
+
+var bgImage = document.getElementById('background');
+function renderBackground() {
+  console.log('Puntando el fondo.');
+}
+
+function renderCharacters(t) {
+  console.log('Pintando a los personajes.');
+}
+
+function renderUI() {
+  console.log('Pintando la interfaz.');
+}
+```
+function renderBackground() {
+
+**Nota**: mucho ojo con utilizar `console.log` dentro de las funciones de
+render. Hacer esto 60 veces por segundo puede degradar el rendimiento de vuestra
+aplicación si tenéis las herramientas de desarrollador abiertas.
+
+Ahora vamos a pintar el fondo. Cambia la función `renderBackground` para que
+sólo incluya el siguiente código:
+
+```js
+context.drawImage(bgImage, 0, 0)
+```
+
+### Paso 4. Pintar los enemigos
+
+Pintaremos los enemigos con primitivas gráficas. El slime será un círculo verde
+y el murciélago un círculo azul. Si alguno de los personajes está muerto,
+lo pintaremos en gris. Borra el log y modifica la función `renderCharacters`
+para que incluya:
+
+```js
+var charaSpace = 800 / party.length;
+var centerOffset = charaSpace / 2;
+party.forEach(function (char, index) {
+  var x = index * charaSpace + centerOffset;
+  var y;
+  if (char.hp === 0) {
+    context.fillStyle = 'grey';
+    y = 700; // en el suelo porque está muerto.
+  } else if (char.name === 'Bat') {
+    context.fillStyle = 'blue';
+    y = 50 * Math.sin(t/100) + 300; // flotando en el aire.
+  } else if (char.name === 'Slime') {
+    context.fillStyle = 'green';
+    y = 400; // en el suelo pero no en la tumba.
+  }
+  context.beginPath();
+  context.arc(x, y, 50, 0, 2 * Math.PI);
+  context.fill();
+});
+```
+
+Puedes mejorar estas estupendas representaciones de los enemigos al término
+de esta sesión de ejercicios.
+
+### Paso 5. Pintar la UI
+
+Falta pintar unas barras de vida justo debajo de cada enemigo. Para ello,
+reemplaza el contenido de la función `renderUI` por el siguiente:
+
+```js
+var width = 100;
+var semiWidth = width / 2;
+var height = 20;
+var semiHeight = height / 2;
+var charaSpace = 800 / party.length;
+var centerOffset = charaSpace / 2;
+party.forEach(function (char, index) {
+  var x = index * charaSpace + centerOffset;
+  var y = 500;
+  if (char.hp > 0) {
+    var lifeArea = Math.floor(char.hp / char.maxHp * width);
+    context.fillStyle = 'red';
+    context.fillRect(x - semiWidth, y - semiHeight, lifeArea, height);
+    context.lineWidth = 3;
+    context.strokeStyle = 'black';
+    context.strokeRect(x - semiWidth, y - semiHeight, width, height);
+  }
+});
+```
+
+---
+
+**Ejercicio**: modifica los `hp` de la lista `party` para que estén al máximo y
+haz que cuando reciban un golpe la barra se anime hasta el nuevo valor.
+
+Recursos:
+
+- [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+- [`CanvasRenderingContext2D.clearRect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/clearRect)
+- [`CanvasRenderingContext2D.fillRect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillRect)
+- [`CanvasRenderingContext2D.fillStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/fillStyle)
+- [`CanvasRenderingContext2D.strokeRect`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeRect)
+- [`CanvasRenderingContext2D.strokeStyle`](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/strokeStyle)
