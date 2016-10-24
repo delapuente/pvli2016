@@ -19,15 +19,16 @@ $endif$
 
 
 
-  <link rel="stylesheet" href="$revealjs-url$/../tabzilla/css/tabzilla.css"/>
+  <!-- <link rel="stylesheet" href="$revealjs-url$/../tabzilla/css/tabzilla.css"/> -->
+  <link rel="stylesheet" href="$revealjs-url$/css/reveal.css"/>
   <link rel="stylesheet" href="$revealjs-url$/css/theme/mozilla-devrel-light.css"/>
-
   <link rel="stylesheet" href="$revealjs-url$/lib/css/solarized-light.css" />
 
 
 
 
-  <link rel="stylesheet" href="$revealjs-url$/css/reveal.css">
+  <!-- <link rel="stylesheet" href="$revealjs-url$/css/reveal.css"> -->
+
   <style type="text/css">code{white-space: pre;}</style>
 $if(quotes)$
   <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
@@ -42,9 +43,9 @@ $endif$
 <!-- $else$ -->
 <!--   <link rel="stylesheet" href="$revealjs-url$/css/theme/black.css" id="theme"> -->
 <!-- $endif$ -->
-$for(css)$
-  <link rel="stylesheet" href="$css$"/>
-$endfor$
+<!-- $for(css)$ -->
+<!--   <link rel="stylesheet" href="$css$"/> -->
+<!-- $endfor$ -->
   <!-- Printing and PDF exports -->
   <script>
     var link = document.createElement( 'link' );
@@ -65,27 +66,37 @@ $endfor$
 
 
 <!-- FIXME megahack because `pandoc` only generates h1's. -->
-<style type="text/css">
-    .level2 h1 {
-        
-    border-top: 0.1em solid #484848;
-    border-bottom: 0.1em solid #484848;
-    
-    padding: 1em 0;
-    margin-bottom: 1em;
-    font-size: 1.6em;
-    margin: 0 0 20px 0;
-    color: #484848;
-    font-family: "Fira Sans", Helvetica, sans-serif;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: normal;
-    text-transform: uppercase;
-    text-shadow: none;
-    word-wrap: break-word;
-}
+<!-- <style type="text/css"> -->
 
-</style>
+
+<!-- .inner { -->
+<!--     width: 100%; -->
+<!--     margin: 0 auto; --> 
+<!-- } -->
+
+<!--     h1{ --> 
+<!--     } -->
+
+<!--     .level2 h1 { -->
+        
+<!--     border-top: 0.1em solid #484848; -->
+<!--     border-bottom: 0.1em solid #484848; -->
+    
+<!--     padding: 1em 0; -->
+<!--     margin-bottom: 1em; -->
+<!--     font-size: 1.6em; -->
+<!--     margin: 0 0 20px 0; -->
+<!--     color: #484848; -->
+<!--     font-family: "Fira Sans", Helvetica, sans-serif; -->
+<!--     font-weight: 600; -->
+<!--     line-height: 1.2; -->
+<!--     letter-spacing: normal; -->
+<!--     text-transform: uppercase; -->
+<!--     text-shadow: none; -->
+<!--     word-wrap: break-word; -->
+<!-- } -->
+
+<!-- </style> -->
 
 
 </head>

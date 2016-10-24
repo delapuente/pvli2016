@@ -1,0 +1,8 @@
+
+@startuml
+Entity <|-- Movable : es-un
+Movable<|-- Visible : es-un
+Visible<|-- Player : es-un
+hide members
+@enduml
+

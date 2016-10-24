@@ -44,7 +44,7 @@ mensaje `Presence`, sino que cada entidad lance el mensaje según lo considere
 oportuno.
 
 (PISTA: las entidades "dormidas" no tienen que anunciar su presencia, pero esto
-no debería modificar mucho el código del [ejercicio 1](ejercicio-1)).
+no debería modificar mucho el código del [ejercicio 1](#ejercicio-1)).
 
 # Ejercicio 4
 
