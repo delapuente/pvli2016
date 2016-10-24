@@ -9,16 +9,18 @@ vim: spelllang=es
 
 # Arquitectura
 
+
 ## `Game` → el juego
+
 
 ## `Entitiy` → las entidades
 
+
 ## `Component` → los componentes
+
 
 ## `Message` → los mensajes
 
+
+
 # Bucle principal
-
-```js
-```
-

@@ -2,7 +2,7 @@ GENERAL=general/criterios_evaluacion.html general/grupos.html general/programa.h
 TEMA1=tema1/0101-1-introduccion-pvli.html tema1/0101-2-interpretes_js.html tema1/0102-tooling.html tema1/compilado.dot.svg  tema1/instrucciones.dot.svg  tema1/interpretes.dot.svg  tema1/trabajo_curso.dot.svg  tema1/trabajo_general.dot.svg  tema1/trabajo_manual.dot.svg
 TEMA2=
 TEMA3=
-TEMA4=tema4/0401-introduccion-arquitectura-videojuegos.html tema4/0402-ejemplo-componentes-completo.html tema4/0403-ejercicios.html tema4/imgs/umlbasico.pu.svg tema4/imgs/herencia.pu.svg tema4/imgs/asociacion.pu.svg tema4/imgs/composicion.pu.svg tema4/imgs/herenciacorrecta.pu.svg  tema4/imgs/herenciaproblema.pu.svg tema4/imgs/sistemascomponentes.pu.svg
+TEMA4=tema4/0401-introduccion-arquitectura-videojuegos.html tema4/0402-ejemplo-componentes-completo.html tema4/imgs/umlbasico.pu.svg tema4/imgs/herencia.pu.svg tema4/imgs/asociacion.pu.svg tema4/imgs/composicion.pu.svg tema4/imgs/herenciacorrecta.pu.svg  tema4/imgs/herenciaproblema.pu.svg tema4/imgs/sistemascomponentes.pu.svg
 TEMA5=
 TEMA6=
 TEMA7=
@@ -16,7 +16,7 @@ BASERUN=pandoc  -s --mathjax --filter pandoc-include -M secPrefix= -M figPrefix=
 all: $(TODO)
 
 %.html: %.md shared/pvli-template-pandoc.html
-	$(BASERUN) -i --variable revealjs-url=../shared/lib/reveal -t revealjs --template shared/pvli-template-pandoc.html $< -o $@
+	$(BASERUN) -i --section-divs --variable revealjs-url=../shared/lib/reveal -t revealjs --template shared/pvli-template-pandoc.html $< -o $@
 
 general/%.html: general/%.md shared/docs.css
 	$(BASERUN) --css ../shared/docs.css $< -o $@
