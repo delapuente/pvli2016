@@ -1,5 +1,5 @@
 ---
-title: Programación PVLI (2016/2017) - preliminar
+title: Programación PVLI (2016/2017) 
 author: Belén Albeza, Carlos León, Salvador de la Puente, Ismael Sagredo
 date: 13/10/2016
 vim: spelllang=es
