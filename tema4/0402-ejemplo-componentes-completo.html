@@ -22,6 +22,43 @@
   <!-- <link rel="stylesheet" href="../shared/lib/reveal/css/reveal.css"> -->
 
   <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
 <!--  -->
 <!--   <link rel="stylesheet" href="../shared/lib/reveal/css/theme/black.css" id="theme"> -->
 <!--  -->
@@ -85,9 +122,62 @@
   <h3 class="date">18/10/16</h3>
 </section>
 
-<section><section id="una-implementación-de-arquitectura-de-componentes-en-javascript" class="titleslide slide level1"><h1>Una implementación de arquitectura de componentes en JavaScript</h1></section></section>
-<section><section id="arquitectura" class="titleslide slide level1"><h1>Arquitectura</h1></section><section><section id="game-el-juego" class="titleslide slide level2"><h1><code>Game</code> → el juego</h1></section></section><section><section id="entitiy-las-entidades" class="titleslide slide level2"><h1><code>Entitiy</code> → las entidades</h1></section></section><section><section id="component-los-componentes" class="titleslide slide level2"><h1><code>Component</code> → los componentes</h1></section></section><section><section id="message-los-mensajes" class="titleslide slide level2"><h1><code>Message</code> → los mensajes</h1></section></section></section>
-<section><section id="bucle-principal" class="titleslide slide level1"><h1>Bucle principal</h1></section></section>
+<section><section id="una-implementación-de-arquitectura-de-componentes-en-javascript" class="titleslide slide level1"><h1>Una implementación de arquitectura de componentes en JavaScript</h1></section><section id="section" class="slide level2">
+<h1></h1>
+<p>Vamos a implementar un sistema <em>muy simple</em> de entidades, componentes y <strong>mensajes</strong></p>
+<p class="fragment">
+Hasta ahora no hemos visto los <em>mensajes</em>, pero son una técnica muy usada para <strong>desacoplar</strong> los componentes, y las entidades
+</p>
+</section></section>
+<section><section id="arquitectura" class="titleslide slide level1"><h1>Arquitectura</h1></section><section id="section-1" class="slide level2">
+<h1></h1>
+<figure>
+<img src="imgs/arquitectura.pu.svg" alt="Diagrama UML de la arquitectura" /><figcaption>Diagrama UML de la arquitectura</figcaption>
+</figure>
+</section><section id="game-el-juego" class="slide level2">
+<h1><code>Game</code> → el juego</h1>
+<p>El juego tiene:</p>
+<ul>
+<li class="fragment">Una lista de <code>Entity</code></li>
+<li class="fragment">Una cola de <code>Message</code>
+<ul>
+<li class="fragment">Los mensajes se meten en la cola</li>
+<li class="fragment">El juego los &quot;reparte&quot;</li>
+</ul></li>
+</ul>
+</section><section id="entitiy-las-entidades" class="slide level2">
+<h1><code>Entitiy</code> → las entidades</h1>
+<p>En una arquitectura simple de componentes, una <code>Entity</code> es poco más que una lista de componentes</p>
+<p>Esto significa que todo lo &quot;interesante&quot; estará <strong>delegado</strong> en los componentes</p>
+</section><section id="component-los-componentes" class="slide level2">
+<h1><code>Component</code> → los componentes</h1>
+<p>Los componentes tienen realmente el modelo del juego</p>
+<p>Veremos varios componentes que hacen cosas particulares</p>
+</section><section id="message-los-mensajes" class="slide level2">
+<h1><code>Message</code> → los mensajes</h1>
+<p>Los sistemas de paso de mensajes son muy flexibles, pero aumentan la arquitectura y tienen <em>impacto en la eficiencia</em></p>
+</section></section>
+<section><section id="bucle-principal" class="titleslide slide level1"><h1>Bucle principal</h1></section><section id="qué-es-el-bucle-principal" class="slide level2">
+<h1>¿Qué es el bucle principal?</h1>
+<p>Es un <em>bucle</em> que se ejecuta durante todo el juego</p>
+<p>En cada ciclo:</p>
+<ul>
+<li class="fragment">Se lee la entrada</li>
+<li class="fragment">Se actualiza el estado</li>
+<li class="fragment">Se vuelve a pintar</li>
+<li class="fragment">Se envían los mensajes pendientes</li>
+<li class="fragment">Se comprueban colisiones</li>
+<li class="fragment">...</li>
+</ul>
+</section><section id="cómo-es-un-main-loop" class="slide level2">
+<h1>Cómo es un <em>main loop</em></h1>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="cf">while</span>(<span class="at">juegoContinua</span>()) <span class="op">{</span>
+    dt <span class="op">=</span> <span class="at">tiempoDesdeLaIteracionAnterior</span>() <span class="co">// unos pocos ms</span>
+    entrada <span class="op">=</span> <span class="at">leerEntrada</span>()<span class="op">;</span>
+    estado <span class="op">=</span> <span class="at">actualizarEstado</span>(entrada<span class="op">,</span> estadoAnterior<span class="op">,</span> dt)<span class="op">;</span>
+    <span class="at">pintarEstado</span>(estado)<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+</section></section>
     </div>
   </div>
 
