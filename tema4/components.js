@@ -17,7 +17,7 @@ var EntityType = {
 // Entities have a name (it doesn't have to be unique, but it helps) and a type
 //
 // Additionally, entities accept a list of instantiated components
-function Entity(entityName, entityType, components=[]) {
+function Entity(entityName, entityType, components) {
     var self = this;
     this.entityName = entityName;
 
@@ -61,12 +61,12 @@ Entity.prototype.receive = function(message) {
 };
 //////////////////////////////////////////////////////////////////////////////
 // if the receiver is null, it is a broadcast message
-function Message(receiver=null) {
+function Message(receiver) {
     this.receiver = receiver;
 }
 
 //////////////////////////////////////////////////////////////////////////////
-function Component(entity=null) {
+function Component(entity) {
     this.entity = entity;
     this.messageQueue = [];
 }
@@ -88,7 +88,7 @@ function Game(entities) {
     this.messageQueue = [];
 }
 
-Game.prototype.mainLoop = function (ticks=null) {
+Game.prototype.mainLoop = function (ticks) {
     var i = 0;
     function line() {
         console.log("-----------------------------------------");
@@ -146,7 +146,7 @@ Game.prototype.deliver = function() {
 //////////////////////////////////////////////////////////////////////////////
 // Components
 //////////////////////////////////////////////////////////////////////////////
-function Attacker(entity=null) {
+function Attacker(entity) {
     Component.call(this, entity);
 }
 Attacker.prototype = Object.create(Component.prototype);
@@ -161,7 +161,7 @@ Attacker.prototype.receive = function(message) {
 };
 
 //////////////////////////////////////////////////////////////////////////////
-function Defender(entity=null) {
+function Defender(entity) {
     Component.call(this, entity);
 }
 Defender.prototype = Object.create(Component.prototype);
@@ -178,14 +178,14 @@ Defender.prototype.receive = function(message) {
 //////////////////////////////////////////////////////////////////////////////
 // Messages
 //////////////////////////////////////////////////////////////////////////////
-function Presence(who, receiver=null) {
+function Presence(who, receiver) {
     Message.call(this, receiver);
     this.who = who;
 }
 Presence.prototype = Object.create(Message.prototype);
 Presence.prototype.constructor = Presence;
 //////////////////////////////////////////////////////////////////////////////
-function Attack(who, receiver=null) {
+function Attack(who, receiver) {
     Message.call(this, receiver);
     this.who = who;
 }
