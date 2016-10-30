@@ -17,6 +17,12 @@ Las URIS son un superconjunto de las URLs.
 
 ![URL vs URI](imgs/URIvsURL.png){height=75%}
 
+
+
+##
+
+
+
 Podemos ver la definición de URI en la RFC de *Tim Berners-Lee* [RFC 3986: Uniform Resource Identifier (URI)](https://tools.ietf.org/html/rfc3986)
 
 "Uniform Resources Identifier (URI) es una secuencia compacta de caracteres que identifica un recurso abstracto o físico".
@@ -35,6 +41,11 @@ Ejemplos:
 El directorio especial ../ indica el directorio padre del que se lanzó la aplicación. El directorio ./ indica el directorio
 de lanzamiento de la aplicación.
 
+
+##
+
+
+
 Cómo se crea una URI:
 
 ![Partes de una URI](imgs/URI.png){height=75%}
@@ -52,6 +63,9 @@ Los stats no tiene propiedades de visualización. Los Stats no son objetos rende
 
 Los Stats sirven para controlar el flujo de juego.
 
+##
+
+
 ![Ejemplo de State](imgs/States.pdf){height=75%}
 
 #Estructura de un State
@@ -63,8 +77,15 @@ Un estado es válido si hay, al menos uno de estos métodos: *preload*, *create*
 
 La gestión del State la realiza el *StateManager*. El StateMnager es el encargado de gestionar los states. Si no se va a usar un método no es necesario re-declararlo.
 
+##
+
+
 <!-- imagen dle flujo de las llamadas a State -->
 ![Flujo de ejecución de los métodos de un State](imgs/TimelinePhaser.pdf){height=50%}
+
+
+##
+
 
 Además, Phaser proporciona una serie de propiedades que podemos utilizar en nuestro juego:
 
@@ -110,9 +131,12 @@ Mayoritariamente, estas propiedades son formas de acceder a los subsistemas de P
 </html>
 ```
 
+##
+
 Ejemplo de states:
 
-```var boot = function(game){
+```js
+var boot = function(game){
 	console.log("Comenzando el juego", "color:white; background:red");
 };
   
@@ -128,7 +152,14 @@ boot.prototype = {
 	}
 }
 ```
-```var preload = function(game){}
+
+
+##
+
+
+
+```js
+var preload = function(game){}
  
 preload.prototype = {
 	preload: function(){ 
@@ -146,6 +177,10 @@ preload.prototype = {
 		this.game.state.start("GameTitle");
 	}
 }```
+
+
+##
+
 
 ¿Cómo cargamos esto en la página Web?
 
@@ -176,19 +211,24 @@ recurso es solicitado por otro dominio. CORS define la forma en la que el navega
 
 [MDN de Cross Origin](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes)
 
+##
+
+
 *anonymous* significa que no hay ningún intercambio de credenciales entre cliente y servidor.
 *use-credentials* significa que para acceder al recurso hay que tener credenciales.
 
 Algunos ejemplos:
 
-```function preload() {
+```js
+function preload() {
 
     game.load.baseURL = 'http://examples.phaser.io/assets/';
     game.load.crossOrigin = 'anonymous';
 }
 ```
 
-```function preload() {
+```js
+function preload() {
 
     game.stage.backgroundColor = '#85b5e1';
 
@@ -201,7 +241,8 @@ Algunos ejemplos:
 Una vez que tenemos el origen de los recursos podemos cargarlos en memoria.
 Se le añade un nombre al recurso para poder identificarlo.
 
-```function preload() {
+```js
+function preload() {
 
     game.load.baseURL = 'http://examples.phaser.io/assets/';
     game.load.crossOrigin = 'anonymous';
@@ -210,8 +251,10 @@ Se le añade un nombre al recurso para poder identificarlo.
 
 }```
 
+##
 
-```function preload() {
+```js
+function preload() {
 
     game.stage.backgroundColor = '#85b5e1';
 
@@ -224,11 +267,15 @@ Se le añade un nombre al recurso para poder identificarlo.
 }```
 
 
+##
+
+
 podemos cargar diferentes recursos como: imágenes, archicos JSON, Atlas de textura, video, sonido, tilemaps...
 
 La función *onLoadComplete* nos informa de la finalización de la carga. 
 
-```onLoadComplete: function() {
+```js
+onLoadComplete: function() {
 
       this.ready = true;
 
@@ -242,7 +289,7 @@ La función *onLoadComplete* nos informa de la finalización de la carga.
 Si cambiamos de stat y no vamos a volver al mismo, es muy probable que haya recursos que ya no utilizaremos
 nunca. En este caso podemos eliminarlos de la cache. Hay que usar la key asignada en la carga.
 
-```
+```js
 cache.removeImage(key)
 cache.removeXML(key)
 ```
@@ -251,21 +298,25 @@ cache.removeXML(key)
 
 Son las imágenes 2D que sirven para visualizar los objetos en un juego 2D.  En Phaser se cargan así:
 
-```
+```js
 player = game.add.sprite(100, 200, 'player');
 ```
-![Sprite](imgs/mario.jpg){height=50%}
+
+![Sprite](imgs/mariosprite.jpg){height=75%}
 Hay que usar la key se le puso en la carga.
 
 #Spritesheet o Atlas de Sprites.
 
-![Spritesheet o Atlas de Sprites](imgs/atlas_sprite.gif){height=50%}
+![Spritesheet o Atlas de Sprites](imgs/mario_spritesheet.gif){height=75%}
 
 Sirven para optimizar recursos, accesos al servidor (No es lo mismo traerse una imagen grande con muchas imágenes pequeñas que mucuhas imagenes pequeñas individuales) además de que es más eficiente en memoria.
 
+##
+
 Sirve también para crear animaciones por frames.
 
-```function preload() {
+```js
+function preload() {
 
     //  37x45 is the size of each frame
     //  Hay 18 frames in the PNG
