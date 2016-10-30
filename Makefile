@@ -12,7 +12,7 @@ TEMA9=
 TEMAS=$(TEMA1) $(TEMA2) $(TEMA3) $(TEMA4) tema4/0403-ejercicios.html $(TEMA5) $(TEMA6) $(TEMA7) $(TEMA8) $(TEMA9) 
 TODO=$(GENERAL) $(TEMAS)
 BASERUN=pandoc  -s --mathjax --filter pandoc-include -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref
-BASERUN=pandoc  -s --mathjax -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref
+# BASERUN=pandoc  -s --mathjax -M secPrefix= -M figPrefix= -M eqnPrefix= -M tblPrefix= --filter pandoc-crossref
 
 all: $(TODO)
 
