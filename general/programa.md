@@ -107,9 +107,10 @@ Tema 5: Carga de recursos <!-- con Phaser -->
     - Uso y liberación de recursos
 <!-- - Spritesheets texturas (contar texturas? multitexturas phaser) -->
 - 04/11 (Carlos)
-    - Cargador de recursos para el juego
-    - Cross-origin. Ejecutar Phaser en local server
-    - Práctica 2: pintar plataformas
+    - Práctica 1
+
+<!-- - Cargador de recursos para el juego -->
+<!-- - Cross-origin. Ejecutar Phaser en local server -->
 
 # 07-11 de noviembre 
 
