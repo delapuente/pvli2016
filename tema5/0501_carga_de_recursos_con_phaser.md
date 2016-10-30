@@ -15,7 +15,7 @@ El juego se renderiza sobre un *Canvas*, luego no está directamente pensado par
 
 Las URIS son un superconjunto de las URLs. 
 
-![URL vs URI](imgs/URIvsURL.png){height=75%}
+![URL vs URI](imgs/URIvsURL.png)
 
 
 
@@ -48,7 +48,7 @@ de lanzamiento de la aplicación.
 
 Cómo se crea una URI:
 
-![Partes de una URI](imgs/URI.png){height=75%}
+![Partes de una URI](imgs/URI.png)
 
 
 #Game Stats
@@ -66,7 +66,7 @@ Los Stats sirven para controlar el flujo de juego.
 ##
 
 
-![Ejemplo de State](imgs/States.pdf){height=75%}
+![Ejemplo de State](imgs/States.png){height=75%}
 
 #Estructura de un State
 
@@ -81,7 +81,8 @@ La gestión del State la realiza el *StateManager*. El StateMnager es el encarga
 
 
 <!-- imagen dle flujo de las llamadas a State -->
-![Flujo de ejecución de los métodos de un State](imgs/TimelinePhaser.pdf){height=50%}
+
+![Flujo de ejecución de los métodos de un State](imgs/TimelinePhaser.png){height=50%}
 
 
 ##
