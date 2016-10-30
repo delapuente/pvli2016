@@ -16,7 +16,7 @@ BASERUN=pandoc  -s --mathjax --filter pandoc-include -M secPrefix= -M figPrefix=
 all: $(TODO)
 
 %.html: %.md shared/pvli-template-pandoc.html
-	$(BASERUN) -i --section-divs --variable revealjs-url=../shared/lib/reveal -t revealjs --template shared/pvli-template-pandoc.html $< -o $@
+	$(BASERUN) -i --slide-level=2 --section-divs --variable revealjs-url=../shared/lib/reveal -t revealjs --template shared/pvli-template-pandoc.html $< -o $@
 
 general/%.html: general/%.md shared/docs.css
 	$(BASERUN) --css ../shared/docs.css $< -o $@

@@ -3,8 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <meta name="author" content="ISmael Sagredo">
-  <meta name="dcterms.date" content="2016-12-10">
+  <meta name="author" content="Ismael Sagredo">
   <title>Carga de recursos con Phaser</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -119,23 +118,22 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <section>
   <h1 class="title">Carga de recursos con Phaser</h1>
-  <h2 class="author">ISmael Sagredo</h2>
+  <h2 class="author">Ismael Sagredo</h2>
   <h3 class="date">28/10/2016</h3>
 </section>
 
-<section id="qué-es-phaser" class="slide level1">
-<h1>Qué es Phaser</h1>
+<section><section id="introducción" class="titleslide slide level1"><h1>Introducción</h1></section><section id="qué-es-phaser" class="slide level2">
+<h2>Qué es Phaser</h2>
 <p><em>Phaser</em> es un framework que nos permite construir juegos en HTML5 para equipos de escritorio y dispositivos móviles. Es bastante nuevo, pero tiene involucrada una apasionada comunidad en el proceso de desarrollo, por lo que crece rápidamente</p>
 <p>El juego se renderiza sobre un <em>Canvas</em>, luego no está directamente pensado par ser ejecutado en Node, aunque podemos &quot;apañarlo&quot;.</p>
-</section>
-<section id="urls-vs-uris" class="slide level1">
-<h1>URLS vs URIS</h1>
+</section><section id="urls-vs-uris" class="slide level2">
+<h2>URLS vs URIS</h2>
 <p>Las URIS son un superconjunto de las URLs.</p>
 <figure>
 <img src="imgs/URIvsURL.png" alt="URL vs URI" /><figcaption>URL vs URI</figcaption>
 </figure>
-<section id="section" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <p>Podemos ver la definición de URI en la RFC de <em>Tim Berners-Lee</em> <a href="https://tools.ietf.org/html/rfc3986">RFC 3986: Uniform Resource Identifier (URI)</a></p>
 <p>&quot;Uniform Resources Identifier (URI) es una secuencia compacta de caracteres que identifica un recurso abstracto o físico&quot;.</p>
 <p>&quot;El nombre de Uniform Resource Locator (URL) es un subconjunto de URIs que además de identificar el recurso, proveen al mismo de una semántica de localización&quot;</p>
@@ -148,43 +146,37 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="fragment">http://es.wikipedia.org/wiki/Wikipedia:Portada URN and URL</li>
 </ul>
 <p>El directorio especial ../ indica el directorio padre del que se lanzó la aplicación. El directorio ./ indica el directorio de lanzamiento de la aplicación.</p>
-</section>
-<section id="section-1" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <p>Cómo se crea una URI:</p>
 <figure>
 <img src="imgs/URI.png" alt="Partes de una URI" /><figcaption>Partes de una URI</figcaption>
 </figure>
-</section>
-</section>
-<section id="game-stats" class="slide level1">
-<h1>Game Stats</h1>
+</section><section id="game-states" class="slide level2">
+<h2>Game States</h2>
 <p>Los estados de Phaser son la unidad mínima que maneja el framework para crear una escena de juego. Podríamos decir que es equivalente a la <em>Scene</em> de Unity.</p>
 <p>Piensa en un State como en un capítulo de un libro. Pero <em>sólo un Stat está activo al mismo tiempo</em>. Podemos cambiar entre estados, pero sólo uno puede estar activo.</p>
 <p>Es decir no podemos declarar un player Stat, o un Power Up state. Eso son entidades no stats.</p>
 <p>Los stats no tiene propiedades de visualización. Los Stats no son objetos renderizables. Son los objetos del Stat los que son renderizables.</p>
 <p>Los Stats sirven para controlar el flujo de juego.</p>
-<section id="section-2" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <figure>
 <img src="imgs/States.png" alt="Ejemplo de State" style="height:75.0%" /><figcaption>Ejemplo de State</figcaption>
 </figure>
-</section>
-</section>
-<section id="estructura-de-un-state" class="slide level1">
-<h1>Estructura de un State</h1>
+</section><section id="estructura-de-un-state" class="slide level2">
+<h2>Estructura de un State</h2>
 <p>Un State es un objeto de Javascript que contiene una serie de métodos ya definidos.</p>
 <p>Un estado es válido si hay, al menos uno de estos métodos: <em>preload</em>, <em>create</em>, <em>update</em> o <em>render</em>. Si no existe alguno de estos métodos, Phaser no carga el State.</p>
 <p>La gestión del State la realiza el <em>StateManager</em>. El StateMnager es el encargado de gestionar los states. Si no se va a usar un método no es necesario re-declararlo.</p>
-<section id="section-3" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <!-- imagen dle flujo de las llamadas a State -->
 <figure>
 <img src="imgs/TimelinePhaser.png" alt="Flujo de ejecución de los métodos de un State" style="height:50.0%" /><figcaption>Flujo de ejecución de los métodos de un State</figcaption>
 </figure>
-</section>
-<section id="section-4" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <p>Además, Phaser proporciona una serie de propiedades que podemos utilizar en nuestro juego:</p>
 <!--  ponemos algunas propiedades -->
 <ul>
@@ -200,37 +192,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="fragment">physics: el sistema de físicas.</li>
 </ul>
 <p>Mayoritariamente, estas propiedades son formas de acceder a los subsistemas de Phaser.</p>
-</section>
-</section>
-<section id="ejemplo-básico-de-un-juego-con-phaser" class="slide level1">
-<h1>Ejemplo básico de un juego con Phaser</h1>
-```
-<!doctype html>
-<html>
-<pre><code>&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot; /&gt;
-    &lt;title&gt;hello phaser!&lt;/title&gt;
-    &lt;script src=&quot;../phaser/build/phaser.min.js&quot;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
+</section></section>
+<section><section id="ejemplo-básico-de-un-juego-con-phaser" class="titleslide slide level1"><h1>Ejemplo básico de un juego con Phaser</h1></section><section class="slide level2">
 
-&lt;script type=&quot;text/javascript&quot;&gt;
-window.onload = function() {
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="er">&lt;</span>!doctype html&gt;
+<span class="kw">&lt;html&gt;</span>
+    <span class="kw">&lt;head&gt;</span>
+        <span class="kw">&lt;meta</span><span class="ot"> charset=</span><span class="st">&quot;UTF-8&quot;</span> <span class="kw">/&gt;</span>
+        <span class="kw">&lt;title&gt;</span>hello phaser!<span class="kw">&lt;/title&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;../phaser/build/phaser.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+    <span class="kw">&lt;/head&gt;</span>
+    <span class="kw">&lt;body&gt;</span>
 
-    var game = new Phaser.Game(800, 600, Phaser.AUTO, &#39;&#39;, { preload: preload, create: create });
+    <span class="kw">&lt;script</span><span class="ot"> type=</span><span class="st">&quot;text/javascript&quot;</span><span class="kw">&gt;</span>
+    <span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
 
-    function preload () {game.load.image(&#39;logo&#39;, &#39;phaser.png&#39;);}
+        <span class="kw">var</span> game <span class="op">=</span> <span class="kw">new</span> <span class="va">Phaser</span>.<span class="at">Game</span>(<span class="dv">800</span><span class="op">,</span> <span class="dv">600</span><span class="op">,</span> <span class="va">Phaser</span>.<span class="at">AUTO</span><span class="op">,</span> <span class="st">&#39;&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">preload</span><span class="op">:</span> preload<span class="op">,</span> <span class="dt">create</span><span class="op">:</span> create <span class="op">}</span>)<span class="op">;</span>
 
-    function create () {
-        var logo = game.add.sprite(game.world.centerX, game.world.centerY, &#39;logo&#39;);
-        logo.anchor.setTo(0.5, 0.5);
-    }};
-&lt;/script&gt;
-&lt;/body&gt;</code></pre>
-</html>
-<p>```</p>
-<section id="section-5" class="level2">
-<h2></h2>
+        <span class="kw">function</span> <span class="at">preload</span> () <span class="op">{</span><span class="va">game</span>.<span class="va">load</span>.<span class="at">image</span>(<span class="st">&#39;logo&#39;</span><span class="op">,</span> <span class="st">&#39;phaser.png&#39;</span>)<span class="op">;}</span>
+
+        <span class="kw">function</span> <span class="at">create</span> () <span class="op">{</span>
+            <span class="kw">var</span> logo <span class="op">=</span> <span class="va">game</span>.<span class="va">add</span>.<span class="at">sprite</span>(<span class="va">game</span>.<span class="va">world</span>.<span class="at">centerX</span><span class="op">,</span> <span class="va">game</span>.<span class="va">world</span>.<span class="at">centerY</span><span class="op">,</span> <span class="st">&#39;logo&#39;</span>)<span class="op">;</span>
+            <span class="va">logo</span>.<span class="va">anchor</span>.<span class="at">setTo</span>(<span class="fl">0.5</span><span class="op">,</span> <span class="fl">0.5</span>)<span class="op">;</span>
+        <span class="op">}};</span>
+    <span class="op">&lt;</span><span class="ss">/script&gt;</span>
+<span class="ss">    &lt;/body</span><span class="op">&gt;</span>
+<span class="op">&lt;</span><span class="ss">/html&gt;</span></code></pre></div>
+</section><section class="slide level2">
+
 <p>Ejemplo de states:</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> boot <span class="op">=</span> <span class="kw">function</span>(game)<span class="op">{</span>
     <span class="va">console</span>.<span class="at">log</span>(<span class="st">&quot;Comenzando el juego&quot;</span><span class="op">,</span> <span class="st">&quot;color:white; background:red&quot;</span>)<span class="op">;</span>
@@ -247,9 +236,8 @@ window.onload = function() {
         <span class="kw">this</span>.<span class="va">game</span>.<span class="va">state</span>.<span class="at">start</span>(<span class="st">&quot;Preload&quot;</span>)<span class="op">;</span>
     <span class="op">}</span>
 <span class="op">}</span></code></pre></div>
-</section>
-<section id="section-6" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> preload <span class="op">=</span> <span class="kw">function</span>(game)<span class="op">{}</span>
  
 <span class="va">preload</span>.<span class="at">prototype</span> <span class="op">=</span> <span class="op">{</span>
@@ -267,38 +255,31 @@ window.onload = function() {
     <span class="dt">create</span><span class="op">:</span> <span class="kw">function</span>()<span class="op">{</span>
         <span class="kw">this</span>.<span class="va">game</span>.<span class="va">state</span>.<span class="at">start</span>(<span class="st">&quot;GameTitle&quot;</span>)<span class="op">;</span>
     <span class="op">}</span>
-<span class="op">}</span><span class="vs">```</span>
+<span class="op">}</span></code></pre></div>
+</section><section class="slide level2">
 
+<p>¿Cómo cargamos esto en la página Web?</p>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html">        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;phaser.min.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;src/boot.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;src/preload.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+        <span class="kw">&lt;script</span><span class="ot"> src=</span><span class="st">&quot;src/gametitle.js&quot;</span><span class="kw">&gt;&lt;/script&gt;</span>
+        <span class="kw">&lt;script&gt;</span>
+            <span class="va">window</span>.<span class="at">onload</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+                <span class="kw">var</span> game <span class="op">=</span> <span class="kw">new</span> <span class="va">Phaser</span>.<span class="at">Game</span>(<span class="dv">320</span><span class="op">,</span> <span class="dv">480</span><span class="op">,</span> <span class="va">Phaser</span>.<span class="at">CANVAS</span><span class="op">,</span> <span class="st">&quot;game&quot;</span>)<span class="op">;</span>
+                <span class="va">game</span>.<span class="va">state</span>.<span class="at">add</span>(<span class="st">&quot;Boot&quot;</span><span class="op">,</span>boot)<span class="op">;</span>
+                <span class="va">game</span>.<span class="va">state</span>.<span class="at">add</span>(<span class="st">&quot;Preload&quot;</span><span class="op">,</span>preload)<span class="op">;</span>
+                <span class="va">game</span>.<span class="va">state</span>.<span class="at">add</span>(<span class="st">&quot;GameTitle&quot;</span><span class="op">,</span>gameTitle)<span class="op">;</span>
+            <span class="op">};</span>    
+        <span class="op">&lt;</span><span class="ss">/script&gt;</span></code></pre></div>
+</section></section>
+<section><section id="localización-de-los-recursos" class="titleslide slide level1"><h1>Localización de los recursos</h1></section><section class="slide level2">
 
-<span class="vs">##</span>
-
-
-<span class="vs">¿Cómo cargamos esto en la página Web?</span></code></pre></div>
-    
-<script src="phaser.min.js"></script>
-    
-<script src="src/boot.js"></script>
-<pre><code>    &lt;script src=&quot;src/preload.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;src/gametitle.js&quot;&gt;&lt;/script&gt;
-    &lt;script&gt;
-        window.onload = function() {
-            var game = new Phaser.Game(320, 480, Phaser.CANVAS, &quot;game&quot;);
-            game.state.add(&quot;Boot&quot;,boot);
-            game.state.add(&quot;Preload&quot;,preload);
-            game.state.add(&quot;GameTitle&quot;,gameTitle);
-        };    
-    &lt;/script&gt;</code></pre>
-<p>```</p>
-</section>
-</section>
-<section id="localización-de-los-recursos" class="slide level1">
-<h1>Localización de los recursos</h1>
 <p>Para localizar los recursos podemos usar <em>baseURL</em> y <em>crossOrigin</em> del subsistema load.</p>
 <p><em>BaseURL</em> es el lugar donde están los recursos. Si los recursos no están en el mismo sitio que el código podemos establecer aquí la url base para no tener que escribirla constantemente en el método de carga concreto.</p>
 <p><em>Cross-origin resource sharing (CORS)</em> es un mecanismo de control y restricción de recursos en una página web cuando un recurso es solicitado por otro dominio. CORS define la forma en la que el navegador debe interactuar con el servidor.</p>
 <p><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes">MDN de Cross Origin</a></p>
-<section id="section-7" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <p><em>anonymous</em> significa que no hay ningún intercambio de credenciales entre cliente y servidor. <em>use-credentials</em> significa que para acceder al recurso hay que tener credenciales.</p>
 <p>Algunos ejemplos:</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">preload</span>() <span class="op">{</span>
@@ -306,66 +287,69 @@ window.onload = function() {
     <span class="va">game</span>.<span class="va">load</span>.<span class="at">baseURL</span> <span class="op">=</span> <span class="st">&#39;http://examples.phaser.io/assets/&#39;</span><span class="op">;</span>
     <span class="va">game</span>.<span class="va">load</span>.<span class="at">crossOrigin</span> <span class="op">=</span> <span class="st">&#39;anonymous&#39;</span><span class="op">;</span>
 <span class="op">}</span></code></pre></div>
-<p>```js function preload() {</p>
-<pre><code>game.stage.backgroundColor = &#39;#85b5e1&#39;;
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">preload</span>() <span class="op">{</span>
 
-game.load.baseURL = &#39;http://examples.phaser.io/assets/&#39;;
-game.load.crossOrigin = &#39;anonymous&#39;;</code></pre>
-<p>}```</p>
-</section>
-</section>
-<section id="carga-de-recursos-en-memoria" class="slide level1">
-<h1>carga de recursos en memoria</h1>
+    <span class="va">game</span>.<span class="va">stage</span>.<span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">&#39;#85b5e1&#39;</span><span class="op">;</span>
+
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">baseURL</span> <span class="op">=</span> <span class="st">&#39;http://examples.phaser.io/assets/&#39;</span><span class="op">;</span>
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">crossOrigin</span> <span class="op">=</span> <span class="st">&#39;anonymous&#39;</span><span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+</section></section>
+<section><section id="carga-de-recursos-en-memoria" class="titleslide slide level1"><h1>Carga de recursos en memoria</h1></section><section class="slide level2">
+
 <p>Una vez que tenemos el origen de los recursos podemos cargarlos en memoria. Se le añade un nombre al recurso para poder identificarlo.</p>
-<p>```js function preload() {</p>
-<pre><code>game.load.baseURL = &#39;http://examples.phaser.io/assets/&#39;;
-game.load.crossOrigin = &#39;anonymous&#39;;
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">preload</span>() <span class="op">{</span>
 
-game.load.image(&#39;phaser&#39;, &#39;sprites/phaser-dude.png&#39;);</code></pre>
-<p>}```</p>
-<section id="section-8" class="level2">
-<h2></h2>
-<p>```js function preload() {</p>
-<pre><code>game.stage.backgroundColor = &#39;#85b5e1&#39;;
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">baseURL</span> <span class="op">=</span> <span class="st">&#39;http://examples.phaser.io/assets/&#39;</span><span class="op">;</span>
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">crossOrigin</span> <span class="op">=</span> <span class="st">&#39;anonymous&#39;</span><span class="op">;</span>
 
-game.load.baseURL = &#39;http://examples.phaser.io/assets/&#39;;
-game.load.crossOrigin = &#39;anonymous&#39;;
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">image</span>(<span class="st">&#39;phaser&#39;</span><span class="op">,</span> <span class="st">&#39;sprites/phaser-dude.png&#39;</span>)<span class="op">;</span>
 
-game.load.image(&#39;player&#39;, &#39;sprites/phaser-dude.png&#39;);
-game.load.image(&#39;platform&#39;, &#39;sprites/platform.png&#39;);</code></pre>
-<p>}```</p>
-</section>
-<section id="section-9" class="level2">
-<h2></h2>
+<span class="op">}</span></code></pre></div>
+</section><section class="slide level2">
+
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">preload</span>() <span class="op">{</span>
+
+    <span class="va">game</span>.<span class="va">stage</span>.<span class="at">backgroundColor</span> <span class="op">=</span> <span class="st">&#39;#85b5e1&#39;</span><span class="op">;</span>
+
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">baseURL</span> <span class="op">=</span> <span class="st">&#39;http://examples.phaser.io/assets/&#39;</span><span class="op">;</span>
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">crossOrigin</span> <span class="op">=</span> <span class="st">&#39;anonymous&#39;</span><span class="op">;</span>
+
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">image</span>(<span class="st">&#39;player&#39;</span><span class="op">,</span> <span class="st">&#39;sprites/phaser-dude.png&#39;</span>)<span class="op">;</span>
+    <span class="va">game</span>.<span class="va">load</span>.<span class="at">image</span>(<span class="st">&#39;platform&#39;</span><span class="op">,</span> <span class="st">&#39;sprites/platform.png&#39;</span>)<span class="op">;</span>
+
+<span class="op">}</span></code></pre></div>
+</section><section class="slide level2">
+
 <p>podemos cargar diferentes recursos como: imágenes, archicos JSON, Atlas de textura, video, sonido, tilemaps...</p>
 <p>La función <em>onLoadComplete</em> nos informa de la finalización de la carga.</p>
-<p>```js onLoadComplete: function() {</p>
-<pre><code>  this.ready = true;
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">onLoadComplete<span class="op">:</span> <span class="kw">function</span>() <span class="op">{</span>
 
-}```</code></pre>
+  <span class="kw">this</span>.<span class="at">ready</span> <span class="op">=</span> <span class="kw">true</span><span class="op">;</span>
+
+<span class="op">}</span></code></pre></div>
 <p><em>isLoading</em> nos informa de que aún estamos cargando recursos.</p>
-</section>
-</section>
-<section id="liberación-de-recursos" class="slide level1">
-<h1>Liberación de recursos</h1>
+</section></section>
+<section><section id="liberación-de-recursos" class="titleslide slide level1"><h1>Liberación de recursos</h1></section><section class="slide level2">
+
 <p>Si cambiamos de stat y no vamos a volver al mismo, es muy probable que haya recursos que ya no utilizaremos nunca. En este caso podemos eliminarlos de la cache. Hay que usar la key asignada en la carga.</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">cache</span>.<span class="at">removeImage</span>(key)
 <span class="va">cache</span>.<span class="at">removeXML</span>(key)</code></pre></div>
-</section>
-<section id="sprites-en-phaser" class="slide level1">
-<h1>Sprites en phaser</h1>
+</section></section>
+<section><section id="sprites-en-phaser" class="titleslide slide level1"><h1>Sprites en phaser</h1></section><section class="slide level2">
+
 <p>Son las imágenes 2D que sirven para visualizar los objetos en un juego 2D. En Phaser se cargan así:</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">player <span class="op">=</span> <span class="va">game</span>.<span class="va">add</span>.<span class="at">sprite</span>(<span class="dv">100</span><span class="op">,</span> <span class="dv">200</span><span class="op">,</span> <span class="st">&#39;player&#39;</span>)<span class="op">;</span></code></pre></div>
 <p><img src="imgs/mariosprite.jpg" alt="Sprite" style="height:75.0%" /> Hay que usar la key se le puso en la carga.</p>
-</section>
-<section id="spritesheet-o-atlas-de-sprites." class="slide level1">
-<h1>Spritesheet o Atlas de Sprites.</h1>
+</section></section>
+<section><section id="spritesheet-o-atlas-de-sprites." class="titleslide slide level1"><h1>Spritesheet o Atlas de Sprites.</h1></section><section class="slide level2">
+
 <figure>
 <img src="imgs/mario_spritesheet.gif" alt="Spritesheet o Atlas de Sprites" style="height:75.0%" /><figcaption>Spritesheet o Atlas de Sprites</figcaption>
 </figure>
 <p>Sirven para optimizar recursos, accesos al servidor (No es lo mismo traerse una imagen grande con muchas imágenes pequeñas que mucuhas imagenes pequeñas individuales) además de que es más eficiente en memoria.</p>
-<section id="section-10" class="level2">
-<h2></h2>
+</section><section class="slide level2">
+
 <p>Sirve también para crear animaciones por frames.</p>
 <div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">preload</span>() <span class="op">{</span>
 
@@ -380,8 +364,7 @@ game.load.image(&#39;platform&#39;, &#39;sprites/platform.png&#39;);</code></pre
     <span class="kw">var</span> walk <span class="op">=</span> <span class="va">mummy</span>.<span class="va">animations</span>.<span class="at">add</span>(<span class="st">&#39;walk&#39;</span>)<span class="op">;</span> <span class="co">//[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ...]</span>
     <span class="va">mummy</span>.<span class="va">animations</span>.<span class="at">play</span>(<span class="st">&#39;walk&#39;</span><span class="op">,</span> <span class="dv">30</span><span class="op">,</span> <span class="kw">true</span>)<span class="op">;</span>
 <span class="op">}</span></code></pre></div>
-</section>
-</section>
+</section></section>
     </div>
   </div>
 

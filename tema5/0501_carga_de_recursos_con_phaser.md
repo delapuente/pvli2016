@@ -1,27 +1,26 @@
 ---
 title: Carga de recursos con Phaser
-author: ISmael Sagredo
+author: Ismael Sagredo
 date: 28/10/2016
-vim: spelling=es
+vim: spelllang=es
 ...
 
-# Qué es Phaser
+
+# Introducción
+
+## Qué es Phaser
 
 *Phaser* es un framework que nos permite construir juegos en HTML5 para equipos de escritorio y dispositivos móviles. Es bastante nuevo, pero tiene involucrada una apasionada comunidad en el proceso de desarrollo, por lo que crece rápidamente
 
 El juego se renderiza sobre un *Canvas*, luego no está directamente pensado par ser ejecutado en Node, aunque podemos "apañarlo".
 
-#URLS vs URIS
+##URLS vs URIS
 
 Las URIS son un superconjunto de las URLs. 
 
 ![URL vs URI](imgs/URIvsURL.png)
 
-
-
-##
-
-
+---
 
 Podemos ver la definición de URI en la RFC de *Tim Berners-Lee* [RFC 3986: Uniform Resource Identifier (URI)](https://tools.ietf.org/html/rfc3986)
 
@@ -42,7 +41,7 @@ El directorio especial ../ indica el directorio padre del que se lanzó la aplic
 de lanzamiento de la aplicación.
 
 
-##
+---
 
 
 
@@ -51,7 +50,7 @@ Cómo se crea una URI:
 ![Partes de una URI](imgs/URI.png)
 
 
-#Game Stats
+## Game States
 
 Los estados de Phaser son la unidad mínima que maneja el framework para crear una escena de juego. Podríamos decir que es equivalente a la *Scene* de Unity.
 
@@ -63,12 +62,12 @@ Los stats no tiene propiedades de visualización. Los Stats no son objetos rende
 
 Los Stats sirven para controlar el flujo de juego.
 
-##
 
+---
 
 ![Ejemplo de State](imgs/States.png){height=75%}
 
-#Estructura de un State
+## Estructura de un State
 
 Un State es un objeto de Javascript que contiene una serie de métodos ya definidos. 
 
@@ -77,7 +76,7 @@ Un estado es válido si hay, al menos uno de estos métodos: *preload*, *create*
 
 La gestión del State la realiza el *StateManager*. El StateMnager es el encargado de gestionar los states. Si no se va a usar un método no es necesario re-declararlo.
 
-##
+---
 
 
 <!-- imagen dle flujo de las llamadas a State -->
@@ -85,7 +84,7 @@ La gestión del State la realiza el *StateManager*. El StateMnager es el encarga
 ![Flujo de ejecución de los métodos de un State](imgs/TimelinePhaser.png){height=50%}
 
 
-##
+---
 
 
 Además, Phaser proporciona una serie de propiedades que podemos utilizar en nuestro juego:
@@ -106,8 +105,11 @@ Mayoritariamente, estas propiedades son formas de acceder a los subsistemas de P
 
 #Ejemplo básico de un juego con Phaser
 
+---
 
-```<!doctype html>
+
+```html
+<!doctype html>
 <html>
     <head>
         <meta charset="UTF-8" />
@@ -132,7 +134,7 @@ Mayoritariamente, estas propiedades son formas de acceder a los subsistemas de P
 </html>
 ```
 
-##
+---
 
 Ejemplo de states:
 
@@ -155,7 +157,7 @@ boot.prototype = {
 ```
 
 
-##
+---
 
 
 
@@ -177,15 +179,16 @@ preload.prototype = {
   	create: function(){
 		this.game.state.start("GameTitle");
 	}
-}```
+}
+```
 
 
-##
+---
 
 
 ¿Cómo cargamos esto en la página Web?
 
-```
+```html
     	<script src="phaser.min.js"></script>
     	<script src="src/boot.js"></script>
 		<script src="src/preload.js"></script>
@@ -202,6 +205,8 @@ preload.prototype = {
 
 #Localización de los recursos
 
+---
+
 Para localizar los recursos podemos usar *baseURL* y *crossOrigin* del subsistema load.
 
 *BaseURL* es el lugar donde están los recursos. Si los recursos no están en el mismo sitio que el código
@@ -212,7 +217,7 @@ recurso es solicitado por otro dominio. CORS define la forma en la que el navega
 
 [MDN de Cross Origin](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes)
 
-##
+---
 
 
 *anonymous* significa que no hay ningún intercambio de credenciales entre cliente y servidor.
@@ -235,9 +240,12 @@ function preload() {
 
     game.load.baseURL = 'http://examples.phaser.io/assets/';
     game.load.crossOrigin = 'anonymous';
-}```
+}
+```
 
-#carga de recursos en memoria
+#Carga de recursos en memoria
+
+---
 
 Una vez que tenemos el origen de los recursos podemos cargarlos en memoria.
 Se le añade un nombre al recurso para poder identificarlo.
@@ -250,9 +258,10 @@ function preload() {
 
     game.load.image('phaser', 'sprites/phaser-dude.png');
 
-}```
+}
+```
 
-##
+---
 
 ```js
 function preload() {
@@ -265,10 +274,11 @@ function preload() {
     game.load.image('player', 'sprites/phaser-dude.png');
     game.load.image('platform', 'sprites/platform.png');
 
-}```
+}
+```
 
 
-##
+---
 
 
 podemos cargar diferentes recursos como: imágenes, archicos JSON, Atlas de textura, video, sonido, tilemaps...
@@ -278,14 +288,16 @@ La función *onLoadComplete* nos informa de la finalización de la carga.
 ```js
 onLoadComplete: function() {
 
-      this.ready = true;
+  this.ready = true;
 
-    }```
+}
+```
 
 *isLoading* nos informa de que aún estamos cargando recursos.
 
 #Liberación de recursos
 
+---
 
 Si cambiamos de stat y no vamos a volver al mismo, es muy probable que haya recursos que ya no utilizaremos
 nunca. En este caso podemos eliminarlos de la cache. Hay que usar la key asignada en la carga.
@@ -296,6 +308,8 @@ cache.removeXML(key)
 ```
 
 #Sprites en phaser
+
+---
 
 Son las imágenes 2D que sirven para visualizar los objetos en un juego 2D.  En Phaser se cargan así:
 
@@ -308,11 +322,13 @@ Hay que usar la key se le puso en la carga.
 
 #Spritesheet o Atlas de Sprites.
 
+---
+
 ![Spritesheet o Atlas de Sprites](imgs/mario_spritesheet.gif){height=75%}
 
 Sirven para optimizar recursos, accesos al servidor (No es lo mismo traerse una imagen grande con muchas imágenes pequeñas que mucuhas imagenes pequeñas individuales) además de que es más eficiente en memoria.
 
-##
+---
 
 Sirve también para crear animaciones por frames.
 
