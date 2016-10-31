@@ -1,7 +1,7 @@
 ---
 title: Carga de recursos con Phaser
 author: Ismael Sagredo
-date: 28/10/2016
+date: 31/10/2016
 vim: spelllang=es
 ...
 
