@@ -1,9 +1,13 @@
 # Entidades de Phaser
 
 
-Los ejemplos de esta lección se deben probar sobre un proyecto Phaser basado
-en la [plantilla que os proporcionamos](../plantilla-juego). Realiza los cambios
-que se indiquen en cada ejemplo.
+<!-- Explicar la sandbox en lugar de esto -->
+Los ejemplos de esta lección pueden probarse en la sandbox de Phaser.
+
+
+
+<!-- Hay que advertir que hay un bug en la documentación de Phaser más actual
+que oculta algunas propiedades. Mirar 2.5 y 2.4 también. -->
 
 
 
@@ -87,7 +91,7 @@ create: function () {
 ## El mundo
 
 
-En Phaser, la factoría de objetos se llama `add` o añadir por una razón:
+En Phaser, la factoría de objetos se llama añadir (`add`) por una razón:
 **porque añadimos las nuevas entidades al mundo**.
 
 
@@ -95,13 +99,18 @@ Para Phaser, el mundo, representado por la clase [`World`](
 https://phaser.io/docs/2.6.2/Phaser.World.html), es la **abstracción del lugar
 (un plano bidimensional) donde habitan las entidades**.
 
-<!-- Esquema del mundo. -->
+
+![El mundo, la cámara y entidades más allá de los límites de la cámara](
+./imgs/world.svg)
+
 
 Miramos al mundo a través de
 [cámaras](https://phaser.io/docs/2.6.2/Phaser.Camera.html).
 
 
-<!-- Esquema de lo que sería la cámara en el mundo. -->
+![El mundo, la cámara y entidades más allá de los límites de la cámara](
+./imgs/world-and-camera.svg)
+
 
 En Phaser existe sólo un mundo, que se crea automáticamente cuando creamos el
 juego y al que se puede acceder a través del atributo [`world`](
@@ -117,9 +126,6 @@ Este mundo tiene un tamaño inicial igual al tamaño indicado al construir el
 juego pero se expandirá conforme incluyamos entidades que sobrepasen los límites
 del espacio de juego.
 
-
-<!-- Ejemplo con una fila de imágenes más allá de los límites del stage
-y mover la cámara de un lado a otro. -->
 
 
 ## Entidades `Sprite`
