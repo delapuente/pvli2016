@@ -1,8 +1,9 @@
 # Entidades de Phaser
 
 
-<!-- Explicar la sandbox en lugar de esto -->
-Los ejemplos de esta lección pueden probarse en la sandbox de Phaser.
+<!-- Explicar la sandbox más en detenimiento. Hablar de las tabs y de cómo
+vamos a enseñar en el código la parte más relevante. -->
+Los ejemplos de esta lección pueden probarse en la sandbox de Phaser...
 
 
 
@@ -12,6 +13,9 @@ que oculta algunas propiedades. Mirar 2.5 y 2.4 también. -->
 
 
 ## El servidor local
+<!-- Quedamos en que esto lo mandábamos como ejercicio obligatorio y lo quitamos
+de aquí. Algo como correr el servidor en local y cambiar el logo de Phaser por
+uno propio. -->
 
 
 Una vez hayas copiado la plantilla, lanza el siguiente comando:
@@ -43,11 +47,12 @@ https://phaser.io/docs/2.6.2/Phaser.Image.html).
 
 
 Su simplicidad las hace ligeras y eficientes en términos de memoria. Utilizamos
-imágenes cuando no necesitamos físicas o animaciones.
+imágenes cuando no necesitamos comportamientos complejos como físicas o
+animaciones por _keyframes_.
 
 
-De hecho, las imágenes **no se pueden mover** aunque se pueden rotar, escalar o
-recortar. Esto las hace ideales para, por ejemplo, logos, imágenes de fondo,
+Aun así, las imágenes se pueden mover, rotar, escalar o recortar. Esto las hace
+ideales para, por ejemplo, logos, imágenes de fondo, barras de carga,
 elementos de interfaz...
 
 
@@ -55,36 +60,18 @@ Una imagen se crea a través del método factoría [`add.image`](
 https://phaser.io/docs/2.6.2/Phaser.GameObjectFactory.html#image) del objeto
 juego. Por ejemplo, como parte de la creación de un estado:
 
-```js
-create: function () {
-  this.game.add.image(0, 0, 'logo');
-}
-```
-
-
-En la plantilla, el logo se ha añadido como si fuera un sprite. Vamos a
-_corregir_ esto haciendo que sea sólo una imagen:
-
-```js
-// En src/js/play_scene.js
-create: function () {
-  // Hemos cambiado add.sprite por add.image
-  var logo = this.game.add.image(
-    // Hablaremos sobre el mundo en breve.
-    this.game.world.centerX, this.game.world.centerY, 'logo');
-  logo.anchor.setTo(0.5, 0.5);
-}
-```
-
 
 ### Atributos relevantes de las imágenes
 
-<!-- ¿Qué atributos sería interesante comentar? -->
+
+<!-- Contar positin (y contar Point), anchor, alpha, blendMode, angle, scale.
+Recuerda que aparte de la Sandbox, puedes tirar de las demos de Phaser. -->
 
 
 ### Métodos relevantes de las imágenes
 
-<!-- ¿Y métodos? -->
+
+<!-- Contar crop -->
 
 
 
@@ -131,32 +118,93 @@ del espacio de juego.
 ## Entidades `Sprite`
 
 
-Bien sea manualmente o delegando en un sistema de físicas, en general querremos
-mover nuestras imágenes por la pantalla. Para ello necesitaremos utilizar la
-clase [`Sprite`](https://phaser.io/docs/2.6.2/Phaser.Sprite.html).
+La mayoría de las entidades visibles de un juego incorporan alguna animación
+y comportamiento. La clase [`Sprite`](
+https://phaser.io/docs/2.6.2/Phaser.Sprite.html) representa estas "entidades
+animadas" y es el componente principal de los juegos con Phaser.
 
 
-Además, son los sprites los que admiten animaciones basadas en _spritesheets_
-como estudiaremos más adelante.
+Aunque podamos añadir _sprites_ al mundo utilizando el método factoría
+[`add.sprite`](
+https://phaser.io/docs/2.6.2/Phaser.GameObjectFactory.html#sprite), el sprite
+por defecto es tan simple que no se suele utilizar salvo en ocasiones donde
+no se requiere un comportamiento complejo.
 
 
-Las instancias de la clase `Sprite` se añaden al mundo utilizando el método
-factoría [`add.sprite`](
-https://phaser.io/docs/2.6.2/Phaser.GameObjectFactory.html#sprite), idéntico al
-estudiado para añadir imágenes.
+Este ejemplo es equivalente a añadir un _sprite_ con `add.sprite`:
+
+```js
+// En la pestaña create.
+function create() {
+  var sprite = new Phaser.Sprite(this.game, 0, 0, 'phaser');
+  this.game.world.addChild(sprite);
+}
+```
+https://phaser.io/sandbox/KTYGfoXs
 
 
-<!-- Ejemplo de campo de asteroides. -->
+En la mayoría de los casos los _sprites_ tendrán un comportamiento avanzado:
+reaccionarán a los controles, ejecutarán algoritmos de IA, necesitarás métodos
+auxiliares, etc.
+
+
+Por ello, en lugar de usar instancias de las clase `Sprite`, es mejor que
+creemos clases adaptadas a nuestras necesidades y añadir instancias de estas
+clases.
+
+
+Para ello, nuestras clases _sprite_ deben heredar de [`Phaser.Sprite`](
+). Por ejemplo, considera el _sprite_ de un personaje que aparece aleatoriamente
+y cae.
+
+
+```js
+function FallingMartian(game) {
+  var x = Math.random() * game.world.width;
+  var y = Math.random() * game.world.height;
+  Phaser.Sprite.call(this, game, x, y, 'phaser');
+}
+FallingMartian.prototype = Object.create(Phaser.Sprite.prototype);
+FallingMartian.constructor = FallingMartian;
+```
+
+
+Ahora podemos personalizar su comportamiento durante la fase de actualización
+de Phaser. Por ejemplo:
+
+
+```js
+FallingMartian.prototype.update = function () {
+  this.y += 2;
+}
+```
+
+
+Usando el ejemplo anterior para añadir un _sprite_, podemos añadir el personaje
+que cae:
+
+```js
+// En la pestaña create.
+function create() {
+  for (var i = 0; i < 10; i++) {
+    var sprite = new FallingMartian(this.game, 0, 0, 'phaser');
+    this.game.world.addChild(sprite);
+  }
+}
+```
+https://phaser.io/sandbox/xMDkDhBs
+
 
 
 ### Atributos relevantes de los sprites
 
-<!-- ¿Qué atributos sería interesante comentar? -->
+<!-- Contar que tienen todos los de image además de algunos de ciclo de vida
+que veremos en el tema 6.2, children, animations y body -->
 
 
 ### Métodos relevantes de los sprites
 
-<!-- ¿Y métodos? -->
+<!-- Contar overlap, addChild y removeChild -->
 
 
 
@@ -179,30 +227,20 @@ https://phaser.io/docs/2.6.2/Phaser.Sprite.html#x) e [`y`](
 https://phaser.io/docs/2.6.2/Phaser.Sprite.html#y).
 
 
-<!-- El ejemplo moviendo los asteroides. -->
+<!-- Un ejemplo moviendo al marciano. Conviene que sobreescriban update
+y que NO sea la escena la que mueve el sprite. -->
 
 
 ### Rotación
 
 
-<!-- Contar el atributo angle y ejemplo rotandolos. -->
+<!-- Contar el atributo angle y ejemplo rotando al marciano. -->
 
 ### Escalado
 
 
-<!-- Contar el atributo y ejemplo escalando algunos de ellos -->
-
-
-<!-- ¿Alguna transformación / alteración de los atributos que se propague
-por la jerarquía y que me esté dejando? -->
-
-### Sistemas de coordenadas
-
-Es conveniente pensar que las transformaciones alteran el sistema de coordenadas
-de la entidad en lugar de la entidad en sí.
-
-El punto de ancla, el atributo `anchor` de una entidad, determina dónde se situa
-el origen de coodenadas respecto del gráfico.
+<!-- Contar el atributo y ejemplo escalando al marciano. Contar escalado
+negativo para hacer mirroring. -->
 
 
 
@@ -222,8 +260,11 @@ Es decir, si la entidad `Moon` se añade a la entidad `Earth`, significa que
 
 
 Lo que a su vez significa que al transformar `Earth` modificaremos `Moon`
-indirectamente y que transformaremos `Moon` respecto del sistema de coordenadas
-de `Earth`.
+indirectamente.
 
 
-<!-- Ejemplo del sistema solar. -->
+También significa que si transformaremos `Moon`, lo haremos respecto del sistema
+de coordenadas de `Earth` y no del mundo.
+
+
+<!-- Como ejemplo, un sistema Planeta-Satélite sería perfecto aquí. -->
